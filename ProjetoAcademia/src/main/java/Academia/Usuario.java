@@ -15,7 +15,16 @@ public abstract class Usuario {
     private String senha;
     private String tipo;
 
-    public Usuario() {
+    public Usuario(int id, String nome, String cpf, String email,
+    String dataNasc, String senha, String tipo) {
+    this.id = id;
+    this.nome = nome;
+    this.cpf = cpf;
+    this.email = email;
+    this.dataNasc = dataNasc;
+    this.senha = senha;
+    this.tipo = tipo;
+
     }
 
     public int getId() {
