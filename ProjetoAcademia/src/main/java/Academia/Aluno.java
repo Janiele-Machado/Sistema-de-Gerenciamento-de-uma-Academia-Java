@@ -10,6 +10,11 @@ public class Aluno extends Usuario {
     private String matricula;
     private String objetivo;
 
+    public Aluno(int id, String nome, String cpf, String email,
+                 String dataNasc, String senha, String tipo) {
+        super(id,nome,cpf,email,dataNasc,senha,tipo);
+    }
+
     public String getStatus() {
         return status;
     }
