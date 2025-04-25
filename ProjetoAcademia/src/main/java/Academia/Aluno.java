@@ -14,6 +14,11 @@ public class Aluno extends Usuario {
                  String dataNasc, String senha, String tipo) {
         super(id,nome,cpf,email,dataNasc,senha,tipo);
     }
+    
+    //construtor vazio
+    public Aluno(){
+        
+    }
 
     public String getStatus() {
         return status;

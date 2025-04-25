@@ -1,4 +1,3 @@
-
 package Academia;
 
 /**
@@ -16,15 +15,48 @@ public abstract class Usuario {
     private String tipo;
 
     public Usuario(int id, String nome, String cpf, String email,
-    String dataNasc, String senha, String tipo) {
-    this.id = id;
-    this.nome = nome;
-    this.cpf = cpf;
-    this.email = email;
-    this.dataNasc = dataNasc;
-    this.senha = senha;
-    this.tipo = tipo;
+            String dataNasc, String senha, String tipo) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.dataNasc = dataNasc;
+        this.senha = senha;
+        this.tipo = tipo;
 
+    }
+
+    //construtor vazio
+    public Usuario() {
+
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDataNasc(String dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public int getId() {
@@ -54,6 +86,5 @@ public abstract class Usuario {
     public String getTipo() {
         return tipo;
     }
-
 
 }
