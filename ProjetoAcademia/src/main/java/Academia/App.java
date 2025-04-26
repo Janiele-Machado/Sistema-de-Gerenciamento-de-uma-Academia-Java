@@ -1,10 +1,11 @@
 package Academia;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Metodos metodos = new Metodos();
         Scanner scan = new Scanner(System.in);
         int opc_principal = 0;
@@ -23,6 +24,8 @@ public class App {
                 }
 
             } else if (opc_principal == 2) {
+                metodos.logar();
+                
 
             } else if (opc_principal == 3) {
 
