@@ -24,7 +24,19 @@ public class App {
                 }
 
             } else if (opc_principal == 2) {
-                metodos.logar();
+                String met =metodos.logar();
+               switch(met){
+                   case"aluno":
+                       // funcoes do aluno
+                   case"personal":
+                     // funcoes do personal
+                   case"adm":
+                       
+                   default:
+                       System.out.println("...");
+                       
+               }
+                
                 
 
             } else if (opc_principal == 3) {
