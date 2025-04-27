@@ -37,6 +37,7 @@ public class Metodos {
     }
 
     public String logar() throws SQLException {
+
         System.out.println("Email:");
         String email_ver = scan.nextLine();
         System.out.println("Senha:");
@@ -59,6 +60,39 @@ public class Metodos {
 
         }
 
+    }
+
+    public void menuADM() {
+        int opc_amd=0;
+        do {
+            System.out.println("-".repeat(33));
+            System.out.println("|------MENU ADMINISTRADOR:-------|");
+            System.out.println("|1-Deletar usuarios              |");
+            System.out.println("|2-Relatorio financeiro          |");
+            System.out.println("|3-Folha salarial                |");
+            System.out.println("|4- Relatorio Geral              |");
+            System.out.println("|5-Cadastrar planos             |");
+            System.out.println("|6- Quero Sair                   |");
+            System.out.println("-".repeat(33));
+             opc_amd = scan.nextInt();
+            scan.nextLine();
+            if (opc_amd == 1) {
+
+            } else if (opc_amd == 2) {
+
+            } else if (opc_amd == 3) {
+
+            } else if (opc_amd == 4) {
+
+            } else if (opc_amd == 5) {
+
+            } else if (opc_amd == 6) {
+                System.out.println("...");
+            } else {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+
+        }while(opc_amd==6);
     }
 
 }
