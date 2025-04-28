@@ -41,5 +41,33 @@ public class Deletar {
         
     }
     
+     public void deletarAdm(String email) throws SQLException{
+          Connection conexao = new Conexao().getConexao();
+          conexao.setAutoCommit(false); // Transação manual
+     try{  
+         
+         String sql_delAdm = "DELETE FROM adm WHERE fk_usu_adm = (SELECT id FROM usuario WHERE email = ? AND tipo = 'adm'";
+         PreparedStatement comando_dellA = conexao.prepareStatement(sql_delAdm);
+         comando_dellA.setString(1, email);
+         comando_dellA.executeUpdate();
+         
+         String sql_delU = " DELETE FROM usuario WHERE email = 'manu@gmail.com' AND tipo = 'adm';";
+         PreparedStatement comando_dellu = conexao.prepareStatement(sql_delU);
+         comando_dellu.setString(1, email);
+         comando_dellu.executeUpdate();
+         
+     } catch(SQLException e){
+         conexao.rollback(); // Reverte em caso de erro
+         e.printStackTrace();
+         
+         
+     }finally{
+         conexao.setAutoCommit(true);
+        conexao.close();
+     }
+                 
+         
+         
+     }
     
 }
