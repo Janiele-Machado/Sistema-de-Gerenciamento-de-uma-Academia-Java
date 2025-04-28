@@ -95,6 +95,32 @@ public class App {
                             }
                             break;
                         case 3:
+                            try {
+                                Personal a1 = new Personal();
+                                System.out.println("Ola, Insira os dados pra prosseguir com seu Cadastro:");
+                                System.out.println("Digite seu nome Completo:");
+                                a1.setNome(scan.nextLine());
+                                System.out.println("Digite seu Email:");
+                                a1.setEmail(scan.nextLine());
+                                System.out.println("Digite seu CPF:");
+                                a1.setCpf(scan.nextLine());
+                                System.out.println("Digite sua data de nascimento:");
+                                a1.setDataNasc(scan.nextLine());
+                                System.out.println("Digite a sua especialidade:");
+                                a1.setEspecialidade(scan.nextLine());
+                                System.out.println("Agora, digite sua senha para acessar o sistema:");
+                                a1.setSenha(scan.nextLine());
+                                a1.setTipo("personal");
+                                a1.setSalario(1200);
+                                a1.setBonus_por_aluno(0);
+                                a1.setQtd_aluno(0);
+                                Cadastro cad_per = new Cadastro();
+                                cad_per.inserir(a1);
+                            } catch (Exception e) {
+                                System.out.println("Erro ao cadastrar personal: " + e.getMessage());
+                                e.printStackTrace(); //exibir informações detalhadas sobre uma exceção 
+                            }
+
                             break;
                         case 4:
                             break;

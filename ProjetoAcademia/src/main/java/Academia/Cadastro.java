@@ -172,7 +172,7 @@ public class Cadastro {
 
             // Confirmar a transação
             conexao.commit();
-            System.out.println("Administrador cadastrado com sucesso!");
+            System.out.println("Personal cadastrado com sucesso!");
 
             // Fechar as conexões
             comandoUsuario.close();
