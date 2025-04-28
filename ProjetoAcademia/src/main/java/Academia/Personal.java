@@ -1,5 +1,7 @@
 package Academia;
 
+import java.sql.Date;
+
 public class Personal extends Usuario {
 
     private String especialidade;
@@ -9,15 +11,8 @@ public class Personal extends Usuario {
 
     }
 
-    public Personal(int id, String nome, String cpf, String email, String dataNasc, String senha, String tipo, String especialidade) {
+    public Personal(int id, String nome, String cpf, String email,Date dataNasc, String senha, String tipo, String especialidade) {
         super(id, nome, cpf, email, dataNasc, senha, tipo);
-        setId(id);
-        setNome(nome);
-        setCpf(cpf);
-        setEmail(email);
-        setDataNasc(dataNasc);
-        setSenha(senha);
-        setTipo(tipo);
         this.especialidade = especialidade;
     }
 

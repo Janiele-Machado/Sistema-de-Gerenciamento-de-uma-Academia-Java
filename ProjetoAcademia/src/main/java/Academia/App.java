@@ -1,9 +1,22 @@
 package Academia;
 
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class App {
+
+    public static String geradorMatricula() {
+        Random rand = new Random();
+
+        // Gera os primeiros 4 dígitos (entre 1000 e 9999)
+        int primeiraParte = 1000 + rand.nextInt(9000);
+
+        // Gera os segundos 4 dígitos (entre 1000 e 9999)
+        int segundaParte = 1000 + rand.nextInt(9000);
+
+        return "MAT" + String.valueOf(primeiraParte) + String.valueOf(segundaParte); //retorna a matricula gerada;
+    }
 
     public static void main(String[] args) throws SQLException {
         Metodos metodos = new Metodos();
@@ -14,6 +27,7 @@ public class App {
 
             metodos.menuPrincipal();
             opc_principal = scan.nextInt();
+            scan.nextLine();
 
             if (opc_principal == 1) {
                 int opc_cadastro = 0;
@@ -21,6 +35,46 @@ public class App {
 
                     metodos.menuCadastro();
                     opc_cadastro = scan.nextInt();
+                    scan.nextLine();
+
+                    switch (opc_cadastro) {
+                        case 1:
+                            try {
+                                Aluno a1 = new Aluno();
+                                System.out.println("Ola, Insira os dados pra prosseguir com seu Cadastro:");
+                                System.out.println("Digite seu nome Completo:");
+                                a1.setNome(scan.nextLine());
+                                System.out.println("Digite seu Email:");
+                                a1.setEmail(scan.nextLine());
+                                System.out.println("Digite seu CPF:");
+                                a1.setCpf(scan.nextLine());
+                                System.out.println("Digite sua data de nascimento:");
+                                a1.setDataNasc(scan.nextLine());
+                                System.out.println("Digite seu Objetivo:");
+                                a1.setObjetivo(scan.nextLine());
+                                System.out.println("Agora, digite sua senha para acessar o sistema:");
+                                a1.setSenha(scan.nextLine());
+                                a1.setTipo("aluno");
+                                a1.setMatricula(geradorMatricula());
+                                a1.setStatus("ativo");
+                                Cadastro cad_aluno = new Cadastro();
+                                cad_aluno.inserir(a1);
+                            } catch (Exception e) {
+                                System.out.println("Erro ao cadastrar aluno: " + e.getMessage());
+                                e.printStackTrace();
+                            }
+
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        default:
+                            System.out.println("Opcao invalida");
+                            ;
+                    }
                 }
 
             } else if (opc_principal == 2) {

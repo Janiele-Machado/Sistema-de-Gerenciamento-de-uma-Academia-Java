@@ -22,7 +22,7 @@ public class Cadastro {
         String sqlUsuario = "INSERT INTO usuario(nome, cpf, email, data_nascimento, senha, tipo) VALUES(?, ?, ?, ?, ?, ?)";
 
         //INSERT INTO `academia_db`.`aluno` (`status`, `matricula`, `objetivo`, `fk_usu_aluno`) VALUES ('ativo', 'Mat2028888', 'PerderPeso', '5');
-        String sqlAluno = "INSERT INTO aluno ( status, matricula, objetivo, fk_uso_aluno) VALUES(?, ?, ?, ?)";
+        String sqlAluno = "INSERT INTO aluno (`status`, `matricula`, `objetivo`,`fk_usu_aluno`) VALUES(?, ?, ?, ?)";
         try {
             // Começar uma transação para garantir consistência
             conexao.setAutoCommit(false);
@@ -32,9 +32,9 @@ public class Cadastro {
             comandoUsuario.setString(1, aluno.getNome());
             comandoUsuario.setString(2, aluno.getCpf());
             comandoUsuario.setString(3, aluno.getEmail());
-            comandoUsuario.setString(4, aluno.getDataNasc());
+            comandoUsuario.setDate(4, aluno.getDataNasc());
             comandoUsuario.setString(5, aluno.getSenha());
-            comandoUsuario.setString(6, "aluno");
+            comandoUsuario.setString(6, aluno.getTipo());
             comandoUsuario.executeUpdate();
 
             // Obter o id gerado automaticamente (pois o banco utiliza auto incremento)
@@ -44,7 +44,7 @@ public class Cadastro {
 
             // Inserindo dados na tabela aluno
             PreparedStatement comandoAluno = conexao.prepareStatement(sqlAluno);
-            comandoAluno.setString(1, "ativo");
+            comandoAluno.setString(1, aluno.getStatus());
             comandoAluno.setString(2, aluno.getMatricula());
             comandoAluno.setString(3, aluno.getObjetivo());
             comandoAluno.setInt(4, uso_aluno);

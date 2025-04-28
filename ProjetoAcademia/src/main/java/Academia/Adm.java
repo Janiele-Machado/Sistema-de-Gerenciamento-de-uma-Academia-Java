@@ -1,6 +1,8 @@
 
 package Academia;
 
+import java.sql.Date;
+
 /**
  *
  * @author Janiele
@@ -12,7 +14,7 @@ public class Adm extends Usuario {
     
 
     public Adm(int id, String nome, String cpf, String email,
-               String dataNasc, String senha, String tipo,double salario,String setor, String numero_comercial) {
+                Date dataNasc, String senha, String tipo,double salario,String setor, String numero_comercial) {
         super(id, nome, cpf, email, dataNasc, senha, tipo);
         this.salario = salario;
         this.setor=setor;
