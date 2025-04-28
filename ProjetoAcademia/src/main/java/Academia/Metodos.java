@@ -45,7 +45,7 @@ public class Metodos {
 
         Connection conexao = new Conexao().getConexao();
 
-        String sql_logar = "SELECT tipo from `academiaatualizado1.sql`.usuario where email = ? AND senha = ?;";
+        String sql_logar = "SELECT tipo from usuario where email = ? AND senha = ?;";
         PreparedStatement comandoLogar = conexao.prepareStatement(sql_logar);
         comandoLogar.setString(1, email_ver);
         comandoLogar.setString(2, senha_vre);

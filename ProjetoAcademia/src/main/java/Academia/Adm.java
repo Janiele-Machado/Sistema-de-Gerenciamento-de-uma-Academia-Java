@@ -1,4 +1,3 @@
-
 package Academia;
 
 import java.sql.Date;
@@ -8,22 +7,24 @@ import java.sql.Date;
  * @author Janiele
  */
 public class Adm extends Usuario {
+
     private double salario;
-   private String numero_comercial;
+    private String numero_comercial;
     private String setor;
-    
+    private String desc;
 
     public Adm(int id, String nome, String cpf, String email,
-                Date dataNasc, String senha, String tipo,double salario,String setor, String numero_comercial) {
+            Date dataNasc, String senha, String tipo, double salario, String setor, String numero_comercial, String desc) {
         super(id, nome, cpf, email, dataNasc, senha, tipo);
         this.salario = salario;
-        this.setor=setor;
-        this.salario=salario;
+        this.setor = setor;
+        this.salario = salario;
+        this.desc = desc;
     }
-    
+
     //construtor vazio
-    public Adm(){
-        
+    public Adm() {
+
     }
 
     public void setSalario(double salario) {
@@ -49,7 +50,14 @@ public class Adm extends Usuario {
     public String getSetor() {
         return setor;
     }
-    
-    
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+    
+    
 }
