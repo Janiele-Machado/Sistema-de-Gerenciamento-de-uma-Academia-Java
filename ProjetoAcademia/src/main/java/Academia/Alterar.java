@@ -7,4 +7,12 @@ public class Alterar {
         aluno.setMatricula(matricula);
         aluno.setObjetivo(Objetivo);
         aluno.setStatus(status);
+
+        aluno.setNome(nome);
+        aluno.setCpf(cpf);
+        aluno.setEmail(email);
+        aluno.setDataNasc(dataNasc);
+        aluno.setSenha(senha);
+        aluno.setTipo(tipo);
+    }
 }
