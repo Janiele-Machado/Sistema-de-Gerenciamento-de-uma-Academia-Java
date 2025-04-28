@@ -1,5 +1,9 @@
 package Academia;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Heitor
@@ -10,12 +14,12 @@ public abstract class Usuario {
     private String nome;
     private String cpf;
     private String email;
-    private String dataNasc;
+    private Date dataNasc;
     private String senha;
     private String tipo;
 
     public Usuario(int id, String nome, String cpf, String email,
-            String dataNasc, String senha, String tipo) {
+            Date dataNasc, String senha, String tipo) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -48,7 +52,15 @@ public abstract class Usuario {
     }
 
     public void setDataNasc(String dataNasc) {
-        this.dataNasc = dataNasc;
+         try {
+             //Método que recebe a data de nascimento do usuario em String e converte para o padrao date;
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date dataUtil = formato.parse(dataNasc);
+            this.dataNasc = new Date(dataUtil.getTime());
+        } catch (ParseException e) {
+            System.out.println("Formato de data inválido. Use dd/MM/yyyy.");
+            e.printStackTrace();
+        }
     }
 
     public void setSenha(String senha) {
@@ -75,7 +87,7 @@ public abstract class Usuario {
         return email;
     }
 
-    public String getDataNasc() {
+    public Date getDataNasc() {
         return dataNasc;
     }
 

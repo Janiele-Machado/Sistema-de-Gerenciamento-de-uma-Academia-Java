@@ -1,5 +1,7 @@
 package Academia;
 
+import java.sql.Date;
+
 /**
  *
  * @author Janiele
@@ -11,7 +13,7 @@ public class Aluno extends Usuario {
     private String objetivo;
 
     public Aluno(int id, String nome, String cpf, String email,
-                 String dataNasc, String senha, String tipo) {
+                 Date dataNasc, String senha, String tipo) {
         super(id,nome,cpf,email,dataNasc,senha,tipo);
     }
     

@@ -35,6 +35,19 @@ public class Metodos {
         System.out.println("|4- Quero Sair                  |");
         System.out.println("-".repeat(33));
     }
+    
+     public void menuAluno() {
+        //Função repeat utilizada para otimizar a decoração 
+        System.out.println("-".repeat(34));
+        System.out.println("|Escolha o que voce deseja fazer:|");
+        System.out.println("|1- Contratar um plano           |");
+        System.out.println("|2- Ver meu plano                |");
+        System.out.println("|3- Fazer Pagamento              |");
+        System.out.println("|4- Alterar Cadastro             |");
+        System.out.println("|5- Desativar meu plano          |");
+        System.out.println("|6-Sair                          |");
+        System.out.println("-".repeat(34));
+    }
 
     public String logar() throws SQLException {
 
@@ -45,7 +58,7 @@ public class Metodos {
 
         Connection conexao = new Conexao().getConexao();
 
-        String sql_logar = "SELECT tipo from `academiaatualizado1.sql`.usuario where email = ? AND senha = ?;";
+        String sql_logar = "SELECT tipo from usuario where email = ? AND senha = ?;";
         PreparedStatement comandoLogar = conexao.prepareStatement(sql_logar);
         comandoLogar.setString(1, email_ver);
         comandoLogar.setString(2, senha_vre);
