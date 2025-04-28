@@ -134,8 +134,30 @@ public class App {
                 String met = metodos.logar();
                 switch (met) {
                     case "aluno":
-                        // funcoes do aluno
-                        System.out.println("teste");
+                        int opc_aluno = 0;
+                        while(opc_aluno != 6){
+                            metodos.menuAluno();
+                            opc_aluno = scan.nextInt();
+                            scan.nextLine();
+                            
+                            if(opc_aluno == 1){
+                                
+                            }else if(opc_aluno == 2){
+                                
+                            }else if(opc_aluno == 3){
+                                
+                            }else if(opc_aluno == 4){
+                                
+                            }else if(opc_aluno == 5){
+                                
+                            }else if(opc_aluno == 6){
+                                
+                            }else{
+                                System.out.println("Opcao invalida");
+                            }
+                            
+                        }
+                        
                     case "personal":
                     // funcoes do personal
                     case "adm":
