@@ -167,8 +167,26 @@ public class App {
                         break;
 
                     case "personal":
+                        int opc_personal = 0;
+                        while (opc_personal != 6) {
+                            metodos.menuPersonal();
+                            opc_personal = scan.nextInt();
+                            scan.nextLine();
 
-                        // funcoes do personal
+                            if (opc_personal == 1) {
+
+                            } else if (opc_personal == 2) {
+
+                            } else if (opc_personal == 3) {
+
+                            } else if (opc_personal == 4) {
+
+                            } else {
+                                System.out.println("Opcao invalida");
+                            }
+                            
+                        }
+                        
                         break;
 
                     case "adm":
