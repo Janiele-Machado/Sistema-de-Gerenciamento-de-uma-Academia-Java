@@ -20,7 +20,7 @@ public class Alterar {
     }
 
     public void alterarPersonal(Personal personal, int id, String nome, String cpf, String email, Date dataNasc, 
-            String senha, String tipo, String especialidade, double salario, double bonus_por_aluno) {
+            String senha, String tipo, String especialidade) {
         
         personal.setNome(nome);
         personal.setCpf(cpf);
@@ -28,9 +28,7 @@ public class Alterar {
         personal.setDataNasc(tipo);
         personal.setSenha(senha);
         personal.setTipo(tipo);
-        personal.setBonus_por_aluno(bonus_por_aluno);
         personal.setEspecialidade(especialidade);
-        personal.setSalario(salario);
         
     }
 }
