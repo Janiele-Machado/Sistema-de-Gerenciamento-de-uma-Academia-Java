@@ -133,5 +133,16 @@ public class Metodos {
 
         } while (opc_amd == 6);
     }
+    
+    public void menuPersonal() throws SQLException {
+        
+        System.out.println("-".repeat(33));
+        System.out.println("|---------MENU PERSONAL:---------|");
+        System.out.println("|1- Ver meus alunos             |");
+        System.out.println("|2- Alterar meu cadastro        |");
+        System.out.println("|3- Sair                        |");
+        System.out.println("-".repeat(33));
+        
+    }
 
 }
