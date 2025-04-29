@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class App {
-    
+
     public static String geradorMatricula() {
         Random rand = new Random();
 
@@ -14,29 +14,29 @@ public class App {
 
         // Gera os segundos 4 dígitos (entre 1000 e 9999)
         int segundaParte = 1000 + rand.nextInt(9000);
-        
+
         return "MAT" + String.valueOf(primeiraParte) + String.valueOf(segundaParte); //retorna a matricula gerada;
     }
-    
+
     public static void main(String[] args) throws SQLException {
         Metodos metodos = new Metodos();
         Scanner scan = new Scanner(System.in);
         int opc_principal = 0;
-        
+
         while (opc_principal != 3) {
-            
+
             metodos.menuPrincipal();
             opc_principal = scan.nextInt();
             scan.nextLine();
-            
+
             if (opc_principal == 1) {
                 int opc_cadastro = 0;
                 while (opc_cadastro != 4) {
-                    
+
                     metodos.menuCadastro();
                     opc_cadastro = scan.nextInt();
                     scan.nextLine();
-                    
+
                     switch (opc_cadastro) {
                         case 1:
                             try {
@@ -63,7 +63,7 @@ public class App {
                                 System.out.println("Erro ao cadastrar aluno: " + e.getMessage());
                                 e.printStackTrace();
                             }
-                            
+
                             break;
                         case 2:
                             try {
@@ -129,53 +129,59 @@ public class App {
                             ;
                     }
                 }
-                
+
             } else if (opc_principal == 2) {
-                String met = metodos.logar();
+                System.out.println("Email:");
+                String email_ver = scan.nextLine();
+                System.out.println("Senha:");
+                String senha_vre = scan.nextLine();
+                String met = metodos.logar(email_ver, senha_vre);
+                int id = metodos.retornoID(email_ver);// metodo do id
+
                 switch (met) {
                     case "aluno":
                         int opc_aluno = 0;
-                        while(opc_aluno != 6){
+                        while (opc_aluno != 6) {
                             metodos.menuAluno();
                             opc_aluno = scan.nextInt();
                             scan.nextLine();
-                            
-                            if(opc_aluno == 1){
-                                
-                            }else if(opc_aluno == 2){
-                                
-                            }else if(opc_aluno == 3){
-                                
-                            }else if(opc_aluno == 4){
-                                
-                            }else if(opc_aluno == 5){
-                                
-                            }else if(opc_aluno == 6){
-                                
-                            }else{
+
+                            if (opc_aluno == 1) {
+
+                            } else if (opc_aluno == 2) {
+
+                            } else if (opc_aluno == 3) {
+
+                            } else if (opc_aluno == 4) {
+
+                            } else if (opc_aluno == 5) {
+
+                            } else if (opc_aluno == 6) {
+
+                            } else {
                                 System.out.println("Opcao invalida");
                             }
-                            
+
                         }
-                        
+
                         break;
-                        
+
                     case "personal":
-                        
-                    // funcoes do personal
+
+                        // funcoes do personal
                         break;
-                        
+
                     case "adm":
-                    // funções do administrador
+                        // funções do administrador
                         break;
-                    
+
                     default:
-                        System.out.println("...");
-                    
+                        System.out.println("Falha no login tente novamente");
+
                 }
-                
+
             } else if (opc_principal == 3) {
-                
+
                 System.out.println("Obrigado por utilizar nosso sistema <3 ");
             }
         }

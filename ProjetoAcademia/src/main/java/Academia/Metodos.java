@@ -50,19 +50,16 @@ public class Metodos {
         System.out.println("-".repeat(34));
     }
 
-    public String logar() throws SQLException {
+    public String logar(String email_ver, String senha_ver) throws SQLException {
 
-        System.out.println("Email:");
-        String email_ver = scan.nextLine();
-        System.out.println("Senha:");
-        String senha_vre = scan.nextLine();
+        
 
         Connection conexao = new Conexao().getConexao();
 
         String sql_logar = "SELECT tipo from usuario where email = ? AND senha = ?;";
         PreparedStatement comandoLogar = conexao.prepareStatement(sql_logar);
         comandoLogar.setString(1, email_ver);
-        comandoLogar.setString(2, senha_vre);
+        comandoLogar.setString(2, senha_ver);
         ResultSet rs = comandoLogar.executeQuery();
 
         if (rs.next()) {
