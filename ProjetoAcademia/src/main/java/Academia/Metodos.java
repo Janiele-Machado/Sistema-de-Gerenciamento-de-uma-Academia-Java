@@ -144,5 +144,24 @@ public class Metodos {
         System.out.println("-".repeat(33));
         
     }
+    
+    public int retornoID(String email) throws SQLException{
+        Connection conexao = new Conexao().getConexao();
+        String sql_relID = "select id from usuario  where email = ?;";
+        PreparedStatement comando_relID = conexao.prepareStatement(sql_relID);
+        comando_relID.setString(1, email);
+        ResultSet rs = comando_relID.executeQuery();
+        if(rs.next()){
+            int id = rs.getInt("id");
+            return id;
+            
+            
+        }else{
+            return 0;
+        }
+        
+        
+        
+    }
 
 }
