@@ -158,9 +158,16 @@ public class App {
                             
                         }
                         
+                        break;
+                        
                     case "personal":
+                        
                     // funcoes do personal
+                        break;
+                        
                     case "adm":
+                    // funções do administrador
+                        break;
                     
                     default:
                         System.out.println("...");
