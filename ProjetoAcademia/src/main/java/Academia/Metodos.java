@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 public class Metodos {
 
     Scanner scan = new Scanner(System.in);
+    Deletar del = new Deletar();
 
     public void menuPrincipal() {
         //Função repeat utilizada para otimizar a decoração 
@@ -35,8 +36,8 @@ public class Metodos {
         System.out.println("|4- Quero Sair                  |");
         System.out.println("-".repeat(33));
     }
-    
-     public void menuAluno() {
+
+    public void menuAluno() {
         //Função repeat utilizada para otimizar a decoração 
         System.out.println("-".repeat(34));
         System.out.println("|Escolha o que voce deseja fazer:|");
@@ -72,12 +73,11 @@ public class Metodos {
             return null;
 
         }
-        
 
     }
 
-    public void menuADM() {
-        int opc_amd=0;
+    public void menuADM() throws SQLException {
+        int opc_amd = 0;
         do {
             System.out.println("-".repeat(33));
             System.out.println("|------MENU ADMINISTRADOR:-------|");
@@ -88,9 +88,34 @@ public class Metodos {
             System.out.println("|5-Cadastrar planos             |");
             System.out.println("|6- Quero Sair                   |");
             System.out.println("-".repeat(33));
-             opc_amd = scan.nextInt();
+            opc_amd = scan.nextInt();
             scan.nextLine();
             if (opc_amd == 1) {
+                int opc1 = 0;
+                do {
+                    System.out.println("-".repeat(33));
+                    System.out.println("|-------Deletar:-------|");
+                    System.out.println("|1-Deletar Personal    |");
+                    System.out.println("|2-Deletar ADM         |");
+                    System.out.println("|3-Deletar Aluno       |");
+                    System.out.println("|4-Sair                |");
+                    opc1 = scan.nextInt();
+                    if (opc1 == 1) {
+                        System.out.println("Digite o email do Personal que queria Deletar");
+                        del.deletarPersonal(scan.nextLine());
+
+                    } else if (opc1 == 2) {
+                        System.out.println("Digite o email do ADM que queira Deletar");
+                        del.deletarAdm(scan.nextLine());
+                    } else if (opc1 == 3) {
+                        System.out.println("Digite o email do Aluno que queira Deletar");
+                        del.deletarAluno(scan.nextLine());
+                    } else if (opc1 == 4) {
+                        System.out.println(":::");
+                    } else {
+                        System.out.println("Digite uma opção valida");
+                    }
+                } while (opc1 == 4);
 
             } else if (opc_amd == 2) {
 
@@ -106,7 +131,7 @@ public class Metodos {
                 System.out.println("Opção inválida. Tente novamente.");
             }
 
-        }while(opc_amd==6);
+        } while (opc_amd == 6);
     }
 
 }
