@@ -14,6 +14,7 @@ public class Metodos {
 
     Scanner scan = new Scanner(System.in);
     Deletar del = new Deletar();
+    Relatorios rel = new Relatorios();
 
     public void menuPrincipal() {
         //Função repeat utilizada para otimizar a decoração 
@@ -51,8 +52,6 @@ public class Metodos {
     }
 
     public String logar(String email_ver, String senha_ver) throws SQLException {
-
-        
 
         Connection conexao = new Conexao().getConexao();
 
@@ -119,7 +118,32 @@ public class Metodos {
             } else if (opc_amd == 3) {
 
             } else if (opc_amd == 4) {
+                int opc4=0;
+                do {
+                    System.out.println("-".repeat(33));
+                    System.out.println("|-------Deletar:-------|");
+                    System.out.println("|1-Relatorio Personal    |");
+                    System.out.println("|2-Relatorio ADM         |");
+                    System.out.println("|3-Relatorio Aluno       |");
+                    System.out.println("|4-Sair                |");
+                    opc4 = scan.nextInt();
+                    if (opc4 == 1) {
+                        rel.Relatorio_personal();
+                        
+                        
 
+                    } else if (opc4 == 2) {
+                        rel.Relatorio_adm();
+                       
+                    } else if (opc4 == 3) {
+                        rel.Relatorio_aluno();
+                    } else if (opc4 == 4) {
+                        System.out.println(":::");
+                        
+                    } else {
+                        System.out.println("Digite uma opção valida");
+                    }
+                }while(opc_amd ==4);    
             } else if (opc_amd == 5) {
 
             } else if (opc_amd == 6) {
@@ -130,9 +154,9 @@ public class Metodos {
 
         } while (opc_amd == 6);
     }
-    
+
     public void menuPersonal() throws SQLException {
-        
+
         System.out.println("-".repeat(33));
         System.out.println("|---------MENU PERSONAL:--------|");
         System.out.println("|1- Ver meus alunos             |");
@@ -140,26 +164,23 @@ public class Metodos {
         System.out.println("|3- Alterar meu cadastro        |");
         System.out.println("|4- Sair                        |");
         System.out.println("-".repeat(33));
-        
+
     }
-    
-    public int retornoID(String email) throws SQLException{
+
+    public int retornoID(String email) throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_relID = "select id from usuario  where email = ?;";
         PreparedStatement comando_relID = conexao.prepareStatement(sql_relID);
         comando_relID.setString(1, email);
         ResultSet rs = comando_relID.executeQuery();
-        if(rs.next()){
+        if (rs.next()) {
             int id = rs.getInt("id");
             return id;
-            
-            
-        }else{
+
+        } else {
             return 0;
         }
-        
-        
-        
+
     }
 
 }
