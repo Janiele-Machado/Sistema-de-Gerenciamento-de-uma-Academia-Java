@@ -71,5 +71,37 @@ public class Relatorios {
         conexao.close();
     }
     
+    public void Relatorio_adm() throws SQLException {
+        Connection conexao = new Conexao().getConexao();
+        String sql_relAdm = " Select * from usuario inner join personal on  usuario.id = fk_usu_adm;";
+        PreparedStatement comando_al = conexao.prepareStatement(sql_relAdm);
+        ResultSet rs = comando_al.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String nome = rs.getString("nome");
+            String email = rs.getString("email");
+            String cpf = rs.getString("cpf");
+            Date dataNascimento = rs.getDate("data_nascimento");
+            double salario = rs.getDouble("salario");
+            String telefone = rs.getString("telefone_comercial");
+            String descricao = rs.getString("descricao");
+            String setor = rs.getString("setor");
+
+            System.out.println("ID: " + id
+                    + ", Nome: " + nome
+                    + ", Email: " + email
+                    + ", CPF: " + cpf
+                    + ", Nascimento: " + dataNascimento
+                    + ", Salário: " + salario
+                    + ", telefone:  "+ telefone
+                    + ", descricao: "+ descricao
+                    + ", setor:  "+ setor);
+
+        }
+        rs.close();
+
+        conexao.close();
+    }
+    
 
 }
