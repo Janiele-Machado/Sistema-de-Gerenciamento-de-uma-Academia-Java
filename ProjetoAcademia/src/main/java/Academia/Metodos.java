@@ -55,7 +55,7 @@ public class Metodos {
     }
 
     public void opcPlanos() {
-        System.out.println("-".repeat(50));
+        System.out.println("-".repeat(54));
         System.out.println("|Escolha qual Plano Voce Deseja Contratar:          |");
         System.out.println("|Opcao 1: Plano Comum                               |");
         System.out.println("|Tipo: Mensal                                       |");
@@ -69,7 +69,7 @@ public class Metodos {
         System.out.println("|Tipo: anual(Por doze meses)                        |");
         System.out.println("|Valor: 90 reais                                    |");
         System.out.println("|Com direito a um instrutor de sua preferencia      |");
-        System.out.println("-".repeat(50));
+        System.out.println("-".repeat(54));
 
     }
 

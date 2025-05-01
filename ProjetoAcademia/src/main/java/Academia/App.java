@@ -186,6 +186,26 @@ public class App {
                                     }
 
                                 } else if (opc_plano == 3) {
+                                    System.out.println("Tem Certeza que deseja contratar o Plano Premium Plus? Digite S para sim e N para nao:");
+                                    String op1 = scan.nextLine();
+
+                                    if (op1.equalsIgnoreCase("s")) {
+                                        System.out.println("Escolha seu Personal: ");
+                                        metodos.listarPersonal();
+                                        System.out.println("Digite o nome completo do seu personal: ");
+                                        String nome_personal = scan.nextLine();
+                                        int id_personal = metodos.obterIdPersonal(nome_personal);
+                                        int id_aluno = metodos.obterIdAluno(id);
+                                        double valor = 90;
+                                        String nome = "Plano Premium Plus";
+                                        int duracao = 12;
+                                        int qtd_alunos = metodos.descobrirQTDalunos(nome_personal);
+                                        metodos.contratarPlano(id_aluno, id_personal, valor, duracao, nome, qtd_alunos);
+
+                                    } else {
+                                        System.out.println("saindo...");
+
+                                    }
 
                                 } else {
                                     System.out.println("Opcao invalida tente novamente");
