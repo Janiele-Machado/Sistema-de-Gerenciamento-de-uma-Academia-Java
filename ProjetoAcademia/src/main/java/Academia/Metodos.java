@@ -67,7 +67,7 @@ public class Metodos {
             return tipo_uso;
         } else {
 
-            return null;
+            return "";
 
         }
 

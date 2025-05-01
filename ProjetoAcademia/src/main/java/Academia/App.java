@@ -172,7 +172,7 @@ public class App {
                         break;
 
                     case "adm":
-                        // funções do administrador
+                        System.out.println("teste");
                         break;
 
                     default:
