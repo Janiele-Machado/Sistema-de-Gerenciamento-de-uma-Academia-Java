@@ -18,7 +18,7 @@ public class App {
         return "MAT" + String.valueOf(primeiraParte) + String.valueOf(segundaParte); //retorna a matricula gerada;
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, Exception, Exception {
         Metodos metodos = new Metodos();
         Scanner scan = new Scanner(System.in);
         int opc_principal = 0;
@@ -147,6 +147,49 @@ public class App {
                             scan.nextLine();
 
                             if (opc_aluno == 1) {
+                                metodos.opcPlanos();
+                                int opc_plano = scan.nextInt();
+                                scan.nextLine();
+
+                                if (opc_plano == 1) {
+                                    System.out.println("Tem Certeza que deseja contratar o Plano Comum? Digite S para sim e N para nao:");
+                                    String op1 = scan.nextLine();
+
+                                    if (op1.equalsIgnoreCase("s")) {
+                                        int id_aluno = metodos.obterIdAluno(id);
+                                        metodos.contratarPlano(id_aluno);
+                                    } else {
+                                        System.out.println("saindo...");
+
+                                    }
+
+                                } else if (opc_plano == 2) {
+                                    System.out.println("Tem Certeza que deseja contratar o Plano Premium? Digite S para sim e N para nao:");
+                                    String op1 = scan.nextLine();
+
+                                    if (op1.equalsIgnoreCase("s")) {
+                                        System.out.println("Escolha seu Personal: ");
+                                        metodos.listarPersonal();
+                                        System.out.println("Digite o nome completo do seu personal: ");
+                                        String nome_personal = scan.nextLine();
+                                        int id_personal = metodos.obterIdPersonal(nome_personal);
+                                        int id_aluno = metodos.obterIdAluno(id);
+                                        double valor = 100;
+                                        String nome = "Plano Premium";
+                                        int duracao = 3;
+                                        int qtd_alunos = metodos.descobrirQTDalunos(nome_personal);
+                                        metodos.contratarPlano(id_aluno, id_personal, valor, duracao, nome, qtd_alunos);
+
+                                    } else {
+                                        System.out.println("saindo...");
+
+                                    }
+
+                                } else if (opc_plano == 3) {
+
+                                } else {
+                                    System.out.println("Opcao invalida tente novamente");
+                                }
 
                             } else if (opc_aluno == 2) {
 
@@ -184,9 +227,9 @@ public class App {
                             } else {
                                 System.out.println("Opcao invalida");
                             }
-                            
+
                         }
-                        
+
                         break;
 
                     case "adm":
@@ -201,6 +244,8 @@ public class App {
             } else if (opc_principal == 3) {
 
                 System.out.println("Obrigado por utilizar nosso sistema <3 ");
+            } else {
+                System.out.println("Digite uma opcao valida");
             }
         }
     }

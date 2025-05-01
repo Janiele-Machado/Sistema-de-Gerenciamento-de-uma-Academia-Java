@@ -1,10 +1,13 @@
 package Academia;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -49,6 +52,25 @@ public class Metodos {
         System.out.println("|5- Desativar meu plano          |");
         System.out.println("|6-Sair                          |");
         System.out.println("-".repeat(34));
+    }
+
+    public void opcPlanos() {
+        System.out.println("-".repeat(50));
+        System.out.println("|Escolha qual Plano Voce Deseja Contratar:          |");
+        System.out.println("|Opcao 1: Plano Comum                               |");
+        System.out.println("|Tipo: Mensal                                       |");
+        System.out.println("|Valor: 120 reais                                   |");
+        System.out.println("|Sem Instrutor ):                                   |\n");
+        System.out.println("|Opcao 2: Plano Premium                             |");
+        System.out.println("|Tipo: Trimestral(Por tres meses)                   |");
+        System.out.println("|Valor: 100 reais                                   |");
+        System.out.println("|Com direito a um instrutor de sua preferencia      |\n");
+        System.out.println("|Opcao 3: Plano Premium Plus                        |");
+        System.out.println("|Tipo: anual(Por doze meses)                        |");
+        System.out.println("|Valor: 90 reais                                    |");
+        System.out.println("|Com direito a um instrutor de sua preferencia      |");
+        System.out.println("-".repeat(50));
+
     }
 
     public String logar(String email_ver, String senha_ver) throws SQLException {
@@ -118,7 +140,7 @@ public class Metodos {
             } else if (opc_amd == 3) {
 
             } else if (opc_amd == 4) {
-                int opc4=0;
+                int opc4 = 0;
                 do {
                     System.out.println("-".repeat(33));
                     System.out.println("|-------Deletar:-------|");
@@ -129,21 +151,19 @@ public class Metodos {
                     opc4 = scan.nextInt();
                     if (opc4 == 1) {
                         rel.Relatorio_personal();
-                        
-                        
 
                     } else if (opc4 == 2) {
                         rel.Relatorio_adm();
-                       
+
                     } else if (opc4 == 3) {
                         rel.Relatorio_aluno();
                     } else if (opc4 == 4) {
                         System.out.println(":::");
-                        
+
                     } else {
                         System.out.println("Digite uma opção valida");
                     }
-                }while(opc_amd ==4);    
+                } while (opc_amd == 4);
             } else if (opc_amd == 5) {
 
             } else if (opc_amd == 6) {
@@ -180,23 +200,202 @@ public class Metodos {
         } else {
             return 0;
         }
-        
-        
+
     }
-    
-    public double calcularBonos(String email) throws SQLException{
+
+    public double calcularBonos(String email) throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_cal = "SELECT personal.quant_alunos FROM usuario JOIN personal ON personal.fk_usu_personal = usuario.id WHERE usuario.email = ?; ";
         PreparedStatement comandocal = conexao.prepareStatement(sql_cal);
         comandocal.setString(1, email);
         ResultSet rs = comandocal.executeQuery();
-        if(rs.next()){
+        if (rs.next()) {
             int quant = rs.getInt("quant_alunos");
-            return 50*quant; // 50 por aluno pode se tornar dinamico
-        }else{
+            return 50 * quant; // 50 por aluno pode se tornar dinamico
+        } else {
             return 0.0;
         }
-        
+
     }
 
+    public void contratarPlano(int idAluno) throws Exception {
+        double valor = 120;
+        String nome = "Plano Comum";
+        int duracao = 1;
+        String ativa = "sim";
+        LocalDate data_inicio = LocalDate.now(); // pega a data atual do dia da contratação
+        LocalDate data_fim = data_inicio.plus(1, ChronoUnit.MONTHS);//add um mês a data de contratação
+        Date dataInicioSQL = Date.valueOf(data_inicio);
+        Date dataFimSQL = Date.valueOf(data_fim);
+
+        // conecta com o banco  
+        Connection conexao = new Conexao().getConexao();
+
+        //INSERT INTO `assinatura` (`aluno_id`, `nome_plano`, `duracao_meses`, `valor`, `data_inicio`, `data_fim`, `ativa`) VALUES ('3', 'Plano Comum', '1', '100', '2025-04-30', '2025-05-30', 'sim');
+        String sqlAss = "INSERT INTO `assinatura` (`aluno_id`, `nome_plano`, `duracao_meses`, `valor`, `data_inicio`, `data_fim`, `ativa`) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        try {
+            // Começar uma transação para garantir consistência
+            conexao.setAutoCommit(false);
+
+            // Inserindo dados na tabela aluno
+            PreparedStatement comandoAss = conexao.prepareStatement(sqlAss);
+            comandoAss.setInt(1, idAluno);
+            comandoAss.setString(2, nome);
+            comandoAss.setInt(3, duracao);
+            comandoAss.setDouble(4, valor);
+            comandoAss.setDate(5, dataInicioSQL);
+            comandoAss.setDate(6, dataFimSQL);
+            comandoAss.setString(7, ativa);
+            comandoAss.executeUpdate();
+
+            // Confirmar a transação
+            conexao.commit();
+            System.out.println("Plano Contratado com sucesso!");
+
+            // Fechar as conexões
+            comandoAss.close();
+            conexao.setAutoCommit(true);
+
+        } catch (Exception e) {
+            try {
+                // Em caso de erro, desfaz a transação
+                conexao.rollback();
+            } catch (SQLException rollbackEx) {
+                System.out.println("Erro ao reverter a transação: " + rollbackEx.getMessage());
+            }
+            System.out.println("Erro ao contratar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
+        }
+    }
+    public void contratarPlano(int idAluno, int id_personal, double valor, int duracao, String nome,int qtd) throws Exception {
+        
+        String ativa = "sim";
+        LocalDate data_inicio = LocalDate.now(); // pega a data atual do dia da contratação
+        LocalDate data_fim = data_inicio.plus(duracao, ChronoUnit.MONTHS);//add os meses a data de contratação
+        Date dataInicioSQL = Date.valueOf(data_inicio);
+        Date dataFimSQL = Date.valueOf(data_fim);
+        qtd = qtd + 1;
+
+        // conecta com o banco  
+        Connection conexao = new Conexao().getConexao();
+
+        //INSERT INTO `academia_db`.`assinatura` (`aluno_id`, `personal_id`, `nome_plano`, `duracao_meses`, `valor`, `data_inicio`, `data_fim`, `ativa`) VALUES ('1', '1', '1', '1', '1', '1', '1', '1');
+        String sqlAss = "INSERT INTO `assinatura` (`aluno_id`, `personal_id`, `nome_plano`, `duracao_meses`, `valor`, `data_inicio`, `data_fim`, `ativa`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sqlqtd = "UPDATE `personal` SET `quant_alunos` = ? WHERE (`id` = ?);";
+        try {
+            // Começar uma transação para garantir consistência
+            conexao.setAutoCommit(false);
+
+            // Inserindo dados na tabela aluno
+            PreparedStatement comandoAss = conexao.prepareStatement(sqlAss);
+            comandoAss.setInt(1, idAluno);
+            comandoAss.setInt(2, id_personal);
+            comandoAss.setString(3, nome);
+            comandoAss.setInt(4, duracao);
+            comandoAss.setDouble(5, valor);
+            comandoAss.setDate(6, dataInicioSQL);
+            comandoAss.setDate(7, dataFimSQL);
+            comandoAss.setString(8, ativa);
+            comandoAss.executeUpdate();
+            
+            PreparedStatement comandoQtd = conexao.prepareStatement(sqlqtd);
+            comandoQtd.setInt(1, qtd);
+            comandoQtd.setInt(2, id_personal);
+            comandoQtd.executeUpdate();
+
+            // Confirmar a transação
+            conexao.commit();
+            System.out.println("Plano Contratado com sucesso!");
+
+            // Fechar as conexões
+            comandoAss.close();
+            comandoQtd.close();
+            conexao.setAutoCommit(true);
+
+        } catch (Exception e) {
+            try {
+                // Em caso de erro, desfaz a transação
+                conexao.rollback();
+            } catch (SQLException rollbackEx) {
+                System.out.println("Erro ao reverter a transação: " + rollbackEx.getMessage());
+            }
+            System.out.println("Erro ao contratar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
+        }
+    }
+    
+
+    public int obterIdAluno(int id) throws SQLException {
+        Connection conexao = new Conexao().getConexao();
+        String sql_relID = "Select id from aluno where fk_usu_aluno = ? ";
+        PreparedStatement comando_relID = conexao.prepareStatement(sql_relID);
+        comando_relID.setInt(1, id);
+        ResultSet rs = comando_relID.executeQuery();
+        if (rs.next()) {
+            int id_aluno = rs.getInt("id");
+            return id_aluno;
+
+        } else {
+            return 0;
+        }
+    }
+
+    public void listarPersonal() throws SQLException {
+
+        Connection conexao = new Conexao().getConexao();
+        String sqlListar = "SELECT usuario.nome, personal.especialidade FROM personal inner join usuario on usuario.id = personal.fk_usu_personal;";
+        try {
+            PreparedStatement comandoListar = conexao.prepareStatement(sqlListar);
+            ResultSet rs2 = comandoListar.executeQuery();
+
+            while (rs2.next()) {
+               
+                System.out.println("Nome: " + rs2.getString("nome"));
+                System.out.println("Especialidade: " + rs2.getString("especialidade"));
+                System.out.println("-----------------------------------------------");
+            }
+
+            comandoListar.close();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+
+            try {
+                if (conexao != null && !conexao.isClosed()) {
+                    conexao.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+
+        }
+    }
+    public int obterIdPersonal(String nome) throws SQLException {
+        Connection conexao = new Conexao().getConexao();
+        String sql_relID = "select personal.id from personal inner join usuario on usuario.id = personal.fk_usu_personal where usuario.nome = ?;";
+        PreparedStatement comando_relID = conexao.prepareStatement(sql_relID);
+        comando_relID.setString(1, nome);
+        ResultSet rs = comando_relID.executeQuery();
+        if (rs.next()) {
+            int id_personal = rs.getInt("id");
+            return id_personal;
+
+        } else {
+            return 0;
+        }
+    }
+
+    public int descobrirQTDalunos(String nome) throws SQLException {
+        Connection conexao = new Conexao().getConexao();
+        String sql_cal = "SELECT personal.quant_alunos FROM usuario JOIN personal ON personal.fk_usu_personal = usuario.id WHERE usuario.nome = ?; ";
+        PreparedStatement comandocal = conexao.prepareStatement(sql_cal);
+        comandocal.setString(1, nome);
+        ResultSet rs = comandocal.executeQuery();
+        if (rs.next()) {
+            int quant = rs.getInt("quant_alunos");
+            return quant; 
+        } else {
+            return -1;
+        }
+
+    }
 }
