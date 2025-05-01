@@ -51,10 +51,17 @@ public class Deletar {
          comando_dellA.setString(1, email);
          comando_dellA.executeUpdate();
          
-         String sql_delU = " DELETE FROM usuario WHERE email = 'manu@gmail.com' AND tipo = 'adm';";
+         String sql_delF = "DELETE FROM financa WHERE usuario_id = (SELECT id FROM usuario WHERE email = ? AND tipo = 'adm')";
+         PreparedStatement comando_dellF = conexao.prepareStatement(sql_delF);
+         comando_dellF.setString(1, email);
+         comando_dellF.executeUpdate();
+         
+         
+         String sql_delU = " DELETE FROM usuario WHERE email = ? AND tipo = 'adm';";
          PreparedStatement comando_dellu = conexao.prepareStatement(sql_delU);
          comando_dellu.setString(1, email);
          comando_dellu.executeUpdate();
+         
          
      } catch(SQLException e){
          conexao.rollback(); // Reverte em caso de erro
