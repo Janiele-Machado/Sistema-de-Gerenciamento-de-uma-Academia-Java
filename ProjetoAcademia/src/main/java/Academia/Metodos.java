@@ -180,7 +180,23 @@ public class Metodos {
         } else {
             return 0;
         }
-
+        
+        
+    }
+    
+    public double calcularBonos(String email) throws SQLException{
+        Connection conexao = new Conexao().getConexao();
+        String sql_cal = "SELECT personal.quant_alunos FROM usuario JOIN personal ON personal.fk_usu_personal = usuario.id WHERE usuario.email = ?; ";
+        PreparedStatement comandocal = conexao.prepareStatement(sql_cal);
+        comandocal.setString(1, email);
+        ResultSet rs = comandocal.executeQuery();
+        if(rs.next()){
+            int quant = rs.getInt("quant_alunos");
+            return 50*quant; // 50 por aluno pode se tornar dinamico
+        }else{
+            return 0.0;
+        }
+        
     }
 
 }
