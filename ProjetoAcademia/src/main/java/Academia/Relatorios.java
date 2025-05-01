@@ -42,7 +42,7 @@ public class Relatorios {
     }
     public void Relatorio_aluno() throws SQLException {
         Connection conexao = new Conexao().getConexao();
-        String sql_relA = " Select * from usuario inner join personal on  usuario.id = fk_usu_aluno;";
+        String sql_relA = " Select * from usuario inner join aluno on  usuario.id = fk_usu_aluno;";
         PreparedStatement comando_al = conexao.prepareStatement(sql_relA);
         ResultSet rs = comando_al.executeQuery();
         while (rs.next()) {
@@ -73,9 +73,9 @@ public class Relatorios {
     
     public void Relatorio_adm() throws SQLException {
         Connection conexao = new Conexao().getConexao();
-        String sql_relAdm = " Select * from usuario inner join personal on  usuario.id = fk_usu_adm;";
-        PreparedStatement comando_al = conexao.prepareStatement(sql_relAdm);
-        ResultSet rs = comando_al.executeQuery();
+        String sql_relAdm = " Select * from usuario inner join adm on  usuario.id = fk_usu_adm;";
+        PreparedStatement comando_adm = conexao.prepareStatement(sql_relAdm);
+        ResultSet rs = comando_adm.executeQuery();
         while (rs.next()) {
             int id = rs.getInt("id");
             String nome = rs.getString("nome");
