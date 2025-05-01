@@ -190,7 +190,7 @@ public class App {
                         break;
 
                     case "adm":
-                        System.out.println("teste");
+                        metodos.menuADM();
                         break;
 
                     default:

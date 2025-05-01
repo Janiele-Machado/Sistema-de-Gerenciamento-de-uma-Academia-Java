@@ -40,5 +40,36 @@ public class Relatorios {
         conexao.close();
 
     }
+    public void Relatorio_aluno() throws SQLException {
+        Connection conexao = new Conexao().getConexao();
+        String sql_relA = " Select * from usuario inner join personal on  usuario.id = fk_usu_aluno;";
+        PreparedStatement comando_al = conexao.prepareStatement(sql_relA);
+        ResultSet rs = comando_al.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String nome = rs.getString("nome");
+            String email = rs.getString("email");
+            String cpf = rs.getString("cpf");
+            Date dataNascimento = rs.getDate("data_nascimento");
+            String matricula = rs.getString("matricula");
+            String objetivo = rs.getString("objetivo");
+            String status = rs.getString("status");
+
+            System.out.println("ID: " + id
+                    + ", Nome: " + nome
+                    + ", Email: " + email
+                    + ", CPF: " + cpf
+                    + ", Nascimento: " + dataNascimento
+                    + ", matricula: " + matricula
+                    + ", objetivo:" + objetivo
+                    + ", status: " + status);
+                    
+
+        }
+        rs.close();
+
+        conexao.close();
+    }
+    
 
 }
