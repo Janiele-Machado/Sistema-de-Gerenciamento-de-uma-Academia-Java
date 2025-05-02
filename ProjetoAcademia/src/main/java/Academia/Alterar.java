@@ -14,15 +14,34 @@ public class Alterar {
         String sqlAlterarAluno = "UPDATE aluno SET status=?, matricula=?, objetivo=? WHERE fk_usu_aluno=?";
 
         try{
-            PreparedStatement stmt = conexao.prepareStatement(sqlAlterarUsuario);
+            //Atualizando tabela usuarios
+            PreparedStatement comandoUsuario = conexao.prepareStatement(sqlAlterarUsuario);
+
             comandoUsuario.setString(1, aluno.getNome());
             comandoUsuario.setString(2, aluno.getCpf());
             comandoUsuario.setString(3, aluno.getEmail());
             comandoUsuario.setString(4, aluno.setDataNasc());
             comandoUsuario.setString(5, aluno.getSenha());
-            comandoUsuario.setString(6, aluno.setTipo());
+            comandoUsuario.setString(6, aluno.getTipo());
             comandoUsuario.setInt(7, aluno.getId());
             comandoUsuario.executeUpdate();
+
+            //Atualizando tabela aluno
+            PreparedStatement comandoAluno = conexao.prepareStatement(sqlAlterarAluno);
+
+            comandoAluno.setString(1, aluno.getStatus());
+            comandoAluno.setString(2, aluno.getMatricula());
+            comandoAluno.setString(3, aluno.getObjetivo());
+            comandoUsuario.setInt(4, aluno.getId());
+            comandoAluno.executeUpdate();
+
+            System.out.println("Alteracao realizada com sucesso!");
+
+            comandoUsuario.close();
+            comandoAluno.close();
+        } catch (SQLException e){
+            System.out.println("Erro ao alterar aluno: " + e.getMessage());
+            e.printStackTrace();
         }
 
 
