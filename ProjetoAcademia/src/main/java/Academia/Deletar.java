@@ -46,7 +46,7 @@ public class Deletar {
           conexao.setAutoCommit(false); // Transação manual
      try{  
          
-         String sql_delAdm = "DELETE FROM adm WHERE fk_usu_adm = (SELECT id FROM usuario WHERE email = ? AND tipo = 'adm'";
+         String sql_delAdm = "DELETE FROM adm WHERE fk_usu_adm = (SELECT id FROM usuario WHERE email = ? AND tipo = 'adm')";
          PreparedStatement comando_dellA = conexao.prepareStatement(sql_delAdm);
          comando_dellA.setString(1, email);
          comando_dellA.executeUpdate();

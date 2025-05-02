@@ -139,6 +139,7 @@ public class Metodos {
                 } while (opc1 != 4);
 
             } else if (opc_amd == 2) {
+                
 
             } else if (opc_amd == 3) {
 
@@ -209,7 +210,7 @@ public class Metodos {
 
     }
 
-    public int retornoID(String email) throws SQLException {
+    public static int retornoID(String email) throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_relID = "select id from usuario  where email = ?;";
         PreparedStatement comando_relID = conexao.prepareStatement(sql_relID);
@@ -225,20 +226,44 @@ public class Metodos {
 
     }
 
-    public double calcularBonos(String email) throws SQLException {
+    public void  calcularBonos(String email) throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_cal = "SELECT personal.quant_alunos FROM usuario JOIN personal ON personal.fk_usu_personal = usuario.id WHERE usuario.email = ?; ";
         PreparedStatement comandocal = conexao.prepareStatement(sql_cal);
         comandocal.setString(1, email);
         ResultSet rs = comandocal.executeQuery();
+        double bonus;
         if (rs.next()) {
             int quant = rs.getInt("quant_alunos");
-            return 50 * quant; // 50 por aluno pode se tornar dinamico
+             bonus = 50 * quant; // 50 por aluno pode se tornar dinamico
         } else {
-            return 0.0;
+            bonus=0.0;
+            
+        }
+        if(bonus>0){
+            try{
+            int id =retornoID(email);
+            LocalDate data_pag= LocalDate.now();
+            String categoria="bonus";
+            String sql_insertB = "INSERT INTO `financa` (`usuario_id`, `valor`, `data_pagamento`, `categoria`) VALUES (?, ?, ?, ?);";
+            PreparedStatement comandocal2 = conexao.prepareStatement(sql_insertB);
+            comandocal2.setInt(1, id);
+            comandocal2.setDouble(2, bonus);
+            comandocal2.setDate(3, java.sql.Date.valueOf(data_pag));
+            comandocal2.setString(4, categoria);
+            comandocal2.executeUpdate();
+            
+            
+            }catch(SQLException e){
+                System.out.println(e);
+                
+            }
+        }else{
+            System.out.println("Sem bonos");
         }
 
     }
+    
 
     public void contratarPlano(int idAluno) throws Exception {
         double valor = 120;
@@ -462,6 +487,7 @@ public class Metodos {
             }
             System.out.println("Erro ao pagar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
+        
     }
 
 }
