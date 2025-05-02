@@ -233,8 +233,8 @@ public class App {
                                     }
 
                                 } else if (opc_aluno == 4) {
-                                    Alterar metodos = new Alterar();
-                                    Aluno aluno = metodos.buscarAlunoPorId(id);
+                                    Alterar novosMetodos = new Alterar();
+                                    Aluno aluno = novosMetodos.buscarAlunoPorId(id);
 
                                     boolean continuarAlterando = true;
 
@@ -267,7 +267,7 @@ public class App {
                                                 aluno.setSenha(scan.nextLine());
                                                 break;
                                             case 0:
-                                                metodos.alterarAluno(aluno);
+                                                novosMetodos.alterarAluno(aluno);
                                                 System.out.println("Dados alterados com sucesso!");
                                                 continuarAlterando = false;
                                                 break;
