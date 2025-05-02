@@ -44,6 +44,7 @@ public class Metodos {
     public void menuAluno() {
         //Função repeat utilizada para otimizar a decoração 
         System.out.println("-".repeat(34));
+        System.out.println("|---------MENU ALUNO:----------- |");
         System.out.println("|Escolha o que voce deseja fazer:|");
         System.out.println("|1- Contratar um plano           |");
         System.out.println("|2- Ver meu plano                |");
