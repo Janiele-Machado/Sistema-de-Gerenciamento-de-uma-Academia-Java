@@ -266,8 +266,9 @@ public class Metodos {
             System.out.println("Erro ao contratar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
     }
-    public void contratarPlano(int idAluno, int id_personal, double valor, int duracao, String nome,int qtd) throws Exception {
-        
+
+    public void contratarPlano(int idAluno, int id_personal, double valor, int duracao, String nome, int qtd) throws Exception {
+
         String ativa = "sim";
         LocalDate data_inicio = LocalDate.now(); // pega a data atual do dia da contratação
         LocalDate data_fim = data_inicio.plus(duracao, ChronoUnit.MONTHS);//add os meses a data de contratação
@@ -296,7 +297,7 @@ public class Metodos {
             comandoAss.setDate(7, dataFimSQL);
             comandoAss.setString(8, ativa);
             comandoAss.executeUpdate();
-            
+
             PreparedStatement comandoQtd = conexao.prepareStatement(sqlqtd);
             comandoQtd.setInt(1, qtd);
             comandoQtd.setInt(2, id_personal);
@@ -321,7 +322,6 @@ public class Metodos {
             System.out.println("Erro ao contratar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
     }
-    
 
     public int obterIdAluno(int id) throws SQLException {
         Connection conexao = new Conexao().getConexao();
@@ -347,7 +347,7 @@ public class Metodos {
             ResultSet rs2 = comandoListar.executeQuery();
 
             while (rs2.next()) {
-               
+
                 System.out.println("Nome: " + rs2.getString("nome"));
                 System.out.println("Especialidade: " + rs2.getString("especialidade"));
                 System.out.println("-----------------------------------------------");
@@ -369,6 +369,7 @@ public class Metodos {
 
         }
     }
+
     public int obterIdPersonal(String nome) throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_relID = "select personal.id from personal inner join usuario on usuario.id = personal.fk_usu_personal where usuario.nome = ?;";
@@ -392,10 +393,53 @@ public class Metodos {
         ResultSet rs = comandocal.executeQuery();
         if (rs.next()) {
             int quant = rs.getInt("quant_alunos");
-            return quant; 
+            return quant;
         } else {
             return -1;
         }
 
     }
+
+    public void fazerPagamentos(int idUsuario, double valor, String categoria) throws Exception {
+
+        LocalDate data_pagamento = LocalDate.now(); // pega a data atual do dia do pagamento
+
+        Date dataPgSQL = Date.valueOf(data_pagamento);
+
+        // conecta com o banco  
+        Connection conexao = new Conexao().getConexao();
+
+        //INSERT INTO `academia_db`.`financa` (`usuario_id`, `valor`, `data_pagamento`, `categoria`) VALUES ('x', 'x', 'x', 'x');
+        String sqlPg = "INSERT INTO `financa` (`usuario_id`, `valor`, `data_pagamento`, `categoria`) VALUES (?, ?, ?, ?);";
+        try {
+            // Começar uma transação para garantir consistência
+            conexao.setAutoCommit(false);
+
+            // Inserindo dados na tabela aluno
+            PreparedStatement comandoPg = conexao.prepareStatement(sqlPg);
+            comandoPg.setInt(1, idUsuario);
+            comandoPg.setDouble(2, valor);
+            comandoPg.setDate(3, dataPgSQL);
+            comandoPg.setString(4, categoria);
+            comandoPg.executeUpdate();
+
+            // Confirmar a transação
+            conexao.commit();
+            System.out.println("Pagamento Realizado com sucesso!");
+
+            // Fechar as conexões
+            comandoPg.close();
+            conexao.setAutoCommit(true);
+
+        } catch (Exception e) {
+            try {
+                // Em caso de erro, desfaz a transação
+                conexao.rollback();
+            } catch (SQLException rollbackEx) {
+                System.out.println("Erro ao reverter a transação: " + rollbackEx.getMessage());
+            }
+            System.out.println("Erro ao pagar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
+        }
+    }
+
 }
