@@ -20,20 +20,7 @@ public class Alterar {
         aluno.setSenha(senha);
         aluno.setTipo(tipo);
     }
-
-    public void alterarPersonal(Personal personal, int id, String nome, String cpf, String email, String dataNasc,
-            String senha, String tipo, String especialidade) {
-
-        personal.setNome(nome);
-        personal.setCpf(cpf);
-        personal.setEmail(email);
-        personal.setDataNasc(dataNasc);
-        personal.setSenha(senha);
-        personal.setTipo(tipo);
-        personal.setEspecialidade(especialidade);
-
-    }
-
+    
     public void alterarPersonal(Personal personal) throws SQLException {
 
         Connection conexao = new Conexao().getConexao();
