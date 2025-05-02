@@ -253,6 +253,9 @@ public class App {
                                 scan.nextLine();
 
                                 if (opc_personal == 1) {
+                                    
+                                    int idPersonal = Metodos.retornoID(email_ver);
+                                    metodos.listarAlunos(idPersonal);
 
                                 } else if (opc_personal == 2) {
 
