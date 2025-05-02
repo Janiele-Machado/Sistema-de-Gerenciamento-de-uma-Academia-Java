@@ -6,19 +6,15 @@ import java.sql.SQLException;
 
 public class Alterar {
 
-    public void alterarAluno(Aluno aluno, int id, String nome, String cpf, String email, String dataNasc,
-            String senha, String tipo, String status, String matricula, String Objetivo) {
+    public void alterarAluno(Aluno aluno) throws SQLException {
 
-        aluno.setMatricula(matricula);
-        aluno.setObjetivo(Objetivo);
-        aluno.setStatus(status);
+        Connection conexao = new Conexao().getConexao();
 
-        aluno.setNome(nome);
-        aluno.setCpf(cpf);
-        aluno.setEmail(email);
-        aluno.setDataNasc(dataNasc);
-        aluno.setSenha(senha);
-        aluno.setTipo(tipo);
+        String sqlAlterarUsuario = "UPDATE usuarios SET nome=?. cpg=?, data_nascimento=?, senha=?, tipo=? WHERE id=?";
+        String sqlAlterarAluno = "UPDATE aluno SET status=?, matricula=?, objetivo=? WHERE fk_usu_aluno=?";
+        
+
+
     }
     
     public void alterarPersonal(Personal personal) throws SQLException {
