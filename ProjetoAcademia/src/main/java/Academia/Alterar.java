@@ -10,7 +10,7 @@ public class Alterar {
 
         Connection conexao = new Conexao().getConexao();
 
-        String sqlAlterarUsuario = "UPDATE usuarios SET nome=?. cpg=?, data_nascimento=?, senha=?, tipo=? WHERE id=?";
+        String sqlAlterarUsuario = "UPDATE usuarios SET nome=?, cpg=?, data_nascimento=?, senha=?, tipo=? WHERE id=?";
         String sqlAlterarAluno = "UPDATE aluno SET status=?, matricula=?, objetivo=? WHERE fk_usu_aluno=?";
 
         try{
@@ -20,7 +20,7 @@ public class Alterar {
             comandoUsuario.setString(1, aluno.getNome());
             comandoUsuario.setString(2, aluno.getCpf());
             comandoUsuario.setString(3, aluno.getEmail());
-            comandoUsuario.setString(4, aluno.setDataNasc());
+            comandoUsuario.setString(4, aluno.getDataNasc());
             comandoUsuario.setString(5, aluno.getSenha());
             comandoUsuario.setString(6, aluno.getTipo());
             comandoUsuario.setInt(7, aluno.getId());
