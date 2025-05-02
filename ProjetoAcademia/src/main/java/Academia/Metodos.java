@@ -94,7 +94,7 @@ public class Metodos {
 
     }
 
-    public void menuADM() throws SQLException {
+    public void menuADM(int id) throws SQLException, Exception {
         int opc_amd = 0;
         do {
             System.out.println("-".repeat(33));
@@ -103,8 +103,9 @@ public class Metodos {
             System.out.println("|2-Relatorio financeiro          |");
             System.out.println("|3-Folha salarial                |");
             System.out.println("|4- Relatorio Geral              |");
-            System.out.println("|5-Cadastrar planos             |");
-            System.out.println("|6- Quero Sair                   |");
+            System.out.println("|5- Realizar Pagamentos          |");
+            System.out.println("|6- Quero atualizar o bonus      |");
+            System.out.println("|7- Quero Sair                   |");
             System.out.println("-".repeat(33));
             opc_amd = scan.nextInt();
             scan.nextLine();
@@ -118,6 +119,7 @@ public class Metodos {
                     System.out.println("|3-Deletar Aluno       |");
                     System.out.println("|4-Sair                |");
                     opc1 = scan.nextInt();
+                    scan.nextLine();
                     if (opc1 == 1) {
                         System.out.println("Digite o email do Personal que queria Deletar");
                         del.deletarPersonal(scan.nextLine());
@@ -133,7 +135,7 @@ public class Metodos {
                     } else {
                         System.out.println("Digite uma opção valida");
                     }
-                } while (opc1 == 4);
+                } while (opc1 != 4);
 
             } else if (opc_amd == 2) {
 
@@ -143,11 +145,11 @@ public class Metodos {
                 int opc4 = 0;
                 do {
                     System.out.println("-".repeat(33));
-                    System.out.println("|-------Deletar:-------|");
+                    System.out.println("|-------Relatorio:-------|");
                     System.out.println("|1-Relatorio Personal    |");
                     System.out.println("|2-Relatorio ADM         |");
                     System.out.println("|3-Relatorio Aluno       |");
-                    System.out.println("|4-Sair                |");
+                    System.out.println("|4-Sair                  |");
                     opc4 = scan.nextInt();
                     if (opc4 == 1) {
                         rel.Relatorio_personal();
@@ -163,16 +165,35 @@ public class Metodos {
                     } else {
                         System.out.println("Digite uma opção valida");
                     }
-                } while (opc_amd == 4);
+                } while (opc_amd != 4);
             } else if (opc_amd == 5) {
+                //realizar pagamentos 
+                System.out.println("Tem Certeza que deseja realizar um pagamento? Digite S para sim e N para nao:");
+                String op1 = scan.nextLine();
 
+                if (op1.equalsIgnoreCase("s")) {
+                    System.out.println("-------------------PAGAMENTO--------------------");
+                    System.out.println("Digite por favor o valor que voce deseja pagar: ");
+                    double valor = scan.nextDouble();
+                    scan.nextLine();
+                    String desc = "Salario";
+                    this.fazerPagamentos(id, valor, desc);
+
+                } else {
+                    System.out.println("saindo...");
+
+                }
             } else if (opc_amd == 6) {
+                //bonus
+
+            } else if (opc_amd == 7) {
                 System.out.println("...");
+
             } else {
                 System.out.println("Opção inválida. Tente novamente.");
             }
 
-        } while (opc_amd == 6);
+        } while (opc_amd != 7);
     }
 
     public void menuPersonal() throws SQLException {

@@ -214,20 +214,21 @@ public class App {
                             } else if (opc_aluno == 2) {
 
                             } else if (opc_aluno == 3) { //Opc Pagamento
-                                 System.out.println("Tem Certeza que deseja realizar um pagamento? Digite S para sim e N para nao:");
-                                    String op1 = scan.nextLine();
+                                System.out.println("Tem Certeza que deseja realizar um pagamento? Digite S para sim e N para nao:");
+                                String op1 = scan.nextLine();
 
-                                    if (op1.equalsIgnoreCase("s")) {
-                                        System.out.println("-------------------PAGAMENTO--------------------");
-                                        System.out.println("Digite por favor o valor que voce deseja pagar: ");
-                                        double valor = scan.nextDouble();
-                                        String desc = "Mensalidade";
-                                        metodos.fazerPagamentos(id, valor, desc);
-                                        
-                                    } else {
-                                        System.out.println("saindo...");
+                                if (op1.equalsIgnoreCase("s")) {
+                                    System.out.println("-------------------PAGAMENTO--------------------");
+                                    System.out.println("Digite por favor o valor que voce deseja pagar: ");
+                                    double valor = scan.nextDouble();
+                                    scan.nextLine();
+                                    String desc = "Mensalidade";
+                                    metodos.fazerPagamentos(id, valor, desc);
 
-                                    }
+                                } else {
+                                    System.out.println("saindo...");
+
+                                }
 
                             } else if (opc_aluno == 4) {
 
@@ -267,7 +268,7 @@ public class App {
                         break;
 
                     case "adm":
-                        metodos.menuADM();
+                        metodos.menuADM(id);
                         break;
 
                     default:
