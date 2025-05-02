@@ -244,7 +244,7 @@ public class App {
                                         System.out.println("2. Alterar CPF                    ");
                                         System.out.println("3. Alterar Email                  ");
                                         System.out.println("4. Alterar Senha                  ");
-                                        System.out.println("0. Salvar Alterações e Voltar     ");
+                                        System.out.println("0. Salvar Alterações/Sair         ");
                                         System.out.print("Escolha uma opção: ");
                                         int escolha = scan.nextInt();
                                         scan.nextLine();
