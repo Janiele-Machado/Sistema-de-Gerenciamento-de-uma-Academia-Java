@@ -87,7 +87,7 @@ public abstract class Usuario {
         return email;
     }
 
-    public String getDataNasc() {
+    public Date getDataNasc() {
         return dataNasc;
     }
 
