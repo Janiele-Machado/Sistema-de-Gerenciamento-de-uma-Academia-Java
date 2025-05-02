@@ -1,5 +1,6 @@
 package Academia;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -232,6 +233,47 @@ public class App {
                                     }
 
                                 } else if (opc_aluno == 4) {
+                                    Alterar metodos = new Alterar();
+                                    Aluno aluno = metodos.buscarAlunoPorId(id);
+
+                                    boolean continuarAlterando = true;
+
+                                    while (continuarAlterando) {
+                                        System.out.println("--------ALTERAÇÃO DE DADOS--------");
+                                        System.out.println("1. Alterar Nome                   ");
+                                        System.out.println("2. Alterar CPF                    ");
+                                        System.out.println("3. Alterar Email                  ");
+                                        System.out.println("4. Alterar Senha                  ");
+                                        System.out.println("0. Salvar Alterações e Voltar     ");
+                                        System.out.print("Escolha uma opção: ");
+                                        int escolha = scan.nextInt();
+                                        scan.nextLine();
+
+                                        switch (escolha) {
+                                            case 1:
+                                                System.out.println("Digite o nome que deseja alterar: ");
+                                                aluno.setNome(scan.nextLine());
+                                                break;
+                                            case 2:
+                                                System.out.println("Digite o novo CPF que deseja colocar:");
+                                                aluno.setCpf(scan.nextLine());
+                                                break;
+                                            case 3:
+                                                System.out.println("Digite o novo email: ");
+                                                aluno.setEmail(scan.nextLine());
+                                                break;
+                                            case 4:
+                                                System.out.println("Digite a nova senha para realizar a atualização:");
+                                                aluno.setSenha(scan.nextLine());
+                                                break;
+                                            case 0:
+                                                metodos.alterarAluno(aluno);
+                                                System.out.println("Dados alterados com sucesso!");
+                                                continuarAlterando = false;
+                                                break;
+                                        }
+
+                                    }
 
                                 } else if (opc_aluno == 5) {
 
