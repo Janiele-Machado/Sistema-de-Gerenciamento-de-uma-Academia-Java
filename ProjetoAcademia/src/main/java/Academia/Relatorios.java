@@ -40,6 +40,7 @@ public class Relatorios {
         conexao.close();
 
     }
+
     public void Relatorio_aluno() throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_relA = " Select * from usuario inner join aluno on  usuario.id = fk_usu_aluno;";
@@ -63,14 +64,13 @@ public class Relatorios {
                     + ", matricula: " + matricula
                     + ", objetivo:" + objetivo
                     + ", status: " + status);
-                    
 
         }
         rs.close();
 
         conexao.close();
     }
-    
+
     public void Relatorio_adm() throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_relAdm = " Select * from usuario inner join adm on  usuario.id = fk_usu_adm;";
@@ -93,57 +93,115 @@ public class Relatorios {
                     + ", CPF: " + cpf
                     + ", Nascimento: " + dataNascimento
                     + ", Salário: " + salario
-                    + ", telefone:  "+ telefone
-                    + ", descricao: "+ descricao
-                    + ", setor:  "+ setor);
+                    + ", telefone:  " + telefone
+                    + ", descricao: " + descricao
+                    + ", setor:  " + setor);
 
         }
         rs.close();
 
         conexao.close();
     }
-    public void Relatorio_salarios() throws SQLException{
+
+    public void Relatorio_salarios() throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_relSal = "SELECT nome, tipo, salario FROM usuario INNER JOIN adm a ON usuario.id = fk_usu_adm;";
         PreparedStatement comandorelS = conexao.prepareStatement(sql_relSal);
         ResultSet rs = comandorelS.executeQuery();
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             String nome = rs.getString("nome");
             String tipo = rs.getString("tipo");
             double salario = rs.getDouble("salario");
-            
-            
+
             System.out.println("---------------------------------------------------");
-            System.out.println("nome: " +nome);
-            System.out.println("Funcionario: "+tipo);
-            System.out.println("Salario: "+salario);
+            System.out.println("nome: " + nome);
+            System.out.println("Funcionario: " + tipo);
+            System.out.println("Salario: " + salario);
             System.out.println("-----------------------------------------------------");
-            
-            
+
         }
         String sql_relSal1 = "SELECT nome, tipo, salario, bonus_por_aluno FROM usuario INNER JOIN personal a ON usuario.id = fk_usu_personal;";
         PreparedStatement comandorelS1 = conexao.prepareStatement(sql_relSal1);
         ResultSet rs1 = comandorelS1.executeQuery();
-        while(rs1.next()){
+        while (rs1.next()) {
             String nome = rs1.getString("nome");
             String tipo = rs1.getString("tipo");
             double salario = rs1.getDouble("salario");
             double bonus = rs1.getDouble("bonus_por_aluno");
-            
-            
+
             System.out.println("---------------------------------------------------");
-            System.out.println("nome: " +nome);
-            System.out.println("Funcionario: "+tipo);
-            System.out.println("Salario: "+salario);
-            System.out.println("bonus: "+bonus);
+            System.out.println("nome: " + nome);
+            System.out.println("Funcionario: " + tipo);
+            System.out.println("Salario: " + salario);
+            System.out.println("bonus: " + bonus);
             System.out.println("-----------------------------------------------------");
-            
-            
+
         }
-        
+
         rs.close();
         rs1.close();
+        conexao.close();
+    }
+
+    public void gerarBalanco() throws SQLException {
+        Connection conexao = new Conexao().getConexao();
+
+        String sql_financas = "SELECT valor, categoria FROM financa";
+        PreparedStatement comandoFinancas = conexao.prepareStatement(sql_financas);
+        ResultSet rsFinancas = comandoFinancas.executeQuery();
+
+        double totalEntradas = 0.0;
+        double totalSaidas = 0.0;
+
+        while (rsFinancas.next()) {
+            double valor = rsFinancas.getDouble("valor");
+            String categoria = rsFinancas.getString("categoria");
+
+            if ("mensalidade".equals(categoria)) {
+                totalEntradas += valor;
+
+            } else if ("Salario".equals(categoria)) {
+                totalSaidas += valor;
+            }
+        }
+
+        String sql_salariosAdm = "SELECT salario FROM usuario INNER JOIN adm ON usuario.id = adm.fk_usu_adm";
+        PreparedStatement comandoAdm = conexao.prepareStatement(sql_salariosAdm);
+        ResultSet rsAdm = comandoAdm.executeQuery();
+
+        double totalSalariosAdm = 0.0;
+        while (rsAdm.next()) {
+            totalSalariosAdm += rsAdm.getDouble("salario");
+        }
+
+        String sql_salariosPersonal = "SELECT salario, bonus_por_aluno FROM usuario INNER JOIN personal ON usuario.id = personal.fk_usu_personal";
+        PreparedStatement comandoPersonal = conexao.prepareStatement(sql_salariosPersonal);
+        ResultSet rsPersonal = comandoPersonal.executeQuery();
+
+        double totalSalariosPersonal = 0.0;
+        while (rsPersonal.next()) {
+            double salarioPersonal = rsPersonal.getDouble("salario");
+            double bonus = rsPersonal.getDouble("bonus_por_aluno");
+            totalSalariosPersonal += (salarioPersonal + bonus); // Salário + bônus
+        }
+
+        double balancoTotal = totalEntradas - totalSaidas - totalSalariosAdm - totalSalariosPersonal;
+
+        System.out.println("---------------------------------------------------");
+        System.out.println("Balanço Financeiro:");
+        System.out.println("Total de Entradas: R$ " + totalEntradas);
+        System.out.println("Total de Saídas: R$ " + totalSaidas );
+        System.out.println("Total de Salários de Administradores: R$ " + totalSalariosAdm);
+        System.out.println("Total de Salários de Personal Trainers (incluindo bônus): R$ " + totalSalariosPersonal);
+        System.out.println("Total de Pagamentos de Alunos: R$ " + totalEntradas);
+        System.out.println("---------------------------------------------------");
+        System.out.println("Balanço Final: R$ " + balancoTotal);
+        System.out.println("---------------------------------------------------");
+
+        rsFinancas.close();
+        rsAdm.close();
+        rsPersonal.close();
         conexao.close();
     }
 
