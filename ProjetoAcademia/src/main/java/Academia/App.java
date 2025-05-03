@@ -7,6 +7,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class App {
+    // pra que serve tantos codigos?
+    // se a vida nao é programada
+    // e as melhores coisas
+    // nao tem logica
 
     public static String geradorMatricula() {
         Random rand = new Random();
