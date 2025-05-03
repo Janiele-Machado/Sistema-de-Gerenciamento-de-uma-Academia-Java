@@ -140,8 +140,10 @@ public class Metodos {
 
             } else if (opc_amd == 2) {
                 
+                
 
             } else if (opc_amd == 3) {
+                rel.Relatorio_salarios();
 
             } else if (opc_amd == 4) {
                 int opc4 = 0;

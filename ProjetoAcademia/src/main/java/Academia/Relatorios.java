@@ -142,7 +142,9 @@ public class Relatorios {
             
         }
         
-        
+        rs.close();
+        rs1.close();
+        conexao.close();
     }
 
 }
