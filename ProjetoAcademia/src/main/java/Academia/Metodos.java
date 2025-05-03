@@ -222,6 +222,37 @@ public class Metodos {
         System.out.println("-".repeat(33));
 
     }
+    
+    public void listarAlunos(int idPersonal) throws SQLException {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.getConexao();
+
+        String sqlListar = """
+            SELECT usuario.nome, usuario.email, aluno.objetivo
+            FROM assinatura
+            JOIN aluno ON assinatura.aluno_id = aluno.id
+            JOIN usuario ON aluno.fk_usu_aluno = usuario.id
+            WHERE assinatura.personal_id = ? AND assinatura.ativa = 'sim';
+        """;
+
+        PreparedStatement ps = con.prepareStatement(sqlListar);
+        ps.setInt(1, idPersonal);
+
+        ResultSet rs = ps.executeQuery();
+
+        System.out.println("\n--- Alunos Ativos ---");
+        while (rs.next()) {
+            System.out.println("Nome: " + rs.getString("nome"));
+            System.out.println("Email: " + rs.getString("email"));
+            System.out.println("Objetivo: " + rs.getString("objetivo"));
+            System.out.println("--------------------------");
+        }
+
+        rs.close();
+        ps.close();
+        con.close();
+    }
+
 
     public static int retornoID(String email) throws SQLException {
         Connection conexao = new Conexao().getConexao();
