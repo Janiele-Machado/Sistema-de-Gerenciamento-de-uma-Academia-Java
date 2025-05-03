@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author samue
+ * @author samuel
  */
 public class Relatorios {
 
@@ -102,6 +102,47 @@ public class Relatorios {
 
         conexao.close();
     }
-    
+    public void Relatorio_salarios() throws SQLException{
+        Connection conexao = new Conexao().getConexao();
+        String sql_relSal = "SELECT nome, tipo, salario FROM usuario INNER JOIN adm a ON usuario.id = fk_usu_adm;";
+        PreparedStatement comandorelS = conexao.prepareStatement(sql_relSal);
+        ResultSet rs = comandorelS.executeQuery();
+        
+        while(rs.next()){
+            String nome = rs.getString("nome");
+            String tipo = rs.getString("tipo");
+            double salario = rs.getDouble("salario");
+            
+            
+            System.out.println("---------------------------------------------------");
+            System.out.println("nome: " +nome);
+            System.out.println("Funcionario: "+tipo);
+            System.out.println("Salario: "+salario);
+            System.out.println("-----------------------------------------------------");
+            
+            
+        }
+        String sql_relSal1 = "SELECT nome, tipo, salario, bonus_por_aluno FROM usuario INNER JOIN personal a ON usuario.id = fk_usu_personal;";
+        PreparedStatement comandorelS1 = conexao.prepareStatement(sql_relSal1);
+        ResultSet rs1 = comandorelS1.executeQuery();
+        while(rs1.next()){
+            String nome = rs1.getString("nome");
+            String tipo = rs1.getString("tipo");
+            double salario = rs1.getDouble("salario");
+            double bonus = rs1.getDouble("bonus_por_aluno");
+            
+            
+            System.out.println("---------------------------------------------------");
+            System.out.println("nome: " +nome);
+            System.out.println("Funcionario: "+tipo);
+            System.out.println("Salario: "+salario);
+            System.out.println("bonus: "+bonus);
+            System.out.println("-----------------------------------------------------");
+            
+            
+        }
+        
+        
+    }
 
 }
