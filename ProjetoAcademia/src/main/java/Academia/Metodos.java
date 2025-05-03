@@ -186,6 +186,19 @@ public class Metodos {
 
                 }
             } else if (opc_amd == 6) {
+               System.out.println("Tem Certeza que deseja realizar um pagamento de bonus ? Digite S para sim e N para nao:");
+                String op1 = scan.nextLine();
+
+                if (op1.equalsIgnoreCase("s")) {
+                    System.out.println("-------------------PAGAMENTO de BONUS--------------------");
+                    System.out.println("Digite por favor o email do personal que queria repassar o bonus  ");
+                    this.calcularBonos(scan.nextLine());
+                    
+
+                } else {
+                    System.out.println("saindo...");
+
+                }
                 //bonus
 
             } else if (opc_amd == 7) {
@@ -253,6 +266,14 @@ public class Metodos {
             comandocal2.setString(4, categoria);
             comandocal2.executeUpdate();
             
+                
+            String sql_insertP = "UPDATE personal SET bonus_por_aluno = ? WHERE fk_usu_personal = ?;";    
+            PreparedStatement  comandocal3 = conexao.prepareStatement(sql_insertP);
+            comandocal3.setDouble(1,bonus);
+            comandocal3.setInt(2, id);
+            comandocal3.executeUpdate();
+            
+            System.out.println("Bonus Depositado");
             
             }catch(SQLException e){
                 System.out.println(e);
