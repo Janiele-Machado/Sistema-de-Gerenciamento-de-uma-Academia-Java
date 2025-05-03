@@ -305,6 +305,9 @@ public class App {
 
                                 } else if (opc_personal == 2) {
 
+                                    int idPersonal = Metodos.retornoID(email_ver);
+                                    metodos.salarioPersonal(idPersonal);
+                                    
                                 } else if (opc_personal == 3) {
 
                                 } else if (opc_personal == 4) {
