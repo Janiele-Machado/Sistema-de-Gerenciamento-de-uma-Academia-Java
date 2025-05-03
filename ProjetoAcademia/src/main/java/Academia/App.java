@@ -309,6 +309,68 @@ public class App {
                                     metodos.salarioPersonal(idPersonal);
                                     
                                 } else if (opc_personal == 3) {
+                                    
+                                    int idPersonal = Metodos.retornoID(email_ver);
+                                    Personal personal = metodos.buscarPersonalPorID(idPersonal);
+                                    
+                                    if (personal != null) {
+                                        
+                                        boolean alterando = true;
+                                        
+                                        while (alterando) {
+                                            System.out.println("\n--- Escolha o campo que deseja alterar ---");
+                                            System.out.println("1. Nome");
+                                            System.out.println("2. CPF");
+                                            System.out.println("3. Email");
+                                            System.out.println("4. Data de Nascimento");
+                                            System.out.println("5. Senha");
+                                            System.out.println("6. Especialidade");
+                                            System.out.println("7. Confirmar alterações");
+                                            System.out.println("8. Cancelar");
+
+                                            int escolha = scan.nextInt();
+                                            scan.nextLine(); // limpar buffer
+
+                                            switch (escolha) {
+                                                case 1:
+                                                    System.out.print("Novo nome: ");
+                                                    personal.setNome(scan.nextLine());
+                                                    break;
+                                                case 2:
+                                                    System.out.print("Novo CPF: ");
+                                                    personal.setCpf(scan.nextLine());
+                                                    break;
+                                                case 3:
+                                                    System.out.print("Novo email: ");
+                                                    personal.setEmail(scan.nextLine());
+                                                    break;
+                                                case 4:
+                                                    System.out.print("Nova data de nascimento (dd/MM/yyyy): ");
+                                                    personal.setDataNasc(scan.nextLine());
+                                                    break;
+                                                case 5:
+                                                    System.out.print("Nova senha: ");
+                                                    personal.setSenha(scan.nextLine());
+                                                    break;
+                                                case 6:
+                                                    System.out.print("Nova especialidade: ");
+                                                    personal.setEspecialidade(scan.nextLine());
+                                                    break;
+                                                case 7:
+                                                    Alterar.alterarPersonal(personal);
+                                                    alterando = false;
+                                                    break;
+                                                case 8:
+                                                    System.out.println("Alteração cancelada.");
+                                                    alterando = false;
+                                                    break;
+                                                default:
+                                                    System.out.println("Opção inválida.");
+                                            }
+                                        }
+                                    } else {
+                                        System.out.println("Personal não encontrado.");
+                                    }
 
                                 } else if (opc_personal == 4) {
 
@@ -317,8 +379,6 @@ public class App {
                                 }
 
                             }
-
-                            break;
 
                         case "adm":
                             metodos.menuADM(id);

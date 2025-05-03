@@ -92,7 +92,7 @@ public class Alterar {
 
 
 
-    public void alterarPersonal(Personal personal) throws SQLException {
+    public static void alterarPersonal(Personal personal) throws SQLException {
 
         Connection conexao = new Conexao().getConexao();
 
