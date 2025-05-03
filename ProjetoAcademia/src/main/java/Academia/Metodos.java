@@ -255,7 +255,52 @@ public class Metodos {
         ps.close();
         con.close();
     }
+    
+    public void salarioPersonal(int idPersonal) throws SQLException {
+        
+    Connection conexao = new Conexao().getConexao();
+    
+    String sqlDados = "SELECT salario, bonus_por_aluno FROM personal WHERE personal.id = ?";
+    PreparedStatement comandoDados = conexao.prepareStatement(sqlDados);
+    comandoDados.setInt(1, idPersonal);
+    ResultSet rsDados = comandoDados.executeQuery();
 
+    if (rsDados.next()) {
+        
+        double salarioBase = rsDados.getDouble("salario");
+        double bonusPorAluno = rsDados.getDouble("bonus_por_aluno");
+
+        String sqlAlunos = "SELECT COUNT(*) AS qtd_alunos FROM assinatura WHERE personal_id = ? AND ativa = 'sim'";
+        PreparedStatement comandoAlunos = conexao.prepareStatement(sqlAlunos);
+        comandoAlunos.setInt(1, idPersonal);
+        ResultSet rsAlunos = comandoAlunos.executeQuery();
+
+        int qtdAlunos = 0;
+        if (rsAlunos.next()) {
+            qtdAlunos = rsAlunos.getInt("qtd_alunos");
+            
+        }
+
+        double salarioFinal = salarioBase + (bonusPorAluno * qtdAlunos);
+
+        System.out.println("===== Salário Atual =====");
+        System.out.println("Salário base: R$" + salarioBase);
+        System.out.println("Alunos ativos: " + qtdAlunos);
+        System.out.println("Bônus por aluno: R$" + bonusPorAluno);
+        System.out.println("Salário total: R$" + salarioFinal);
+        System.out.println("=========================");
+
+        rsAlunos.close();
+        comandoAlunos.close();
+        
+    } else {
+        System.out.println("Dados do personal não encontrados.");
+    }
+
+    rsDados.close();
+    comandoDados.close();
+    conexao.close();
+}
 
     public static int retornoID(String email) throws SQLException {
         Connection conexao = new Conexao().getConexao();
