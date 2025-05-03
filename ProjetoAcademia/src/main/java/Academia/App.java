@@ -293,7 +293,7 @@ public class App {
 
                         case "personal":
                             int opc_personal = 0;
-                            while (opc_personal != 6) {
+                            while (opc_personal != 4) {
                                 metodos.menuPersonal();
                                 opc_personal = scan.nextInt();
                                 scan.nextLine();

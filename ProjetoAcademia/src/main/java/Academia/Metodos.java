@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -258,49 +259,91 @@ public class Metodos {
     
     public void salarioPersonal(int idPersonal) throws SQLException {
         
-    Connection conexao = new Conexao().getConexao();
-    
-    String sqlDados = "SELECT salario, bonus_por_aluno FROM personal WHERE personal.id = ?";
-    PreparedStatement comandoDados = conexao.prepareStatement(sqlDados);
-    comandoDados.setInt(1, idPersonal);
-    ResultSet rsDados = comandoDados.executeQuery();
+        Connection conexao = new Conexao().getConexao();
 
-    if (rsDados.next()) {
-        
-        double salarioBase = rsDados.getDouble("salario");
-        double bonusPorAluno = rsDados.getDouble("bonus_por_aluno");
+        String sqlDados = "SELECT salario, bonus_por_aluno FROM personal WHERE personal.id = ?";
+        PreparedStatement comandoDados = conexao.prepareStatement(sqlDados);
+        comandoDados.setInt(1, idPersonal);
+        ResultSet rsDados = comandoDados.executeQuery();
 
-        String sqlAlunos = "SELECT COUNT(*) AS qtd_alunos FROM assinatura WHERE personal_id = ? AND ativa = 'sim'";
-        PreparedStatement comandoAlunos = conexao.prepareStatement(sqlAlunos);
-        comandoAlunos.setInt(1, idPersonal);
-        ResultSet rsAlunos = comandoAlunos.executeQuery();
+        if (rsDados.next()) {
 
-        int qtdAlunos = 0;
-        if (rsAlunos.next()) {
-            qtdAlunos = rsAlunos.getInt("qtd_alunos");
-            
+            double salarioBase = rsDados.getDouble("salario");
+            double bonusPorAluno = rsDados.getDouble("bonus_por_aluno");
+
+            String sqlAlunos = "SELECT COUNT(*) AS qtd_alunos FROM assinatura WHERE personal_id = ? AND ativa = 'sim'";
+            PreparedStatement comandoAlunos = conexao.prepareStatement(sqlAlunos);
+            comandoAlunos.setInt(1, idPersonal);
+            ResultSet rsAlunos = comandoAlunos.executeQuery();
+
+            int qtdAlunos = 0;
+            if (rsAlunos.next()) {
+                qtdAlunos = rsAlunos.getInt("qtd_alunos");
+
+            }
+
+            double salarioFinal = salarioBase + (bonusPorAluno * qtdAlunos);
+
+            System.out.println("===== Salário Atual =====");
+            System.out.println("Salário base: R$" + salarioBase);
+            System.out.println("Alunos ativos: " + qtdAlunos);
+            System.out.println("Bônus por aluno: R$" + bonusPorAluno);
+            System.out.println("Salário total: R$" + salarioFinal);
+            System.out.println("=========================");
+
+            rsAlunos.close();
+            comandoAlunos.close();
+
+        } else {
+            System.out.println("Dados do personal não encontrados.");
         }
 
-        double salarioFinal = salarioBase + (bonusPorAluno * qtdAlunos);
+        rsDados.close();
+        comandoDados.close();
+        conexao.close();
+    }
+    
+    public Personal buscarPersonalPorID(int idPersonal) throws SQLException {
+        Personal personal = null;
 
-        System.out.println("===== Salário Atual =====");
-        System.out.println("Salário base: R$" + salarioBase);
-        System.out.println("Alunos ativos: " + qtdAlunos);
-        System.out.println("Bônus por aluno: R$" + bonusPorAluno);
-        System.out.println("Salário total: R$" + salarioFinal);
-        System.out.println("=========================");
-
-        rsAlunos.close();
-        comandoAlunos.close();
+        Connection conn = new Conexao().getConexao();
         
-    } else {
-        System.out.println("Dados do personal não encontrados.");
+        String sql = "SELECT * FROM personal WHERE id = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idPersonal);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                
+                personal = new Personal();
+                
+                personal.setId(rs.getInt("id"));
+                personal.setNome(rs.getString("nome"));
+                personal.setCpf(rs.getString("cpf"));
+                personal.setEmail(rs.getString("email"));
+                
+                Date dataNasc = rs.getDate("dataNasc");
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                String dataNascString = formato.format(dataNasc);
+                
+                personal.setDataNasc(dataNascString);
+                
+                personal.setSenha(rs.getString("senha"));
+                personal.setTipo(rs.getString("tipo"));
+                personal.setEspecialidade(rs.getString("especialidade"));
+                personal.setSalario(rs.getDouble("salario"));
+                personal.setBonus_por_aluno(rs.getDouble("bonus_por_aluno"));
+                personal.setQtd_aluno(rs.getInt("quant_alunos"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Erro ao buscar personal por ID.", e);
+        }
+
+        return personal;
     }
 
-    rsDados.close();
-    comandoDados.close();
-    conexao.close();
-}
 
     public static int retornoID(String email) throws SQLException {
         Connection conexao = new Conexao().getConexao();
