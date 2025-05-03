@@ -373,12 +373,15 @@ public class App {
                                     }
 
                                 } else if (opc_personal == 4) {
+                                    
+                                    System.out.println("Saindo do menu de personal...");
 
                                 } else {
                                     System.out.println("Opcao invalida");
                                 }
 
-                            }
+                            }                           
+                            break;
 
                         case "adm":
                             metodos.menuADM(id);
