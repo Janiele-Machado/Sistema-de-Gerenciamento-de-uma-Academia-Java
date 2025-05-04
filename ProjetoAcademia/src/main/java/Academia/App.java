@@ -238,7 +238,7 @@ public class App {
 
                                 } else if (opc_aluno == 4) {
                                     Alterar novosMetodos = new Alterar();
-                                    Aluno aluno = novosMetodos.buscarAlunoPorId(id);
+                                    Aluno aluno = metodos.buscarAlunoPorId(id);
 
                                     boolean continuarAlterando = true;
 

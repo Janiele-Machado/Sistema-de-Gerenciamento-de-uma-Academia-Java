@@ -256,7 +256,53 @@ public class Metodos {
         ps.close();
         con.close();
     }
-    
+
+    public Aluno buscarAlunoPorId(int id){
+        Aluno aluno = new Aluno();
+
+        String sqlUsuario = "SELECT * FROM usuarios WHERE id=?";
+        String sqlAluno = "SELECT * FROM aluno WHERE fk_usu_aluno=?";
+
+        try(Connection conexao = new Conexao().getConexao()){
+
+            PreparedStatement stmUsuario = conexao.prepareStatement(sqlUsuario);
+            stmUsuario.setInt(1, id);
+            ResultSet rstUsuario = stmUsuario.executeQuery();
+
+            if(rstUsuario.next()){
+                aluno.setId(rstUsuario.getInt("id"));
+                aluno.setNome(rstUsuario.getString("nome"));
+                aluno.setCpf(rstUsuario.getString("cpf"));
+                aluno.setEmail(rstUsuario.getString("email"));
+                aluno.setDataNasc(rstUsuario.getNString("data_nascimento"));
+                aluno.setSenha(rstUsuario.getString("senha"));
+                aluno.setTipo(rstUsuario.getString("tipo"));
+            }
+
+            PreparedStatement stmAluno = conexao.prepareStatement(sqlAluno);
+            stmAluno.setInt(1, id);
+            ResultSet rstAluno = stmAluno.executeQuery();
+
+            if(rstAluno.next()){
+                aluno.setStatus(rstAluno.getString("status"));
+                aluno.setMatricula(rstAluno.getString("matricula"));
+                aluno.setObjetivo(rstAluno.getString("objetivo"));
+            }
+
+            stmUsuario.close();
+            stmAluno.close();
+
+        } catch (SQLException e) {
+            System.out.println("Erro na busca do aluno: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return aluno;
+    }
+
+
+
+
     public void salarioPersonal(int idPersonal) throws SQLException {
         
         Connection conexao = new Conexao().getConexao();
