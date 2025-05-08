@@ -84,7 +84,7 @@ public class Alterar {
     public void alterarAdm(Adm adm) throws SQLException {
         Connection conexao = new Conexao().getConexao();
 
-        String sqlAlterar = "UPDATE usuario SET nome=?, cpf=?, email=?, data_nascimento=?, senha=?, tipo=? WHERE usuario.id=?";
+        String sqlAlterar = "UPDATE usuario SET nome=?, email=?, senha=? WHERE usuario.id=?";
         String sqlAlterarAdm = "UPDATE adm SET telefone_comercial=?, setor=?, descricao=? WHERE fk_usu_adm=?";
 
         try {
@@ -93,12 +93,9 @@ public class Alterar {
             PreparedStatement comandoUsuario = conexao.prepareStatement(sqlAlterar);
 
             comandoUsuario.setString(1, adm.getNome());
-            comandoUsuario.setString(2, adm.getCpf());
-            comandoUsuario.setString(3, adm.getEmail());
-            comandoUsuario.setDate(4, adm.getDataNasc());
-            comandoUsuario.setString(5, adm.getSenha());
-            comandoUsuario.setString(6, adm.getTipo());
-            comandoUsuario.setInt(7, adm.getId());
+            comandoUsuario.setString(2, adm.getEmail());
+            comandoUsuario.setString(3, adm.getSenha());
+            comandoUsuario.setInt(4, adm.getId());
 
             comandoUsuario.executeUpdate();
 

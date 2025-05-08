@@ -107,7 +107,8 @@ public class Metodos {
             System.out.println("|4- Relatorio Geral              |");
             System.out.println("|5- Realizar Pagamentos          |");
             System.out.println("|6- Quero atualizar o bonus      |");
-            System.out.println("|7- Quero Sair                   |");
+            System.out.println("|7- Quero atualizar meu cadastro |");
+            System.out.println("|8- Quero Sair                   |");
             System.out.println("-".repeat(33));
             opc_amd = scan.nextInt();
             scan.nextLine();
@@ -203,13 +204,39 @@ public class Metodos {
                 //bonus
 
             } else if (opc_amd == 7) {
+                System.out.println("Tem Certeza que deseja alterar seu cadastro? Digite S para sim e N para nao:");
+                String op1 = scan.nextLine();
+                if (op1.equalsIgnoreCase("s")) {
+                    Adm a1 = new Adm();
+                    a1.setId(id);
+                    System.out.println("Ola, Insira os dados pra prosseguir com sua atualização do cadastro:");
+                    System.out.println("Digite seu nome Completo:");
+                    a1.setNome(scan.nextLine());
+                    System.out.println("Digite seu Email:");
+                    a1.setEmail(scan.nextLine());
+                    System.out.println("Digite seu Número comercial:");
+                    a1.setNumero_comercial(scan.nextLine());
+                    System.out.println("Digite o seu Setor:");
+                    a1.setSetor(scan.nextLine());
+                    System.out.println("Descreva a sua area de atuacao:");
+                    a1.setDesc(scan.nextLine());
+                    System.out.println("Agora, digite sua senha para acessar o sistema:");
+                    a1.setSenha(scan.nextLine());
+                    Alterar alt_adm = new Alterar();
+                    alt_adm.alterarAdm(a1);
+                } else {
+                    System.out.println("saindo...");
+
+                }
+
+            } else if (opc_amd == 8) {
                 System.out.println("...");
 
             } else {
                 System.out.println("Opção inválida. Tente novamente.");
             }
 
-        } while (opc_amd != 7);
+        } while (opc_amd != 8);
     }
 
     public void menuPersonal() throws SQLException {
@@ -320,7 +347,6 @@ public class Metodos {
             System.out.println("Bônus por aluno: R$" + bonusPorAluno);
             System.out.println("Salário total: R$" + salarioFinal);
             System.out.println("=========================");
-            
 
         } else {
             System.out.println("Dados do personal não encontrados.");
