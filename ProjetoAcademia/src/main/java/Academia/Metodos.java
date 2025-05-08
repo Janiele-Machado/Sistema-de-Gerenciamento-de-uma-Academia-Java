@@ -52,7 +52,8 @@ public class Metodos {
         System.out.println("|3- Fazer Pagamento              |");
         System.out.println("|4- Alterar Cadastro             |");
         System.out.println("|5- Desativar meu plano          |");
-        System.out.println("|6-Sair                          |");
+        System.out.println("|6- Reativar meu plano           |");
+        System.out.println("|7- Sair                         |");
         System.out.println("-".repeat(34));
     }
 
@@ -701,7 +702,7 @@ public class Metodos {
 
     }
 
-    public void verPlano(int idUsuario) throws SQLException {
+    public void verPlano(int idUsuario) throws SQLException { // metodo para ver o seu plano atual.
         Connection conexao = new Conexao().getConexao();
 
         String sql = """
@@ -726,7 +727,7 @@ public class Metodos {
             System.out.println("Ativo: " + rs.getString("ativa"));
             System.out.println("=========================================");
         } else {
-            System.out.println("Voce não possui nenhum plano contratado.");
+            System.out.println("Voce nao possui nenhum plano contratado.");
         }
 
         rs.close();
@@ -734,7 +735,7 @@ public class Metodos {
         conexao.close();
     }
 
-    public void desativarPlano(int idUsuario) throws SQLException {
+    public void desativarPlano(int idUsuario) throws SQLException { // metodo para desativar o seu plano atual.
         Connection conexao = new Conexao().getConexao();
 
         String sql = """
@@ -752,11 +753,35 @@ public class Metodos {
         if (linhasAfetadas > 0) {
             System.out.println("Sua assinatura foi desativada com sucesso.");
         } else {
-            System.out.println("Você não possui nenhuma assinatura ativa.");
+            System.out.println("Voce nao possui nenhuma assinatura ativa.");
         }
 
         ps.close();
         conexao.close();
     }
 
+    public void reativarPlano(int idUsuario) throws SQLException { // metodo para reativar plano desativado.
+        Connection conexao = new Conexao().getConexao();
+
+        String sql = """
+        UPDATE assinatura
+        JOIN aluno ON assinatura.aluno_id = aluno.id
+        SET assinatura.ativa = 'sim'
+        WHERE aluno.fk_usu_aluno = ? AND assinatura.ativa = 'nao';
+    """;
+
+        PreparedStatement ps = conexao.prepareStatement(sql);
+        ps.setInt(1, idUsuario);
+
+        int linhasAfetadas = ps.executeUpdate();
+
+        if (linhasAfetadas > 0) {
+            System.out.println("Assinatura reativada com sucesso!");
+        } else {
+            System.out.println("Voce não tem nenhuma assinatura desativada para reativar.");
+        }
+
+        ps.close();
+        conexao.close();
+    }
 }

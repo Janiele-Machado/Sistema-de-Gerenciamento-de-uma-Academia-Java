@@ -260,25 +260,37 @@ public class App {
 
                                     }
 
-                                } else if (opc_aluno == 5) {
+                                } else if (opc_aluno == 5) {// opc desativar a assinatura
                                     System.out.println("Tem certeza que deseja desativar sua assinatura? Digite S para sim e N para nao:");
                                     String resposta = scan.nextLine();
                                     if (resposta.equalsIgnoreCase("s")) {
                                         metodos.desativarPlano(id);
                                     } else {
                                         System.out.println("Assinatura mantida.");
-}
-                                } else if (opc_aluno == 6) {
+                                    }
+                                } else if (opc_aluno == 6) { // opc reativar a assinatura
+
+                                    System.out.println("Voce deseja reativar seu plano anterior? Digite S para sim ou N para nao:");
+                                    String resposta = scan.nextLine();
+
+                                    if (resposta.equalsIgnoreCase("s")) {
+                                        metodos.reativarPlano(id); // Chama o método que criamos
+                                    } else {
+                                        System.out.println("Reativacao cancelada.");
+                                    }
+                                }
+                            else if (opc_aluno == 7) {
                                     System.out.println("saindo...");
                                 } else {
                                     System.out.println("Opcao invalida");
                                 }
 
-                            }
+                    }
 
-                            break;
+                    break;
 
-                        case "personal":
+                
+            case "personal":
                             int opc_personal = 0;
                             while (opc_personal != 4) {
                                 metodos.menuPersonal();//chama o menu de opcoes de personal
@@ -342,11 +354,11 @@ public class App {
                 } else {
                     System.out.println("Digite uma opcao valida");
                 }
-            } catch (InputMismatchException e) { //tratamento para o caso do usuario iserir uma letra no campo inteiro 
+        }catch (InputMismatchException e) { //tratamento para o caso do usuario iserir uma letra no campo inteiro 
                 System.out.println("Entrada invalida. Por favor, digite um numero inteiro.");
                 scan.next(); // Limpa o buffer do scanner para evitar um loop infinito
             }
-        }
-
     }
+
+}
 }
