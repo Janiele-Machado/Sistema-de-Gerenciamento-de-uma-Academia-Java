@@ -11,47 +11,42 @@ public class Alterar {
 
         Connection conexao = new Conexao().getConexao();
 
-        String sqlAlterarUsuario = "UPDATE usuarios SET nome=?, cpf=?, email=?, data_nascimento=?, senha=?, tipo=? WHERE id=?";
-        String sqlAlterarAluno = "UPDATE aluno SET status=?, matricula=?, objetivo=? WHERE fk_usu_aluno=?";
+        String sqlAlterarUsuario = "UPDATE usuario SET nome=?, email=?, senha=? WHERE id=?";
+        String sqlAlterarAluno = "UPDATE aluno SET objetivo=? WHERE fk_usu_aluno=?";
 
-        try{
+        try {
             //Atualizando tabela usuarios
             PreparedStatement comandoUsuario = conexao.prepareStatement(sqlAlterarUsuario);
 
             comandoUsuario.setString(1, aluno.getNome());
-            comandoUsuario.setString(2, aluno.getCpf());
-            comandoUsuario.setString(3, aluno.getEmail());
-            comandoUsuario.setDate(4, aluno.getDataNasc());
-            comandoUsuario.setString(5, aluno.getSenha());
-            comandoUsuario.setString(6, aluno.getTipo());
-            comandoUsuario.setInt(7, aluno.getId());
+            comandoUsuario.setString(2, aluno.getEmail());
+            comandoUsuario.setString(3, aluno.getSenha());
+            comandoUsuario.setInt(4, aluno.getId());
             comandoUsuario.executeUpdate();
 
             //Atualizando tabela aluno
             PreparedStatement comandoAluno = conexao.prepareStatement(sqlAlterarAluno);
-
-            comandoAluno.setString(1, aluno.getStatus());
-            comandoAluno.setString(2, aluno.getMatricula());
-            comandoAluno.setString(3, aluno.getObjetivo());
-            comandoAluno.setInt(4, aluno.getId());
+            
+            comandoAluno.setString(1, aluno.getObjetivo());
+            comandoAluno.setInt(2, aluno.getId());
             comandoAluno.executeUpdate();
 
             System.out.println("Alteracao realizada com sucesso!");
 
             comandoUsuario.close();
             comandoAluno.close();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Erro ao alterar aluno: " + e.getMessage());
             e.printStackTrace();
         }
 
-
     }
-    public static void alterarPersonal(Personal personal) throws SQLException {
+
+    public void alterarPersonal(Personal personal) throws SQLException {
 
         Connection conexao = new Conexao().getConexao();
 
-        String sqlAlterar = "UPDATE  usuarios SET nome=?, cpf=?, email=?, data_nascimento=?, senha=?, tipo=? WHERE  usuario.id=?";
+        String sqlAlterar = "UPDATE  usuario SET nome=?, email=?, senha=? WHERE  usuario.id=?";
         String sqlAlterarPersonal = "UPDATE personal SET especialidade=? WHERE fk_usu_personal=?";
 
         try {
@@ -60,12 +55,9 @@ public class Alterar {
             PreparedStatement comandoUsuario = conexao.prepareStatement(sqlAlterar);
 
             comandoUsuario.setString(1, personal.getNome());
-            comandoUsuario.setString(2, personal.getCpf());
-            comandoUsuario.setString(3, personal.getEmail());
-            comandoUsuario.setDate(4, personal.getDataNasc());
-            comandoUsuario.setString(5, personal.getSenha());
-            comandoUsuario.setString(6, personal.getTipo());
-            comandoUsuario.setInt(7, personal.getId());
+            comandoUsuario.setString(2, personal.getEmail());
+            comandoUsuario.setString(3, personal.getSenha());
+            comandoUsuario.setInt(4, personal.getId());
 
             comandoUsuario.executeUpdate();
 
@@ -89,18 +81,17 @@ public class Alterar {
 
     }
 
-
     public void alterarAdm(Adm adm) throws SQLException {
         Connection conexao = new Conexao().getConexao();
 
-        String sqlAlterar = "UPDATE usuarios SET nome=?, cpf=?, email=?, data_nascimento=?, senha=?, tipo=? WHERE usuario.id=?";
+        String sqlAlterar = "UPDATE usuario SET nome=?, cpf=?, email=?, data_nascimento=?, senha=?, tipo=? WHERE usuario.id=?";
         String sqlAlterarAdm = "UPDATE adm SET telefone_comercial=?, setor=?, descricao=? WHERE fk_usu_adm=?";
 
         try {
-            
+
             // Parte de atualizar tabela usuários
             PreparedStatement comandoUsuario = conexao.prepareStatement(sqlAlterar);
-            
+
             comandoUsuario.setString(1, adm.getNome());
             comandoUsuario.setString(2, adm.getCpf());
             comandoUsuario.setString(3, adm.getEmail());
@@ -108,24 +99,24 @@ public class Alterar {
             comandoUsuario.setString(5, adm.getSenha());
             comandoUsuario.setString(6, adm.getTipo());
             comandoUsuario.setInt(7, adm.getId());
-            
+
             comandoUsuario.executeUpdate();
 
             // Parte de atualizar tabela ADM
             PreparedStatement comandoAdm = conexao.prepareStatement(sqlAlterarAdm);
-            
+
             comandoAdm.setString(1, adm.getNumero_comercial());
             comandoAdm.setString(2, adm.getSetor());
             comandoAdm.setString(3, adm.getDesc());
             comandoAdm.setInt(4, adm.getId());
-            
+
             comandoAdm.executeUpdate();
 
             System.out.println("Alteracao realizada com sucesso!");
 
             comandoUsuario.close();
             comandoAdm.close();
-            
+
         } catch (SQLException e) {
             System.out.println("Erro na alteracao: " + e.getMessage());
             e.printStackTrace();

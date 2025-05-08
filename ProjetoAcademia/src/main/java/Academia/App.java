@@ -237,45 +237,26 @@ public class App {
                                     }
 
                                 } else if (opc_aluno == 4) {
-                                    Alterar novosMetodos = new Alterar();
-                                    Aluno aluno = metodos.buscarAlunoPorId(id);
 
-                                    boolean continuarAlterando = true;
+                                    System.out.println("Tem Certeza que deseja alterar seu cadastro? Digite S para sim e N para nao:");
+                                    String op1 = scan.nextLine();
+                                    if (op1.equalsIgnoreCase("s")) {
+                                        Aluno a1 = new Aluno();
+                                        a1.setId(id);
+                                        System.out.println("Ola, Insira os dados pra prosseguir com sua atualização do cadastro:");
+                                        System.out.println("Digite seu nome Completo:");
+                                        a1.setNome(scan.nextLine());
+                                        System.out.println("Digite seu Email:");
+                                        a1.setEmail(scan.nextLine());
+                                        System.out.println("Digite seu Objetivo:");
+                                        a1.setObjetivo(scan.nextLine());
+                                        System.out.println("Agora, digite sua senha para acessar o sistema:");
+                                        a1.setSenha(scan.nextLine());
+                                        Alterar alt_aluno = new Alterar();
+                                        alt_aluno.alterarAluno(a1);
 
-                                    while (continuarAlterando) {
-                                        System.out.println("--------ALTERAÇÃO DE DADOS--------");
-                                        System.out.println("1. Alterar Nome                   ");
-                                        System.out.println("2. Alterar CPF                    ");
-                                        System.out.println("3. Alterar Email                  ");
-                                        System.out.println("4. Alterar Senha                  ");
-                                        System.out.println("0. Salvar Alterações/Sair         ");
-                                        System.out.print("Escolha uma opção: ");
-                                        int escolha = scan.nextInt();
-                                        scan.nextLine();
-
-                                        switch (escolha) {
-                                            case 1:
-                                                System.out.println("Digite o nome que deseja alterar: ");
-                                                aluno.setNome(scan.nextLine());
-                                                break;
-                                            case 2:
-                                                System.out.println("Digite o novo CPF que deseja colocar:");
-                                                aluno.setCpf(scan.nextLine());
-                                                break;
-                                            case 3:
-                                                System.out.println("Digite o novo email: ");
-                                                aluno.setEmail(scan.nextLine());
-                                                break;
-                                            case 4:
-                                                System.out.println("Digite a nova senha para realizar a atualização:");
-                                                aluno.setSenha(scan.nextLine());
-                                                break;
-                                            case 0:
-                                                novosMetodos.alterarAluno(aluno);
-                                                System.out.println("Dados alterados com sucesso!");
-                                                continuarAlterando = false;
-                                                break;
-                                        }
+                                    } else {
+                                        System.out.println("saindo...");
 
                                     }
 
@@ -299,88 +280,45 @@ public class App {
                                 scan.nextLine();
 
                                 if (opc_personal == 1) {
-                                    
-                                    int idPersonal = Metodos.retornoID(email_ver);
-                                    metodos.listarAlunos(idPersonal);
+                                    int id_per = metodos.obterIdPersonal(id);
+                                    metodos.listarAlunos(id_per);
 
                                 } else if (opc_personal == 2) {
 
-                                    int idPersonal = Metodos.retornoID(email_ver);
-                                    metodos.salarioPersonal(idPersonal);
-                                    
+                                   int id_per = metodos.obterIdPersonal(id);
+                                    metodos.salarioPersonal(id_per);
+
                                 } else if (opc_personal == 3) {
-                                    
-                                    int idPersonal = Metodos.retornoID(email_ver);
-                                    Personal personal = metodos.buscarPersonalPorID(idPersonal);
-                                    
-                                    if (personal != null) {
-                                        
-                                        boolean alterando = true;
-                                        
-                                        while (alterando) {
-                                            System.out.println("\n--- Escolha o campo que deseja alterar ---");
-                                            System.out.println("1. Nome");
-                                            System.out.println("2. CPF");
-                                            System.out.println("3. Email");
-                                            System.out.println("4. Data de Nascimento");
-                                            System.out.println("5. Senha");
-                                            System.out.println("6. Especialidade");
-                                            System.out.println("7. Confirmar alterações");
-                                            System.out.println("8. Cancelar");
-
-                                            int escolha = scan.nextInt();
-                                            scan.nextLine(); // limpar buffer
-
-                                            switch (escolha) {
-                                                case 1:
-                                                    System.out.print("Novo nome: ");
-                                                    personal.setNome(scan.nextLine());
-                                                    break;
-                                                case 2:
-                                                    System.out.print("Novo CPF: ");
-                                                    personal.setCpf(scan.nextLine());
-                                                    break;
-                                                case 3:
-                                                    System.out.print("Novo email: ");
-                                                    personal.setEmail(scan.nextLine());
-                                                    break;
-                                                case 4:
-                                                    System.out.print("Nova data de nascimento (dd/MM/yyyy): ");
-                                                    personal.setDataNasc(scan.nextLine());
-                                                    break;
-                                                case 5:
-                                                    System.out.print("Nova senha: ");
-                                                    personal.setSenha(scan.nextLine());
-                                                    break;
-                                                case 6:
-                                                    System.out.print("Nova especialidade: ");
-                                                    personal.setEspecialidade(scan.nextLine());
-                                                    break;
-                                                case 7:
-                                                    Alterar.alterarPersonal(personal);
-                                                    alterando = false;
-                                                    break;
-                                                case 8:
-                                                    System.out.println("Alteração cancelada.");
-                                                    alterando = false;
-                                                    break;
-                                                default:
-                                                    System.out.println("Opção inválida.");
-                                            }
-                                        }
+                                    System.out.println("Tem Certeza que deseja alterar seu cadastro? Digite S para sim e N para nao:");
+                                    String op1 = scan.nextLine();
+                                    if (op1.equalsIgnoreCase("s")) {
+                                        Personal a1 = new Personal();
+                                        a1.setId(id);
+                                        System.out.println("Ola, Insira os dados pra prosseguir com sua atualização do cadastro:");
+                                        System.out.println("Digite seu nome Completo:");
+                                        a1.setNome(scan.nextLine());
+                                        System.out.println("Digite seu Email:");
+                                        a1.setEmail(scan.nextLine());
+                                        System.out.println("Agora, digite sua especialidade:");
+                                        a1.setEspecialidade(scan.nextLine());
+                                        System.out.println("Agora, digite sua senha para acessar o sistema:");
+                                        a1.setSenha(scan.nextLine());
+                                        Alterar alt_per = new Alterar();
+                                        alt_per.alterarPersonal(a1);
                                     } else {
-                                        System.out.println("Personal não encontrado.");
+                                        System.out.println("saindo...");
+
                                     }
 
                                 } else if (opc_personal == 4) {
-                                    
+
                                     System.out.println("Saindo do menu de personal...");
 
                                 } else {
                                     System.out.println("Opcao invalida");
                                 }
 
-                            }                           
+                            }
                             break;
 
                         case "adm":

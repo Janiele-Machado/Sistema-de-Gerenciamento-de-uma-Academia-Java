@@ -141,8 +141,6 @@ public class Metodos {
 
             } else if (opc_amd == 2) {
                 rel.gerarBalanco();
-                
-                
 
             } else if (opc_amd == 3) {
                 rel.Relatorio_salarios();
@@ -190,14 +188,13 @@ public class Metodos {
 
                 }
             } else if (opc_amd == 6) {
-               System.out.println("Tem Certeza que deseja realizar um pagamento de bonus ? Digite S para sim e N para nao:");
+                System.out.println("Tem Certeza que deseja realizar um pagamento de bonus ? Digite S para sim e N para nao:");
                 String op1 = scan.nextLine();
 
                 if (op1.equalsIgnoreCase("s")) {
                     System.out.println("-------------------PAGAMENTO de BONUS--------------------");
                     System.out.println("Digite por favor o email do personal que queria repassar o bonus  ");
                     this.calcularBonos(scan.nextLine());
-                    
 
                 } else {
                     System.out.println("saindo...");
@@ -226,7 +223,7 @@ public class Metodos {
         System.out.println("-".repeat(33));
 
     }
-    
+
     public void listarAlunos(int idPersonal) throws SQLException {
         Conexao conexao = new Conexao();
         Connection con = conexao.getConexao();
@@ -257,19 +254,19 @@ public class Metodos {
         con.close();
     }
 
-    public Aluno buscarAlunoPorId(int id){
+    public Aluno buscarAlunoPorId(int id) {
         Aluno aluno = new Aluno();
 
         String sqlUsuario = "SELECT * FROM usuarios WHERE id=?";
         String sqlAluno = "SELECT * FROM aluno WHERE fk_usu_aluno=?";
 
-        try(Connection conexao = new Conexao().getConexao()){
+        try (Connection conexao = new Conexao().getConexao()) {
 
             PreparedStatement stmUsuario = conexao.prepareStatement(sqlUsuario);
             stmUsuario.setInt(1, id);
             ResultSet rstUsuario = stmUsuario.executeQuery();
 
-            if(rstUsuario.next()){
+            if (rstUsuario.next()) {
                 aluno.setId(rstUsuario.getInt("id"));
                 aluno.setNome(rstUsuario.getString("nome"));
                 aluno.setCpf(rstUsuario.getString("cpf"));
@@ -283,7 +280,7 @@ public class Metodos {
             stmAluno.setInt(1, id);
             ResultSet rstAluno = stmAluno.executeQuery();
 
-            if(rstAluno.next()){
+            if (rstAluno.next()) {
                 aluno.setStatus(rstAluno.getString("status"));
                 aluno.setMatricula(rstAluno.getString("matricula"));
                 aluno.setObjetivo(rstAluno.getString("objetivo"));
@@ -300,14 +297,11 @@ public class Metodos {
         return aluno;
     }
 
-
-
-
     public void salarioPersonal(int idPersonal) throws SQLException {
-        
+
         Connection conexao = new Conexao().getConexao();
 
-        String sqlDados = "SELECT salario, bonus_por_aluno FROM personal WHERE personal.id = ?";
+        String sqlDados = "SELECT salario, bonus_por_aluno,quant_alunos FROM personal WHERE personal.id = ?";
         PreparedStatement comandoDados = conexao.prepareStatement(sqlDados);
         comandoDados.setInt(1, idPersonal);
         ResultSet rsDados = comandoDados.executeQuery();
@@ -316,17 +310,7 @@ public class Metodos {
 
             double salarioBase = rsDados.getDouble("salario");
             double bonusPorAluno = rsDados.getDouble("bonus_por_aluno");
-
-            String sqlAlunos = "SELECT COUNT(*) AS qtd_alunos FROM assinatura WHERE personal_id = ? AND ativa = 'sim'";
-            PreparedStatement comandoAlunos = conexao.prepareStatement(sqlAlunos);
-            comandoAlunos.setInt(1, idPersonal);
-            ResultSet rsAlunos = comandoAlunos.executeQuery();
-
-            int qtdAlunos = 0;
-            if (rsAlunos.next()) {
-                qtdAlunos = rsAlunos.getInt("qtd_alunos");
-
-            }
+            int qtdAlunos = rsDados.getInt("quant_alunos");
 
             double salarioFinal = salarioBase + (bonusPorAluno * qtdAlunos);
 
@@ -336,9 +320,7 @@ public class Metodos {
             System.out.println("Bônus por aluno: R$" + bonusPorAluno);
             System.out.println("Salário total: R$" + salarioFinal);
             System.out.println("=========================");
-
-            rsAlunos.close();
-            comandoAlunos.close();
+            
 
         } else {
             System.out.println("Dados do personal não encontrados.");
@@ -348,33 +330,33 @@ public class Metodos {
         comandoDados.close();
         conexao.close();
     }
-    
+
     public Personal buscarPersonalPorID(int idPersonal) throws SQLException {
         Personal personal = null;
 
         Connection conn = new Conexao().getConexao();
-        
-        String sql = "SELECT * FROM personal WHERE id = ?";
+
+        String sql = "SELECT * FROM personal WHERE fk_usu_personal = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idPersonal);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                
+
                 personal = new Personal();
-                
+
                 personal.setId(rs.getInt("id"));
                 personal.setNome(rs.getString("nome"));
                 personal.setCpf(rs.getString("cpf"));
                 personal.setEmail(rs.getString("email"));
-                
+
                 Date dataNasc = rs.getDate("dataNasc");
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
                 String dataNascString = formato.format(dataNasc);
-                
+
                 personal.setDataNasc(dataNascString);
-                
+
                 personal.setSenha(rs.getString("senha"));
                 personal.setTipo(rs.getString("tipo"));
                 personal.setEspecialidade(rs.getString("especialidade"));
@@ -389,7 +371,6 @@ public class Metodos {
 
         return personal;
     }
-
 
     public static int retornoID(String email) throws SQLException {
         Connection conexao = new Conexao().getConexao();
@@ -407,7 +388,7 @@ public class Metodos {
 
     }
 
-    public void  calcularBonos(String email) throws SQLException {
+    public void calcularBonos(String email) throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_cal = "SELECT personal.quant_alunos FROM usuario JOIN personal ON personal.fk_usu_personal = usuario.id WHERE usuario.email = ?; ";
         PreparedStatement comandocal = conexao.prepareStatement(sql_cal);
@@ -416,43 +397,41 @@ public class Metodos {
         double bonus;
         if (rs.next()) {
             int quant = rs.getInt("quant_alunos");
-             bonus = 50 * quant; // 50 por aluno pode se tornar dinamico
+            bonus = 50 * quant; // 50 por aluno pode se tornar dinamico
         } else {
-            bonus=0.0;
-            
+            bonus = 0.0;
+
         }
-        if(bonus>0){
-            try{
-            int id =retornoID(email);
-            LocalDate data_pag= LocalDate.now();
-            String categoria="bonus";
-            String sql_insertB = "INSERT INTO `financa` (`usuario_id`, `valor`, `data_pagamento`, `categoria`) VALUES (?, ?, ?, ?);";
-            PreparedStatement comandocal2 = conexao.prepareStatement(sql_insertB);
-            comandocal2.setInt(1, id);
-            comandocal2.setDouble(2, bonus);
-            comandocal2.setDate(3, java.sql.Date.valueOf(data_pag));
-            comandocal2.setString(4, categoria);
-            comandocal2.executeUpdate();
-            
-                
-            String sql_insertP = "UPDATE personal SET bonus_por_aluno = ? WHERE fk_usu_personal = ?;";    
-            PreparedStatement  comandocal3 = conexao.prepareStatement(sql_insertP);
-            comandocal3.setDouble(1,bonus);
-            comandocal3.setInt(2, id);
-            comandocal3.executeUpdate();
-            
-            System.out.println("Bonus Depositado");
-            
-            }catch(SQLException e){
+        if (bonus > 0) {
+            try {
+                int id = retornoID(email);
+                LocalDate data_pag = LocalDate.now();
+                String categoria = "bonus";
+                String sql_insertB = "INSERT INTO `financa` (`usuario_id`, `valor`, `data_pagamento`, `categoria`) VALUES (?, ?, ?, ?);";
+                PreparedStatement comandocal2 = conexao.prepareStatement(sql_insertB);
+                comandocal2.setInt(1, id);
+                comandocal2.setDouble(2, bonus);
+                comandocal2.setDate(3, java.sql.Date.valueOf(data_pag));
+                comandocal2.setString(4, categoria);
+                comandocal2.executeUpdate();
+
+                String sql_insertP = "UPDATE personal SET bonus_por_aluno = ? WHERE fk_usu_personal = ?;";
+                PreparedStatement comandocal3 = conexao.prepareStatement(sql_insertP);
+                comandocal3.setDouble(1, bonus);
+                comandocal3.setInt(2, id);
+                comandocal3.executeUpdate();
+
+                System.out.println("Bonus Depositado");
+
+            } catch (SQLException e) {
                 System.out.println(e);
-                
+
             }
-        }else{
+        } else {
             System.out.println("Sem bonos");
         }
 
     }
-    
 
     public void contratarPlano(int idAluno) throws Exception {
         double valor = 120;
@@ -574,6 +553,21 @@ public class Metodos {
         }
     }
 
+    public int obterIdPersonal(int id) throws SQLException {
+        Connection conexao = new Conexao().getConexao();
+        String sql_relID = "Select id from personal where fk_usu_personal = ? ";
+        PreparedStatement comando_relID = conexao.prepareStatement(sql_relID);
+        comando_relID.setInt(1, id);
+        ResultSet rs = comando_relID.executeQuery();
+        if (rs.next()) {
+            int id_personal = rs.getInt("id");
+            return id_personal;
+
+        } else {
+            return 0;
+        }
+    }
+
     public void listarPersonal() throws SQLException {
 
         Connection conexao = new Conexao().getConexao();
@@ -676,7 +670,7 @@ public class Metodos {
             }
             System.out.println("Erro ao pagar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
-        
+
     }
 
 }
