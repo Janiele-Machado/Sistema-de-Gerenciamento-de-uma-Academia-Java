@@ -147,7 +147,7 @@ public class App {
                     switch (met) {
                         case "aluno":
                             int opc_aluno = 0;
-                            while (opc_aluno != 6) {
+                            while (opc_aluno != 7) {
                                 metodos.menuAluno(); //chama o menu com as opções de aluno
                                 opc_aluno = scan.nextInt();
                                 scan.nextLine();
