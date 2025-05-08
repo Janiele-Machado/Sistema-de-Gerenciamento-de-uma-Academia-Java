@@ -218,7 +218,6 @@ public class App {
                                     }
 
                                 } else if (opc_aluno == 2) {
-
                                     metodos.verPlano(id);
                                 } else if (opc_aluno == 3) { //Opc Pagamento
                                     System.out.println("Tem Certeza que deseja realizar um pagamento? Digite S para sim e N para nao:");
@@ -262,7 +261,13 @@ public class App {
                                     }
 
                                 } else if (opc_aluno == 5) {
-
+                                    System.out.println("Tem certeza que deseja desativar sua assinatura? Digite S para sim e N para não:");
+                                    String resposta = scan.nextLine();
+                                    if (resposta.equalsIgnoreCase("s")) {
+                                        metodos.desativarPlano(id);
+                                    } else {
+                                        System.out.println("Assinatura mantida.");
+}
                                 } else if (opc_aluno == 6) {
                                     System.out.println("saindo...");
                                 } else {

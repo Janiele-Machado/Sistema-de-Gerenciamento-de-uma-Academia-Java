@@ -700,6 +700,7 @@ public class Metodos {
         }
 
     }
+
     public void verPlano(int idUsuario) throws SQLException {
         Connection conexao = new Conexao().getConexao();
 
@@ -729,6 +730,31 @@ public class Metodos {
         }
 
         rs.close();
+        ps.close();
+        conexao.close();
+    }
+
+    public void desativarPlano(int idUsuario) throws SQLException {
+        Connection conexao = new Conexao().getConexao();
+
+        String sql = """
+        UPDATE assinatura
+        JOIN aluno ON assinatura.aluno_id = aluno.id
+        SET assinatura.ativa = 'nao'
+        WHERE aluno.fk_usu_aluno = ? AND assinatura.ativa = 'sim';
+    """;
+
+        PreparedStatement ps = conexao.prepareStatement(sql);
+        ps.setInt(1, idUsuario);
+
+        int linhasAfetadas = ps.executeUpdate();
+
+        if (linhasAfetadas > 0) {
+            System.out.println("Sua assinatura foi desativada com sucesso.");
+        } else {
+            System.out.println("Você não possui nenhuma assinatura ativa.");
+        }
+
         ps.close();
         conexao.close();
     }
