@@ -219,6 +219,7 @@ public class App {
 
                                 } else if (opc_aluno == 2) {
 
+                                    metodos.verPlano(id);
                                 } else if (opc_aluno == 3) { //Opc Pagamento
                                     System.out.println("Tem Certeza que deseja realizar um pagamento? Digite S para sim e N para nao:");
                                     String op1 = scan.nextLine();

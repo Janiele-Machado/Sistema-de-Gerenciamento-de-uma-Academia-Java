@@ -700,5 +700,37 @@ public class Metodos {
         }
 
     }
+    public void verPlano(int idUsuario) throws SQLException {
+        Connection conexao = new Conexao().getConexao();
+
+        String sql = """
+        SELECT assinatura.nome_plano, assinatura.duracao_meses, assinatura.valor,
+               assinatura.data_inicio, assinatura.data_fim, assinatura.ativa
+        FROM assinatura
+        JOIN aluno ON assinatura.aluno_id = aluno.id
+        WHERE aluno.fk_usu_aluno = ?;
+    """;
+
+        PreparedStatement ps = conexao.prepareStatement(sql);
+        ps.setInt(1, idUsuario);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            System.out.println("===== Detalhes do Plano Contratado =====");
+            System.out.println("Nome do plano: " + rs.getString("nome_plano"));
+            System.out.println("Duração (meses): " + rs.getInt("duracao_meses"));
+            System.out.println("Valor: R$" + rs.getDouble("valor"));
+            System.out.println("Início: " + rs.getDate("data_inicio"));
+            System.out.println("Fim: " + rs.getDate("data_fim"));
+            System.out.println("Ativo: " + rs.getString("ativa"));
+            System.out.println("=========================================");
+        } else {
+            System.out.println("Você não possui nenhum plano contratado.");
+        }
+
+        rs.close();
+        ps.close();
+        conexao.close();
+    }
 
 }
