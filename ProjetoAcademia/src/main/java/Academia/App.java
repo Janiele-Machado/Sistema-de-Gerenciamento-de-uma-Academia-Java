@@ -12,7 +12,7 @@ public class App {
     // e as melhores coisas
     // nao tem logica
 
-    public static String geradorMatricula() {
+    public static String geradorMatricula() { //Método que gera a matricula do aluno
         Random rand = new Random();
 
         // Gera os primeiros 4 dígitos (entre 1000 e 9999)
@@ -24,6 +24,7 @@ public class App {
         return "MAT" + String.valueOf(primeiraParte) + String.valueOf(segundaParte); //retorna a matricula gerada;
     }
 
+    //Método principal que efetua a execução do sistema 
     public static void main(String[] args) throws SQLException, Exception {
         Metodos metodos = new Metodos();
         Scanner scan = new Scanner(System.in);
@@ -31,20 +32,20 @@ public class App {
 
         while (opc_principal != 3) {
             try {
-                metodos.menuPrincipal();
+                metodos.menuPrincipal(); //chama o menu principal
                 opc_principal = scan.nextInt();
                 scan.nextLine();
 
-                if (opc_principal == 1) {
+                if (opc_principal == 1) { //Opção Cadastro
                     int opc_cadastro = 0;
                     while (opc_cadastro != 4) {
 
-                        metodos.menuCadastro();
+                        metodos.menuCadastro();//chama o menu cadastro que contem as opções de cadastro no sistema
                         opc_cadastro = scan.nextInt();
                         scan.nextLine();
 
-                        switch (opc_cadastro) {
-                            case 1:
+                        switch (opc_cadastro) { //Cadastro Aluno
+                            case 1: //Cadastro Aluno
                                 try {
                                     Aluno a1 = new Aluno();
                                     System.out.println("Ola, Insira os dados pra prosseguir com seu Cadastro:");
@@ -71,7 +72,7 @@ public class App {
                                 }
 
                                 break;
-                            case 2:
+                            case 2: //Cadastro Adm
                                 try {
                                     Adm a1 = new Adm();
                                     System.out.println("Ola, Insira os dados pra prosseguir com seu Cadastro:");
@@ -100,7 +101,7 @@ public class App {
                                     e.printStackTrace(); //exibir informações detalhadas sobre uma exceção 
                                 }
                                 break;
-                            case 3:
+                            case 3: //Cadastro Personal
                                 try {
                                     Personal a1 = new Personal();
                                     System.out.println("Ola, Insira os dados pra prosseguir com seu Cadastro:");
@@ -128,15 +129,14 @@ public class App {
                                 }
 
                                 break;
-                            case 4:
-                                break;
+
                             default:
                                 System.out.println("Opcao invalida");
-                                ;
+
                         }
                     }
 
-                } else if (opc_principal == 2) {
+                } else if (opc_principal == 2) { //Opção Logar
                     System.out.println("Email:");
                     String email_ver = scan.nextLine();
                     System.out.println("Senha:");
@@ -148,12 +148,12 @@ public class App {
                         case "aluno":
                             int opc_aluno = 0;
                             while (opc_aluno != 6) {
-                                metodos.menuAluno();
+                                metodos.menuAluno(); //chama o menu com as opções de aluno
                                 opc_aluno = scan.nextInt();
                                 scan.nextLine();
 
                                 if (opc_aluno == 1) {
-                                    metodos.opcPlanos();
+                                    metodos.opcPlanos(); //Opção de cadastro de planos
                                     int opc_plano = scan.nextInt();
                                     scan.nextLine();
 
@@ -236,7 +236,7 @@ public class App {
 
                                     }
 
-                                } else if (opc_aluno == 4) {
+                                } else if (opc_aluno == 4) { // opc atualização de cadastro
 
                                     System.out.println("Tem Certeza que deseja alterar seu cadastro? Digite S para sim e N para nao:");
                                     String op1 = scan.nextLine();
@@ -263,7 +263,7 @@ public class App {
                                 } else if (opc_aluno == 5) {
 
                                 } else if (opc_aluno == 6) {
-
+                                    System.out.println("saindo...");
                                 } else {
                                     System.out.println("Opcao invalida");
                                 }
@@ -275,20 +275,20 @@ public class App {
                         case "personal":
                             int opc_personal = 0;
                             while (opc_personal != 4) {
-                                metodos.menuPersonal();
+                                metodos.menuPersonal();//chama o menu de opcoes de personal
                                 opc_personal = scan.nextInt();
                                 scan.nextLine();
 
-                                if (opc_personal == 1) {
+                                if (opc_personal == 1) { //lista os alunos de personal
                                     int id_per = metodos.obterIdPersonal(id);
                                     metodos.listarAlunos(id_per);
 
                                 } else if (opc_personal == 2) {
 
-                                   int id_per = metodos.obterIdPersonal(id);
+                                    int id_per = metodos.obterIdPersonal(id);//mostra o salario de personal
                                     metodos.salarioPersonal(id_per);
 
-                                } else if (opc_personal == 3) {
+                                } else if (opc_personal == 3) {//atualiza o cadastro de personal
                                     System.out.println("Tem Certeza que deseja alterar seu cadastro? Digite S para sim e N para nao:");
                                     String op1 = scan.nextLine();
                                     if (op1.equalsIgnoreCase("s")) {
@@ -322,7 +322,7 @@ public class App {
                             break;
 
                         case "adm":
-                            metodos.menuADM(id);
+                            metodos.menuADM(id); //chama o menu de adm que contem as suas opcoes e as funçoes que executam as funcionalidades 
                             break;
 
                         default:
@@ -336,7 +336,7 @@ public class App {
                 } else {
                     System.out.println("Digite uma opcao valida");
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException e) { //tratamento para o caso do usuario iserir uma letra no campo inteiro 
                 System.out.println("Entrada inválida. Por favor, digite um número inteiro.");
                 scan.next(); // Limpa o buffer do scanner para evitar um loop infinito
             }

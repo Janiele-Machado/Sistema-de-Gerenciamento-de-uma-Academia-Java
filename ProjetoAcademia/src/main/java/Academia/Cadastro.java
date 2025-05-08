@@ -11,7 +11,8 @@ import java.sql.SQLException;
  */
 public class Cadastro {
 
-    public void inserir(Aluno aluno) throws Exception {
+    //Metodo Cadastro de aluno
+    public void inserir(Aluno aluno) throws Exception { //Esse método recebe um objeto do tipo aluno e efetua a inserção desse aluno no banco de dados.
         // conecta com o banco  
         Connection conexao = new Conexao().getConexao();
         // Inserir usuário na tabela 'usuarios' (tabela genérica para usuários)
@@ -69,8 +70,9 @@ public class Cadastro {
             System.out.println("Erro ao cadastrar aluno: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
     }
-    
-     public void inserir(Adm adm) throws Exception {
+
+    //método de cadastro de adm
+    public void inserir(Adm adm) throws Exception { //Esse método recebe um objeto do tipo adm e efetua a inserção desse adm no banco
         // conecta com o banco  
         Connection conexao = new Conexao().getConexao();
         // Inserir usuário na tabela 'usuarios' (tabela genérica para usuários)
@@ -129,8 +131,9 @@ public class Cadastro {
             System.out.println("Erro ao cadastrar adm: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
     }
-     
-       public void inserir(Personal personal) throws Exception {
+
+    //metodo que cadastra o personal 
+    public void inserir(Personal personal) throws Exception {//Esse método recebe um objeto do tipo personal e efetua a inserção desse personal no banco
         // conecta com o banco  
         Connection conexao = new Conexao().getConexao();
         // Inserir usuário na tabela 'usuarios' (tabela genérica para usuários)

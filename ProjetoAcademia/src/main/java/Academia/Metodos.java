@@ -564,6 +564,7 @@ public class Metodos {
         }
     }
 
+    //método que recebe o id de usuario e retorna o id de aluno;
     public int obterIdAluno(int id) throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_relID = "Select id from aluno where fk_usu_aluno = ? ";
@@ -579,6 +580,7 @@ public class Metodos {
         }
     }
 
+    //método que recebe o id de usuario e retorna o id de personal;
     public int obterIdPersonal(int id) throws SQLException {
         Connection conexao = new Conexao().getConexao();
         String sql_relID = "Select id from personal where fk_usu_personal = ? ";
