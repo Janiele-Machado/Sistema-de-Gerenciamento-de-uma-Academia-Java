@@ -126,7 +126,7 @@ public class Cadastro {
                 // Em caso de erro, desfaz a transação
                 conexao.rollback();
             } catch (SQLException rollbackEx) {
-                System.out.println("Erro ao reverter a transação: " + rollbackEx.getMessage());
+                System.out.println("Erro ao reverter a transacao: " + rollbackEx.getMessage());
             }
             System.out.println("Erro ao cadastrar adm: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
@@ -187,7 +187,7 @@ public class Cadastro {
                 // Em caso de erro, desfaz a transação
                 conexao.rollback();
             } catch (SQLException rollbackEx) {
-                System.out.println("Erro ao reverter a transação: " + rollbackEx.getMessage());
+                System.out.println("Erro ao reverter a transacao: " + rollbackEx.getMessage());
             }
             System.out.println("Erro ao cadastrar personal: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }

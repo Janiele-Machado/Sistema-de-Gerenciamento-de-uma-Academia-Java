@@ -136,7 +136,7 @@ public class Metodos {
                     } else if (opc1 == 4) {
                         System.out.println(":::");
                     } else {
-                        System.out.println("Digite uma opção valida");
+                        System.out.println("Digite uma opcao valida");
                     }
                 } while (opc1 != 4);
 
@@ -168,7 +168,7 @@ public class Metodos {
                         System.out.println(":::");
 
                     } else {
-                        System.out.println("Digite uma opção valida");
+                        System.out.println("Digite uma opcao valida");
                     }
                 } while (opc_amd != 4);
             } else if (opc_amd == 5) {
@@ -209,12 +209,12 @@ public class Metodos {
                 if (op1.equalsIgnoreCase("s")) {
                     Adm a1 = new Adm();
                     a1.setId(id);
-                    System.out.println("Ola, Insira os dados pra prosseguir com sua atualização do cadastro:");
+                    System.out.println("Ola, Insira os dados pra prosseguir com sua atualizacao do cadastro:");
                     System.out.println("Digite seu nome Completo:");
                     a1.setNome(scan.nextLine());
                     System.out.println("Digite seu Email:");
                     a1.setEmail(scan.nextLine());
-                    System.out.println("Digite seu Número comercial:");
+                    System.out.println("Digite seu Numero comercial:");
                     a1.setNumero_comercial(scan.nextLine());
                     System.out.println("Digite o seu Setor:");
                     a1.setSetor(scan.nextLine());
@@ -233,7 +233,7 @@ public class Metodos {
                 System.out.println("...");
 
             } else {
-                System.out.println("Opção inválida. Tente novamente.");
+                System.out.println("Opcao invalida. Tente novamente.");
             }
 
         } while (opc_amd != 8);
@@ -244,7 +244,7 @@ public class Metodos {
         System.out.println("-".repeat(33));
         System.out.println("|---------MENU PERSONAL:--------|");
         System.out.println("|1- Ver meus alunos             |");
-        System.out.println("|2- Ver meu salário             |");
+        System.out.println("|2- Ver meu salario             |");
         System.out.println("|3- Alterar meu cadastro        |");
         System.out.println("|4- Sair                        |");
         System.out.println("-".repeat(33));
@@ -341,11 +341,11 @@ public class Metodos {
 
             double salarioFinal = salarioBase + (bonusPorAluno * qtdAlunos);
 
-            System.out.println("===== Salário Atual =====");
-            System.out.println("Salário base: R$" + salarioBase);
+            System.out.println("===== Salario Atual =====");
+            System.out.println("Salario base: R$" + salarioBase);
             System.out.println("Alunos ativos: " + qtdAlunos);
-            System.out.println("Bônus por aluno: R$" + bonusPorAluno);
-            System.out.println("Salário total: R$" + salarioFinal);
+            System.out.println("Bonus por aluno: R$" + bonusPorAluno);
+            System.out.println("Salario total: R$" + salarioFinal);
             System.out.println("=========================");
 
         } else {
@@ -502,7 +502,7 @@ public class Metodos {
                 // Em caso de erro, desfaz a transação
                 conexao.rollback();
             } catch (SQLException rollbackEx) {
-                System.out.println("Erro ao reverter a transação: " + rollbackEx.getMessage());
+                System.out.println("Erro ao reverter a transacao: " + rollbackEx.getMessage());
             }
             System.out.println("Erro ao contratar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
@@ -694,7 +694,7 @@ public class Metodos {
                 // Em caso de erro, desfaz a transação
                 conexao.rollback();
             } catch (SQLException rollbackEx) {
-                System.out.println("Erro ao reverter a transação: " + rollbackEx.getMessage());
+                System.out.println("Erro ao reverter a transacao: " + rollbackEx.getMessage());
             }
             System.out.println("Erro ao pagar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
@@ -721,12 +721,12 @@ public class Metodos {
             System.out.println("Nome do plano: " + rs.getString("nome_plano"));
             System.out.println("Duração (meses): " + rs.getInt("duracao_meses"));
             System.out.println("Valor: R$" + rs.getDouble("valor"));
-            System.out.println("Início: " + rs.getDate("data_inicio"));
+            System.out.println("Inicio: " + rs.getDate("data_inicio"));
             System.out.println("Fim: " + rs.getDate("data_fim"));
             System.out.println("Ativo: " + rs.getString("ativa"));
             System.out.println("=========================================");
         } else {
-            System.out.println("Você não possui nenhum plano contratado.");
+            System.out.println("Voce não possui nenhum plano contratado.");
         }
 
         rs.close();

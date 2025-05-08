@@ -243,7 +243,7 @@ public class App {
                                     if (op1.equalsIgnoreCase("s")) {
                                         Aluno a1 = new Aluno();
                                         a1.setId(id);
-                                        System.out.println("Ola, Insira os dados pra prosseguir com sua atualização do cadastro:");
+                                        System.out.println("Ola, Insira os dados pra prosseguir com sua atualizacao do cadastro:");
                                         System.out.println("Digite seu nome Completo:");
                                         a1.setNome(scan.nextLine());
                                         System.out.println("Digite seu Email:");
@@ -261,7 +261,7 @@ public class App {
                                     }
 
                                 } else if (opc_aluno == 5) {
-                                    System.out.println("Tem certeza que deseja desativar sua assinatura? Digite S para sim e N para não:");
+                                    System.out.println("Tem certeza que deseja desativar sua assinatura? Digite S para sim e N para nao:");
                                     String resposta = scan.nextLine();
                                     if (resposta.equalsIgnoreCase("s")) {
                                         metodos.desativarPlano(id);
@@ -343,7 +343,7 @@ public class App {
                     System.out.println("Digite uma opcao valida");
                 }
             } catch (InputMismatchException e) { //tratamento para o caso do usuario iserir uma letra no campo inteiro 
-                System.out.println("Entrada inválida. Por favor, digite um número inteiro.");
+                System.out.println("Entrada invalida. Por favor, digite um numero inteiro.");
                 scan.next(); // Limpa o buffer do scanner para evitar um loop infinito
             }
         }
