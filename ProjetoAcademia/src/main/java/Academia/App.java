@@ -129,7 +129,10 @@ public class App {
                                 }
 
                                 break;
-
+                                    
+                            case 4 :
+                                System.out.println("Saindo...");
+                                break;
                             default:
                                 System.out.println("Opcao invalida");
 
