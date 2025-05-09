@@ -77,6 +77,8 @@ public class Metodos {
     }
 
     public String logar(String email_ver, String senha_ver) throws SQLException {
+        // Método para autenticar o usuário com email e senha.
+        // Se encontrar no banco, retorna o tipo de usuário (aluno, adm ou personal).
 
         Connection conexao = new Conexao().getConexao();
 
