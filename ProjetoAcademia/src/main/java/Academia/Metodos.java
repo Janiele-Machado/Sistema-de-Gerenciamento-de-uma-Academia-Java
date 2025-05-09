@@ -49,7 +49,7 @@ public class Metodos {
         System.out.println("|Escolha o que voce deseja fazer:|");
         System.out.println("|1- Contratar um plano           |");
         System.out.println("|2- Ver meu plano                |");
-        System.out.println("|3- Fazer Pagamento              |");
+        System.out.println("|3- Registrar Pagamentos         |");
         System.out.println("|4- Alterar Cadastro             |");
         System.out.println("|5- Desativar meu plano          |");
         System.out.println("|6- Reativar meu plano           |");
@@ -106,7 +106,7 @@ public class Metodos {
             System.out.println("|2-Relatorio financeiro          |");
             System.out.println("|3-Folha salarial                |");
             System.out.println("|4- Relatorio Geral              |");
-            System.out.println("|5- Realizar Pagamentos          |");
+            System.out.println("|5- Registrar Pagamentos         |");
             System.out.println("|6- Quero atualizar o bonus      |");
             System.out.println("|7- Quero atualizar meu cadastro |");
             System.out.println("|8- Quero Sair                   |");
@@ -173,8 +173,8 @@ public class Metodos {
                     }
                 } while (opc_amd != 4);
             } else if (opc_amd == 5) {
-                //realizar pagamentos 
-                System.out.println("Tem Certeza que deseja realizar um pagamento? Digite S para sim e N para nao:");
+                ///Essa funcionalidade tem o objetivo de apenas registrar o valor de pagamento de salarios para fins de relatórios financeiros, ele não realmente realiza pagamentos 
+                System.out.println("Tem Certeza que deseja registrar um pagamento? Digite S para sim e N para nao:");
                 String op1 = scan.nextLine();
 
                 if (op1.equalsIgnoreCase("s")) {
@@ -357,7 +357,7 @@ public class Metodos {
         comandoDados.close();
         conexao.close();
     }
-    //metodo absoleto
+    //metodo obsoleto
 
     public Personal buscarPersonalPorID(int idPersonal) throws SQLException {
         Personal personal = null;
@@ -698,7 +698,7 @@ public class Metodos {
             } catch (SQLException rollbackEx) {
                 System.out.println("Erro ao reverter a transacao: " + rollbackEx.getMessage());
             }
-            System.out.println("Erro ao pagar: " + e.getMessage()); //retorno para o caso de dar erro no processo;
+            System.out.println("Erro ao registrar pagamentos: " + e.getMessage()); //retorno para o caso de dar erro no processo;
         }
 
     }

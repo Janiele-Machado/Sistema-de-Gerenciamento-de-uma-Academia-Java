@@ -27,7 +27,7 @@ public class Deletar {
         
     }
     
-     public void deletarPersonal(String email) throws SQLException{
+     public void deletarPersonal(String email) throws SQLException{ //Como regra de negocio não se pode deletar um personal que tenha alunos
         Connection conexao = new Conexao().getConexao();
         String sql_delP = "DELETE financa, assinatura, usuario, personal FROM usuario LEFT JOIN financa ON financa.usuario_id = usuario.id LEFT JOIN assinatura ON assinatura.aluno_id = usuario.id LEFT JOIN personal ON personal.fk_usu_personal = usuario.id WHERE usuario.email = ? AND usuario.tipo = 'personal';";
         PreparedStatement comando_del1 = conexao.prepareStatement(sql_delP);

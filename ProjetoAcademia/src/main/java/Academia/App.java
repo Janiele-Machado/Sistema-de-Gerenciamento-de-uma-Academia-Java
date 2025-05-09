@@ -93,7 +93,7 @@ public class App {
                                     System.out.println("Agora, digite sua senha para acessar o sistema:");
                                     a1.setSenha(scan.nextLine());
                                     a1.setTipo("adm");
-                                    a1.setSalario(1500);
+                                    a1.setSalario(1500);//como regra de negocio colocamos como padrao o valor do salario de adm
                                     Cadastro cad_adm = new Cadastro();
                                     cad_adm.inserir(a1);
                                 } catch (Exception e) {
@@ -118,7 +118,7 @@ public class App {
                                     System.out.println("Agora, digite sua senha para acessar o sistema:");
                                     a1.setSenha(scan.nextLine());
                                     a1.setTipo("personal");
-                                    a1.setSalario(1200);
+                                    a1.setSalario(1200);//como regra de negocio colocamos como padrao o valor do salario de personal
                                     a1.setBonus_por_aluno(0);
                                     a1.setQtd_aluno(0);
                                     Cadastro cad_per = new Cadastro();
@@ -219,13 +219,13 @@ public class App {
 
                                 } else if (opc_aluno == 2) {
                                     metodos.verPlano(id);
-                                } else if (opc_aluno == 3) { //Opc Pagamento
-                                    System.out.println("Tem Certeza que deseja realizar um pagamento? Digite S para sim e N para nao:");
+                                } else if (opc_aluno == 3) { //Essa funcionalidade tem o objetivo de apenas registrar o valor de pagamento do aluno para fins de relatórios financeiros, ele não realmente realiza pagamentos 
+                                    System.out.println("Tem Certeza que deseja registrar um pagamento? Digite S para sim e N para nao:");
                                     String op1 = scan.nextLine();
 
                                     if (op1.equalsIgnoreCase("s")) {
-                                        System.out.println("-------------------PAGAMENTO--------------------");
-                                        System.out.println("Digite por favor o valor que voce deseja pagar: ");
+                                        System.out.println("-------------------REGISTRAR PAGAMENTO--------------------");
+                                        System.out.println("Digite por favor o valor que voce deseja registrar: ");
                                         double valor = scan.nextDouble();
                                         scan.nextLine();
                                         String desc = "Mensalidade";
