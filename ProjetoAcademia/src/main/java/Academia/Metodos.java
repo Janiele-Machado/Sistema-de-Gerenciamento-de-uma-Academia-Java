@@ -101,6 +101,9 @@ public class Metodos {
 
     public void menuADM(int id) throws SQLException, Exception {
         int opc_amd = 0;
+        // Menu com as opções exclusivas do administrador.
+        // Permite deletar usuários, ver relatórios, registrar pagamentos e alterar dados.
+
         do {
             System.out.println("-".repeat(33));
             System.out.println("|------MENU ADMINISTRADOR:-------|");
