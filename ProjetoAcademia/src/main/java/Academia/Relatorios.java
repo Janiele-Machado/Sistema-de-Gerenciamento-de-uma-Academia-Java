@@ -158,7 +158,7 @@ public class Relatorios {
             double valor = rsFinancas.getDouble("valor");
             String categoria = rsFinancas.getString("categoria");
 
-            if ("mensalidade".equals(categoria)) {
+            if ("Mensalidade".equals(categoria)) {
                 totalEntradas += valor;
 
             } else if ("Salario".equals(categoria)) {

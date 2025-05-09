@@ -357,6 +357,7 @@ public class Metodos {
         comandoDados.close();
         conexao.close();
     }
+    //metodo absoleto
 
     public Personal buscarPersonalPorID(int idPersonal) throws SQLException {
         Personal personal = null;
