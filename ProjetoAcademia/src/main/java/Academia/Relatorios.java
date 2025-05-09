@@ -152,7 +152,7 @@ public class Relatorios {
         ResultSet rsFinancas = comandoFinancas.executeQuery();
 
         double totalEntradas = 0.0;
-        double totalSaidas = 0.0;
+        ;
 
         while (rsFinancas.next()) {
             double valor = rsFinancas.getDouble("valor");
@@ -162,7 +162,7 @@ public class Relatorios {
                 totalEntradas += valor;
 
             } else if ("Salario".equals(categoria)) {
-                totalSaidas += valor;
+                
             }
         }
 
@@ -186,7 +186,8 @@ public class Relatorios {
             totalSalariosPersonal += (salarioPersonal + bonus); // Salário + bônus
         }
 
-        double balancoTotal = totalEntradas - totalSaidas - totalSalariosAdm - totalSalariosPersonal;
+        double balancoTotal = totalEntradas  - totalSalariosAdm - totalSalariosPersonal;
+        double totalSaidas = totalSalariosAdm + totalSalariosPersonal;
 
         System.out.println("---------------------------------------------------");
         System.out.println("Balanço Financeiro:");

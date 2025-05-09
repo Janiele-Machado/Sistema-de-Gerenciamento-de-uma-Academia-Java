@@ -178,8 +178,8 @@ public class Metodos {
                 String op1 = scan.nextLine();
 
                 if (op1.equalsIgnoreCase("s")) {
-                    System.out.println("-------------------PAGAMENTO--------------------");
-                    System.out.println("Digite por favor o valor que voce deseja pagar: ");
+                    System.out.println("-------------------REGISTRAR PAGAMENTO--------------------");
+                    System.out.println("Digite por favor o valor que voce deseja registrar: ");
                     double valor = scan.nextDouble();
                     scan.nextLine();
                     String desc = "Salario";
@@ -685,7 +685,7 @@ public class Metodos {
 
             // Confirmar a transação
             conexao.commit();
-            System.out.println("Pagamento Realizado com sucesso!");
+            System.out.println("Pagamento Registrado com sucesso!");
 
             // Fechar as conexões
             comandoPg.close();
