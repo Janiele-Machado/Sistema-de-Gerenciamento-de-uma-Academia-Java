@@ -726,7 +726,7 @@ public class Metodos {
         if (rs.next()) {
             System.out.println("===== Detalhes do Plano Contratado =====");
             System.out.println("Nome do plano: " + rs.getString("nome_plano"));
-            System.out.println("Duração (meses): " + rs.getInt("duracao_meses"));
+            System.out.println("Duracao (meses): " + rs.getInt("duracao_meses"));
             System.out.println("Valor: R$" + rs.getDouble("valor"));
             System.out.println("Inicio: " + rs.getDate("data_inicio"));
             System.out.println("Fim: " + rs.getDate("data_fim"));
