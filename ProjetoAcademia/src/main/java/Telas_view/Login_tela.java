@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Telas_view;
-
+import Academia.Aluno;
+import Academia.Usuario;
 import Academia.Metodos;
+import Academia.Relatorios;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +18,15 @@ import javax.swing.JTextField;
  * @author samue
  */
 public class Login_tela extends javax.swing.JFrame {
+    private  int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     /**
      * Creates new form Login_tela
@@ -85,11 +96,17 @@ public class Login_tela extends javax.swing.JFrame {
         Metodos mts = new Metodos();
         try {
            String ver =  mts.logar(this.getEmail_login().getText(),this.getSenha_login().getText());
+           
+           this.setId(mts.retornoID(this.getEmail_login().getText()));
             
             if(ver.equals("aluno")){
                 Tela_aluno tla = new Tela_aluno();
+                 Relatorios rel = new Relatorios();
+                Aluno alunoLogado = rel.dados_aluno(this.getId());
+                Sessao_usuario.setUsuarioLogado(alunoLogado);
                 JOptionPane.showMessageDialog(this, "Bem vindo!");
                 tla.setVisible(true);
+                this.dispose();
                 
                 
             }else if(ver.equals("personal")){
