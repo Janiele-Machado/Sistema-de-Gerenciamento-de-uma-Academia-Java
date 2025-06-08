@@ -36,6 +36,11 @@ public class Tela_cadastro extends javax.swing.JFrame {
 
         cadastro_aluno.setContentAreaFilled(false);
         cadastro_aluno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastro_aluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastro_alunoActionPerformed(evt);
+            }
+        });
         getContentPane().add(cadastro_aluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 197, 300, 100));
 
         cadastro_personal.setContentAreaFilled(false);
@@ -55,11 +60,17 @@ public class Tela_cadastro extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1168, 755));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cadastro_alunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastro_alunoActionPerformed
+        Tela_cadastro_aluno tlca = new Tela_cadastro_aluno();
+        tlca.setVisible(true);
+    }//GEN-LAST:event_cadastro_alunoActionPerformed
 
     /**
      * @param args the command line arguments
