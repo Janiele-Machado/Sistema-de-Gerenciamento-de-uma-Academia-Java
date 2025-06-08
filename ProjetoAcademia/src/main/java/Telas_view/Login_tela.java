@@ -4,6 +4,13 @@
  */
 package Telas_view;
 
+import Academia.Metodos;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author samue
@@ -75,6 +82,31 @@ public class Login_tela extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add y
+        Metodos mts = new Metodos();
+        try {
+           String ver =  mts.logar(this.getEmail_login().getText(),this.getSenha_login().getText());
+            
+            if(ver.equals("aluno")){
+                Tela_aluno tla = new Tela_aluno();
+                JOptionPane.showMessageDialog(this, "Bem vindo!");
+                tla.setVisible(true);
+                
+                
+            }else if(ver.equals("personal")){
+                
+            }else if(ver.equals("adm")){
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "erro verifique se senha ou email estao corretos!");
+            }
+                
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login_tela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -82,6 +114,23 @@ public class Login_tela extends javax.swing.JFrame {
         tlc.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public JTextField getEmail_login() {
+        return email_login;
+    }
+
+    public void setEmail_login(JTextField email_login) {
+        this.email_login = email_login;
+    }
+
+    public JTextField getSenha_login() {
+        return senha_login;
+    }
+
+    public void setSenha_login(JTextField senha_login) {
+        this.senha_login = senha_login;
+    }
+
+    
     /**
      * @param args the command line arguments
      */
