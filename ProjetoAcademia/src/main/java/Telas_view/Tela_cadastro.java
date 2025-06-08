@@ -29,6 +29,7 @@ public class Tela_cadastro extends javax.swing.JFrame {
         cadastro_aluno = new javax.swing.JButton();
         cadastro_personal = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,6 +46,11 @@ public class Tela_cadastro extends javax.swing.JFrame {
 
         cadastro_personal.setContentAreaFilled(false);
         cadastro_personal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cadastro_personal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastro_personalActionPerformed(evt);
+            }
+        });
         getContentPane().add(cadastro_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 353, 320, 110));
 
         jButton1.setContentAreaFilled(false);
@@ -56,6 +62,15 @@ public class Tela_cadastro extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, 320, 110));
 
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 670, 250, 20));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tela_cadastro.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1168, 755));
 
@@ -65,12 +80,28 @@ public class Tela_cadastro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Tela_cadastro_adm tlcad = new Tela_cadastro_adm();
+        tlcad.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cadastro_alunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastro_alunoActionPerformed
         Tela_cadastro_aluno tlca = new Tela_cadastro_aluno();
         tlca.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_cadastro_alunoActionPerformed
+
+    private void cadastro_personalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastro_personalActionPerformed
+        // TODO add your handling code here:
+        Tela_cadastro_personal telcp = new Tela_cadastro_personal();
+        telcp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_cadastro_personalActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,6 +142,7 @@ public class Tela_cadastro extends javax.swing.JFrame {
     private javax.swing.JButton cadastro_aluno;
     private javax.swing.JButton cadastro_personal;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
