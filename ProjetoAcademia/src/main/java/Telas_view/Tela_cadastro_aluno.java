@@ -75,7 +75,7 @@ public class Tela_cadastro_aluno extends javax.swing.JFrame {
                 insert_datanscActionPerformed(evt);
             }
         });
-        getContentPane().add(insert_datansc, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 122, 160, 20));
+        getContentPane().add(insert_datansc, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 112, 160, 30));
 
         insert_senha.setText("jPasswordField1");
         getContentPane().add(insert_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 290, 30));
@@ -104,6 +104,7 @@ public class Tela_cadastro_aluno extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 0, 1027, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void insert_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_cpfActionPerformed
