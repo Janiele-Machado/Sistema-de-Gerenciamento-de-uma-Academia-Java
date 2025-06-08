@@ -205,5 +205,38 @@ public class Relatorios {
         rsPersonal.close();
         conexao.close();
     }
+        public Aluno dados_aluno(int idUsuario) throws SQLException {
+    Connection conexao = new Conexao().getConexao();
+    
+    String sql = "SELECT * FROM usuario INNER JOIN aluno ON usuario.id = aluno.fk_usu_aluno WHERE usuario.id = ?;";
+    PreparedStatement comando = conexao.prepareStatement(sql);
+    comando.setInt(1, idUsuario);
+
+    ResultSet rs = comando.executeQuery();
+
+     
+
+    if (rs.next()) {
+        Aluno alu = new Aluno();
+        
+        int id = rs.getInt("id");
+        alu.setNome(rs.getString("nome"));
+        alu.setEmail(rs.getString("email"));
+        alu.setCpf(rs.getString("cpf"));
+        alu.setDataNasc(rs.getDate("data_nascimento"));
+        alu.setMatricula(rs.getString("matricula"));
+        alu.setObjetivo(rs.getString("objetivo"));
+        alu.setStatus(rs.getString("status"));
+        return alu;
+
+        
+    }
+
+    rs.close();
+    comando.close();
+    conexao.close();
+
+    return null;
+}
 
 }
