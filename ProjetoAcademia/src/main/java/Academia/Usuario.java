@@ -62,7 +62,9 @@ public abstract class Usuario {
             e.printStackTrace();
         }
     }
-
+     public void setDataNasc(Date data_nasc) {
+        this.dataNasc = data_nasc;
+    }
     public void setSenha(String senha) {
         this.senha = senha;
     }
