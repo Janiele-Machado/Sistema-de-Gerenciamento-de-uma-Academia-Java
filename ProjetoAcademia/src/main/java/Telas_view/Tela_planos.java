@@ -4,17 +4,39 @@
  */
 package Telas_view;
 
+import Academia.Aluno;
+import Academia.Metodos;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author samue
  */
 public class Tela_planos extends javax.swing.JFrame {
 
+    private void carregarPlanos() {
+        Aluno aluno = (Aluno) Sessao_usuario.getUsuarioLogado();
+        try {
+            Metodos mts = new Metodos();
+            int idA = Metodos.retornoID(aluno.getEmail());
+            String infoPlano = mts.verPlano(idA);
+            plano_texto.setText(infoPlano);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+
+    }
+
     /**
      * Creates new form Tela_planos
      */
     public Tela_planos() {
         initComponents();
+        carregarPlanos();
     }
 
     /**
@@ -26,30 +48,76 @@ public class Tela_planos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        plano_texto = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 170, 60));
+
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 170, 60));
+
+        jButton3.setContentAreaFilled(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 170, 60));
+
+        plano_texto.setColumns(20);
+        plano_texto.setRows(5);
+        getContentPane().add(plano_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 320, 130));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tela_planos.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 18, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, 538));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Aluno aluno = (Aluno) Sessao_usuario.getUsuarioLogado();
+        Metodos mts = new Metodos();
+        try {
+            
+            mts.desativarPlano(mts.retornoID(aluno.getEmail()));
+             carregarPlanos(); 
+             JOptionPane.showMessageDialog(this, "Plano Desativado  com sucesso!");
+        } catch (SQLException ex) {
+            Logger.getLogger(Tela_planos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Aluno aluno = (Aluno) Sessao_usuario.getUsuarioLogado();
+        Metodos mts = new Metodos();
+        try {
+            
+            mts.reativarPlano(mts.retornoID(aluno.getEmail()));
+             carregarPlanos(); 
+             JOptionPane.showMessageDialog(this, "Reativado  com sucesso!");
+        } catch (SQLException ex) {
+            Logger.getLogger(Tela_planos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,6 +155,10 @@ public class Tela_planos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextArea plano_texto;
     // End of variables declaration//GEN-END:variables
 }

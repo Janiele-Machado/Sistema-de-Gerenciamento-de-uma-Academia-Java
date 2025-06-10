@@ -708,7 +708,7 @@ public class Metodos {
 
     }
 
-    public void verPlano(int idUsuario) throws SQLException { // metodo para ver o seu plano atual.
+    public String verPlano(int idUsuario) throws SQLException {
         Connection conexao = new Conexao().getConexao();
 
         String sql = """
@@ -723,22 +723,26 @@ public class Metodos {
         ps.setInt(1, idUsuario);
         ResultSet rs = ps.executeQuery();
 
+        StringBuilder sb = new StringBuilder();
+
         if (rs.next()) {
-            System.out.println("===== Detalhes do Plano Contratado =====");
-            System.out.println("Nome do plano: " + rs.getString("nome_plano"));
-            System.out.println("Duracao (meses): " + rs.getInt("duracao_meses"));
-            System.out.println("Valor: R$" + rs.getDouble("valor"));
-            System.out.println("Inicio: " + rs.getDate("data_inicio"));
-            System.out.println("Fim: " + rs.getDate("data_fim"));
-            System.out.println("Ativo: " + rs.getString("ativa"));
-            System.out.println("=========================================");
+            sb.append("===== Detalhes do Plano Contratado =====\n");
+            sb.append("Nome do plano: ").append(rs.getString("nome_plano")).append("\n");
+            sb.append("Duração (meses): ").append(rs.getInt("duracao_meses")).append("\n");
+            sb.append("Valor: R$").append(rs.getDouble("valor")).append("\n");
+            sb.append("Início: ").append(rs.getDate("data_inicio")).append("\n");
+            sb.append("Fim: ").append(rs.getDate("data_fim")).append("\n");
+            sb.append("Ativo: ").append(rs.getString("ativa")).append("\n");
+            sb.append("=========================================\n");
         } else {
-            System.out.println("Voce nao possui nenhum plano contratado.");
+            sb.append("Você não possui nenhum plano contratado.");
         }
 
         rs.close();
         ps.close();
         conexao.close();
+
+        return sb.toString();
     }
 
     public void desativarPlano(int idUsuario) throws SQLException { // metodo para desativar o seu plano atual.
