@@ -9,6 +9,7 @@ import Academia.Metodos;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -76,6 +77,8 @@ public class Tela_cadastroPlano extends javax.swing.JFrame {
         try {
            int id = mts.retornoID(aluno.getEmail());
             mts.contratarPlano(id);
+            JOptionPane.showMessageDialog(this, "Plano cadastrado com sucesso!");
+            this.dispose();
             
         } catch (SQLException ex) {
             Logger.getLogger(Tela_cadastroPlano.class.getName()).log(Level.SEVERE, null, ex);
