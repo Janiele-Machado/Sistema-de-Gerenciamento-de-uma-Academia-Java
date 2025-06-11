@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -46,7 +46,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="190" y="110" width="660" height="290"/>
+          <AbsoluteConstraints x="270" y="100" width="-1" height="380"/>
         </Constraint>
       </Constraints>
 
@@ -55,7 +55,7 @@
         <Component class="javax.swing.JTable" name="Listar_personal">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="0">
+              <Table columnCount="2" rowCount="4">
                 <Column editable="true" title="Nome" type="java.lang.Object"/>
                 <Column editable="true" title="Especialidade" type="java.lang.Object"/>
               </Table>
@@ -89,7 +89,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="6" width="-1" height="653"/>
+          <AbsoluteConstraints x="0" y="0" width="1045" height="659"/>
         </Constraint>
       </Constraints>
     </Component>

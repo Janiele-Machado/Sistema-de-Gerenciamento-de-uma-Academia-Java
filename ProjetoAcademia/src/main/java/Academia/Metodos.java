@@ -1,4 +1,5 @@
- package Academia;
+package Academia;
+
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -9,6 +10,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -793,5 +796,33 @@ public class Metodos {
 
         ps.close();
         conexao.close();
+    }
+
+    public List<Object[]> Dados_personal() throws SQLException {
+        List<Object[]> dados = new ArrayList<>();
+
+        Connection conexao = new Conexao().getConexao();
+        String sqlListar = "SELECT usuario.nome, personal.especialidade FROM personal INNER JOIN usuario ON usuario.id = personal.fk_usu_personal;";
+
+        try {
+            PreparedStatement comandoListar = conexao.prepareStatement(sqlListar);
+            ResultSet rs2 = comandoListar.executeQuery();
+
+            while (rs2.next()) {
+                String nome = rs2.getString("nome");
+                String especialidade = rs2.getString("especialidade");
+                dados.add(new Object[]{nome, especialidade});
+            }
+
+            comandoListar.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar personal: " + e.getMessage());
+        } finally {
+            if (conexao != null && !conexao.isClosed()) {
+                conexao.close();
+            }
+        }
+
+        return dados;
     }
 }

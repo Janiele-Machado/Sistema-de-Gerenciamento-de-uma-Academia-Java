@@ -17,8 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author samue
  */
-public class Tela_escolherPersonal extends javax.swing.JFrame {
-
+public class Tela_escolherPersonal_plus extends javax.swing.JFrame {
     public void preencherTabela() throws SQLException {
         DefaultTableModel modelo = (DefaultTableModel) Listar_personal.getModel();
         modelo.setRowCount(0); // limpa tabela
@@ -29,11 +28,10 @@ public class Tela_escolherPersonal extends javax.swing.JFrame {
             modelo.addRow(linha);
         }
     }
-
     /**
-     * Creates new form Tela_escolherPersonal
+     * Creates new form Tela_escolherPersonal_plus
      */
-    public Tela_escolherPersonal() {
+    public Tela_escolherPersonal_plus() {
         initComponents();
         try {
             preencherTabela();
@@ -70,7 +68,10 @@ public class Tela_escolherPersonal extends javax.swing.JFrame {
 
         Listar_personal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "Nome", "Especialidade"
@@ -78,13 +79,12 @@ public class Tela_escolherPersonal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Listar_personal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 660, 290));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, 380));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tela_escolherPersonal.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, 653));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1045, 659));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -98,7 +98,7 @@ public class Tela_escolherPersonal extends javax.swing.JFrame {
                 Aluno aluno = (Aluno) Sessao_usuario.getUsuarioLogado();
                 Metodos mts = new Metodos();
                 mts.obterIdPersonal(nome);
-                mts.contratarPlano(mts.obterIdAluno(mts.retornoID(aluno.getEmail())), mts.obterIdPersonal(nome), 100.0, 3, "Premium", 1);
+                mts.contratarPlano(mts.obterIdAluno(mts.retornoID(aluno.getEmail())), mts.obterIdPersonal(nome), 90.0, 12, "Premium Plus", 1);
                 JOptionPane.showMessageDialog(this, "Plano contratado com sucesso");
                 this.dispose();
                 Tela_planos  tl = new Tela_planos();
@@ -114,7 +114,6 @@ public class Tela_escolherPersonal extends javax.swing.JFrame {
         } else {
            JOptionPane.showMessageDialog(this, "Nenhuma linha selecionada!");
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -134,20 +133,20 @@ public class Tela_escolherPersonal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tela_escolherPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tela_escolherPersonal_plus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tela_escolherPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tela_escolherPersonal_plus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tela_escolherPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tela_escolherPersonal_plus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tela_escolherPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tela_escolherPersonal_plus.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tela_escolherPersonal().setVisible(true);
+                new Tela_escolherPersonal_plus().setVisible(true);
             }
         });
     }
