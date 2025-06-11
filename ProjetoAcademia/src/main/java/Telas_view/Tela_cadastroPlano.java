@@ -9,34 +9,19 @@ import Academia.Metodos;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author samue
+ * @author aluno
  */
-public class Tela_planos extends javax.swing.JFrame {
-
-    private void carregarPlanos() {
-        Aluno aluno = (Aluno) Sessao_usuario.getUsuarioLogado();
-        try {
-            Metodos mts = new Metodos();
-            int idA = Metodos.retornoID(aluno.getEmail());
-            String infoPlano = mts.verPlano(idA);
-            plano_texto.setText(infoPlano);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            
-        }
-
-    }
+public class Tela_cadastroPlano extends javax.swing.JFrame {
 
     /**
-     * Creates new form Tela_planos
+     * Creates new form Tela_cadastroPlano
      */
-    public Tela_planos() {
+    public Tela_cadastroPlano() {
         initComponents();
-        carregarPlanos();
+        
     }
 
     /**
@@ -51,7 +36,6 @@ public class Tela_planos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        plano_texto = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,12 +43,7 @@ public class Tela_planos extends javax.swing.JFrame {
 
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 170, 60));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 220, 390, 570));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -73,7 +52,7 @@ public class Tela_planos extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 170, 60));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 390, 570));
 
         jButton3.setContentAreaFilled(false);
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -82,56 +61,34 @@ public class Tela_planos extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 170, 60));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 390, 570));
 
-        plano_texto.setColumns(20);
-        plano_texto.setRows(5);
-        getContentPane().add(plano_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 320, 130));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tela_planos.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, 538));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Telas Sistema de Academia.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 1404, 795));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        Aluno aluno = (Aluno) Sessao_usuario.getUsuarioLogado();
-        Metodos mts = new Metodos();
-        try {
-            
-            mts.desativarPlano(mts.retornoID(aluno.getEmail()));
-             carregarPlanos(); 
-             JOptionPane.showMessageDialog(this, "Plano Desativado  com sucesso!");
-        } catch (SQLException ex) {
-            Logger.getLogger(Tela_planos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Aluno aluno = (Aluno) Sessao_usuario.getUsuarioLogado();
-        Metodos mts = new Metodos();
-        try {
-            
-            mts.reativarPlano(mts.retornoID(aluno.getEmail()));
-             carregarPlanos(); 
-             JOptionPane.showMessageDialog(this, "Reativado  com sucesso!");
-        } catch (SQLException ex) {
-            Logger.getLogger(Tela_planos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Tela_cadastroPlano tlPlano = new Tela_cadastroPlano();
-        tlPlano.setVisible(true);
-        
-        
+         Aluno aluno = (Aluno) Sessao_usuario.getUsuarioLogado();
+         Metodos mts = new Metodos();
+        try {
+           int id = mts.retornoID(aluno.getEmail());
+            mts.contratarPlano(id);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Tela_cadastroPlano.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Tela_cadastroPlano.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,20 +107,20 @@ public class Tela_planos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tela_planos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tela_cadastroPlano.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tela_planos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tela_cadastroPlano.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tela_planos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tela_cadastroPlano.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tela_planos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tela_cadastroPlano.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Tela_planos().setVisible(true);
+                new Tela_cadastroPlano().setVisible(true);
             }
         });
     }
@@ -173,6 +130,5 @@ public class Tela_planos extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextArea plano_texto;
     // End of variables declaration//GEN-END:variables
 }
