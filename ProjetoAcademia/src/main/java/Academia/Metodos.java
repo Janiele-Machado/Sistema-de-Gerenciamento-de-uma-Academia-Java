@@ -1,6 +1,5 @@
 package Academia;
 
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -822,6 +821,40 @@ public class Metodos {
                 conexao.close();
             }
         }
+
+        return dados;
+    }
+
+    public List<Object[]> listarAlunos_tabela(int idPersonal) throws SQLException {
+        List<Object[]> dados = new ArrayList<>();
+
+        Conexao conexao = new Conexao();
+        Connection con = conexao.getConexao();
+
+        String sqlListar = """
+        SELECT usuario.nome, usuario.email, aluno.objetivo
+        FROM assinatura
+        JOIN aluno ON assinatura.aluno_id = aluno.id
+        JOIN usuario ON aluno.fk_usu_aluno = usuario.id
+        WHERE assinatura.personal_id = ? AND assinatura.ativa = 'sim';
+    """;
+
+        PreparedStatement ps = con.prepareStatement(sqlListar);
+        ps.setInt(1, idPersonal);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String nome = rs.getString("nome");
+            String email = rs.getString("email");
+            String objetivo = rs.getString("objetivo");
+
+            dados.add(new Object[]{nome, email, objetivo});
+        }
+
+        rs.close();
+        ps.close();
+        con.close();
 
         return dados;
     }

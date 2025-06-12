@@ -238,5 +238,36 @@ public class Relatorios {
 
     return null;
 }
+        public Personal dados_personal(int idUsuario) throws SQLException {
+    Connection conexao = new Conexao().getConexao();
+
+    String sql = "SELECT * FROM usuario INNER JOIN personal ON usuario.id = personal.fk_usu_personal WHERE usuario.id = ?;";
+    PreparedStatement comando = conexao.prepareStatement(sql);
+    comando.setInt(1, idUsuario);
+
+    ResultSet rs = comando.executeQuery();
+
+    if (rs.next()) {
+        Personal personal = new Personal();
+
+        personal.setId(rs.getInt("id"));
+        personal.setNome(rs.getString("nome"));
+        personal.setEmail(rs.getString("email"));
+        personal.setCpf(rs.getString("cpf"));
+        personal.setDataNasc(rs.getDate("data_nascimento"));
+        personal.setSalario(rs.getDouble("salario"));
+        personal.setBonus_por_aluno(rs.getDouble("bonus_por_aluno"));
+        personal.setEspecialidade(rs.getString("especialidade"));
+        personal.setQtd_aluno(rs.getInt("quant_alunos"));
+       
+        return personal;
+    }
+
+    rs.close();
+    comando.close();
+    conexao.close();
+
+    return null;
+}
 
 }

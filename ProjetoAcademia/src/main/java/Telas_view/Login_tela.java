@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Telas_view;
+
 import Academia.Aluno;
 import Academia.Usuario;
 import Academia.Metodos;
+import Academia.Personal;
 import Academia.Relatorios;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,7 +20,8 @@ import javax.swing.JTextField;
  * @author samue
  */
 public class Login_tela extends javax.swing.JFrame {
-    private  int id;
+
+    private int id;
 
     public int getId() {
         return id;
@@ -95,35 +98,42 @@ public class Login_tela extends javax.swing.JFrame {
         // TODO add y
         Metodos mts = new Metodos();
         try {
-           String ver =  mts.logar(this.getEmail_login().getText(),this.getSenha_login().getText());
-           
-           this.setId(mts.retornoID(this.getEmail_login().getText()));
-            
-            if(ver.equals("aluno")){
+            String ver = mts.logar(this.getEmail_login().getText(), this.getSenha_login().getText());
+
+            this.setId(mts.retornoID(this.getEmail_login().getText()));
+
+            if (ver.equals("aluno")) {
                 Tela_aluno tla = new Tela_aluno();
-                 Relatorios rel = new Relatorios();
+                Relatorios rel = new Relatorios();
                 Aluno alunoLogado = rel.dados_aluno(this.getId());
                 Sessao_usuario.setUsuarioLogado(alunoLogado);
                 JOptionPane.showMessageDialog(this, "Bem vindo!");
                 tla.setVisible(true);
                 this.dispose();
+
+            } else if (ver.equals("personal")) {
+                Relatorios rel1 = new Relatorios();               
+                 Personal personalLogado = rel1.dados_personal(mts.retornoID(this.email_login.getText()));
+                  Sessao_usuario.setUsuarioLogado(personalLogado);
+                  JOptionPane.showMessageDialog(this, "Bem vindo!");
+                  Tela_personal pers = new Tela_personal();
+                  pers.setVisible(true);
+                  this.dispose();
+               
                 
                 
-            }else if(ver.equals("personal")){
-                
-            }else if(ver.equals("adm")){
-                
-            }else{
+
+            } else if (ver.equals("adm")) {
+
+            } else {
                 JOptionPane.showMessageDialog(this, "erro verifique se senha ou email estao corretos!");
             }
-                
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Login_tela.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -147,7 +157,6 @@ public class Login_tela extends javax.swing.JFrame {
         this.senha_login = senha_login;
     }
 
-    
     /**
      * @param args the command line arguments
      */
