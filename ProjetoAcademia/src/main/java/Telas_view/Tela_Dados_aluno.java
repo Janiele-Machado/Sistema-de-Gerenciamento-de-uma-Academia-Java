@@ -64,7 +64,6 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
         select_senha = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
         select_email1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -78,14 +77,14 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
                 select_nomeActionPerformed(evt);
             }
         });
-        getContentPane().add(select_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 320, 270, 30));
+        getContentPane().add(select_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 270, 30));
         getContentPane().add(select_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 270, 30));
 
         select_objetivo.setColumns(20);
         select_objetivo.setRows(5);
         jScrollPane1.setViewportView(select_objetivo);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 250, 40));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 250, 30));
         getContentPane().add(select_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 270, 30));
 
         jButton1.setContentAreaFilled(false);
@@ -105,7 +104,6 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 80, 40));
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 430, 240, 30));
         getContentPane().add(select_email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 270, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
@@ -251,7 +249,6 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField select_cpf;
     private javax.swing.JTextField select_datanasc;
