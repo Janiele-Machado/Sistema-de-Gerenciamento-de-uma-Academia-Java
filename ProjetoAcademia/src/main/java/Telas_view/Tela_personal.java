@@ -85,16 +85,32 @@ public class Tela_personal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(Listar_alunos);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 900, 200));
+
+        salario_personal.setEditable(false);
         getContentPane().add(salario_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 210, 30));
+
+        nome_personal.setEditable(false);
         getContentPane().add(nome_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 210, 30));
+
+        email_personal.setEditable(false);
         getContentPane().add(email_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 210, 30));
 
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(892, 50, 110, 50));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(832, 120, 160, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tela_Personal.png"))); // NOI18N
@@ -102,6 +118,21 @@ public class Tela_personal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Login_tela tl = new Login_tela();
+        tl.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Tela_dados_personal tl = new Tela_dados_personal();
+        tl.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
