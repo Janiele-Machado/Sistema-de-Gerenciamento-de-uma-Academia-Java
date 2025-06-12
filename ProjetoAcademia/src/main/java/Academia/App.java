@@ -178,7 +178,7 @@ public class App {
 
                                         if (op1.equalsIgnoreCase("s")) {
                                             System.out.println("Escolha seu Personal: ");
-                                            metodos.listarPersonal();
+                                            metodos.listarPersonal(); //chama um método que faz um select e mostra todos os personais cadastrados
                                             System.out.println("Digite o nome completo do seu personal: ");
                                             String nome_personal = scan.nextLine();
                                             int id_personal = metodos.obterIdPersonal(nome_personal);
@@ -267,7 +267,7 @@ public class App {
                                     System.out.println("Tem certeza que deseja desativar sua assinatura? Digite S para sim e N para nao:");
                                     String resposta = scan.nextLine();
                                     if (resposta.equalsIgnoreCase("s")) {
-                                        metodos.desativarPlano(id);
+                                        metodos.desativarPlano(id); //chama o método que desativa o plano
                                     } else {
                                         System.out.println("Assinatura mantida.");
                                     }
@@ -277,7 +277,7 @@ public class App {
                                     String resposta = scan.nextLine();
 
                                     if (resposta.equalsIgnoreCase("s")) {
-                                        metodos.reativarPlano(id); // Chama o método que criamos
+                                        metodos.reativarPlano(id); // Chama o método que criamos para reativar o plano
                                     } else {
                                         System.out.println("Reativacao cancelada.");
                                     }
@@ -306,8 +306,8 @@ public class App {
 
                                 } else if (opc_personal == 2) {
 
-                                    int id_per = metodos.obterIdPersonal(id);//mostra o salario de personal
-                                    metodos.salarioPersonal(id_per);
+                                    int id_per = metodos.obterIdPersonal(id);
+                                    metodos.salarioPersonal(id_per);//mostra o salario do personal
 
                                 } else if (opc_personal == 3) {//atualiza o cadastro de personal
                                     System.out.println("Tem Certeza que deseja alterar seu cadastro? Digite S para sim e N para nao:");
