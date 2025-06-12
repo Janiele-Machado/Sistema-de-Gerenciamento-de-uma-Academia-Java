@@ -67,8 +67,8 @@ public class App {
                                     Cadastro cad_aluno = new Cadastro();
                                     cad_aluno.inserir(a1);
                                 } catch (Exception e) {
-                                    System.out.println("Erro ao cadastrar aluno: " + e.getMessage());
-                                    e.printStackTrace();
+                                    System.out.println("Erro ao cadastrar aluno: " + e.getMessage()); //mensagem de erro caso não consiga cadastrar um aluno
+                                    e.printStackTrace();//exibir informações detalhadas sobre uma exceção 
                                 }
 
                                 break;
@@ -131,10 +131,10 @@ public class App {
                                 break;
                                     
                             case 4 :
-                                System.out.println("Saindo...");
+                                System.out.println("Saindo...");//opc para o usuario sair e encerrar a execução
                                 break;
                             default:
-                                System.out.println("Opcao invalida");
+                                System.out.println("Opcao invalida"); // para o caso dele inserir uma opc invalida
 
                         }
                     }
@@ -165,7 +165,7 @@ public class App {
                                         String op1 = scan.nextLine();
 
                                         if (op1.equalsIgnoreCase("s")) {
-                                            int id_aluno = metodos.obterIdAluno(id);
+                                            int id_aluno = metodos.obterIdAluno(id); //chama um metodo que recebe o id de usuario que é também uma chave estrangeira e retorno o id do aluno;
                                             metodos.contratarPlano(id_aluno);
                                         } else {
                                             System.out.println("saindo...");
