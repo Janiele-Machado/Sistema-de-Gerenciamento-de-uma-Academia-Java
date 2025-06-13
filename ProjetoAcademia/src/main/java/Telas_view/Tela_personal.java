@@ -84,7 +84,7 @@ public class Tela_personal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Listar_alunos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 900, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 900, 200));
 
         salario_personal.setEditable(false);
         getContentPane().add(salario_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 210, 30));
@@ -117,6 +117,7 @@ public class Tela_personal extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, 621));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

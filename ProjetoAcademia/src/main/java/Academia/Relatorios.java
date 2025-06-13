@@ -144,67 +144,66 @@ public class Relatorios {
         conexao.close();
     }
 
-    public void gerarBalanco() throws SQLException {
-        Connection conexao = new Conexao().getConexao();
+  public Object[][] gerarBalancoArray() throws SQLException {
+    Connection conexao = new Conexao().getConexao();
 
-        String sql_financas = "SELECT valor, categoria FROM financa";
-        PreparedStatement comandoFinancas = conexao.prepareStatement(sql_financas);
-        ResultSet rsFinancas = comandoFinancas.executeQuery();
+    double totalEntradas = 0.0;
 
-        double totalEntradas = 0.0;
-        ;
+    // Somar apenas entradas (Mensalidades)
+    String sql_financas = "SELECT valor, categoria FROM financa";
+    PreparedStatement comandoFinancas = conexao.prepareStatement(sql_financas);
+    ResultSet rsFinancas = comandoFinancas.executeQuery();
 
-        while (rsFinancas.next()) {
-            double valor = rsFinancas.getDouble("valor");
-            String categoria = rsFinancas.getString("categoria");
+    while (rsFinancas.next()) {
+        double valor = rsFinancas.getDouble("valor");
+        String categoria = rsFinancas.getString("categoria");
 
-            if ("Mensalidade".equals(categoria)) {
-                totalEntradas += valor;
-
-            } else if ("Salario".equals(categoria)) {
-                
-            }
+        if ("Mensalidade".equalsIgnoreCase(categoria)) {
+            totalEntradas += valor;
         }
-
-        String sql_salariosAdm = "SELECT salario FROM usuario INNER JOIN adm ON usuario.id = adm.fk_usu_adm";
-        PreparedStatement comandoAdm = conexao.prepareStatement(sql_salariosAdm);
-        ResultSet rsAdm = comandoAdm.executeQuery();
-
-        double totalSalariosAdm = 0.0;
-        while (rsAdm.next()) {
-            totalSalariosAdm += rsAdm.getDouble("salario");
-        }
-
-        String sql_salariosPersonal = "SELECT salario, bonus_por_aluno FROM usuario INNER JOIN personal ON usuario.id = personal.fk_usu_personal";
-        PreparedStatement comandoPersonal = conexao.prepareStatement(sql_salariosPersonal);
-        ResultSet rsPersonal = comandoPersonal.executeQuery();
-
-        double totalSalariosPersonal = 0.0;
-        while (rsPersonal.next()) {
-            double salarioPersonal = rsPersonal.getDouble("salario");
-            double bonus = rsPersonal.getDouble("bonus_por_aluno");
-            totalSalariosPersonal += (salarioPersonal + bonus); // Salário + bônus
-        }
-
-        double balancoTotal = totalEntradas  - totalSalariosAdm - totalSalariosPersonal;
-        double totalSaidas = totalSalariosAdm + totalSalariosPersonal;
-
-        System.out.println("---------------------------------------------------");
-        System.out.println("Balanço Financeiro:");
-        System.out.println("Total de Entradas: R$ " + totalEntradas);
-        System.out.println("Total de Saídas: R$ " + totalSaidas );
-        System.out.println("Total de Salários de Administradores: R$ " + totalSalariosAdm);
-        System.out.println("Total de Salários de Personal Trainers (incluindo bônus): R$ " + totalSalariosPersonal);
-        System.out.println("Total de Pagamentos de Alunos: R$ " + totalEntradas);
-        System.out.println("---------------------------------------------------");
-        System.out.println("Balanço Final: R$ " + balancoTotal);
-        System.out.println("---------------------------------------------------");
-
-        rsFinancas.close();
-        rsAdm.close();
-        rsPersonal.close();
-        conexao.close();
     }
+
+    // Salários de administradores
+    String sql_salariosAdm = "SELECT salario FROM usuario INNER JOIN adm ON usuario.id = adm.fk_usu_adm";
+    PreparedStatement comandoAdm = conexao.prepareStatement(sql_salariosAdm);
+    ResultSet rsAdm = comandoAdm.executeQuery();
+
+    double totalSalariosAdm = 0.0;
+    while (rsAdm.next()) {
+        totalSalariosAdm += rsAdm.getDouble("salario");
+    }
+
+    // Salários de personal + bônus
+    String sql_salariosPersonal = "SELECT salario, bonus_por_aluno FROM usuario INNER JOIN personal ON usuario.id = personal.fk_usu_personal";
+    PreparedStatement comandoPersonal = conexao.prepareStatement(sql_salariosPersonal);
+    ResultSet rsPersonal = comandoPersonal.executeQuery();
+
+    double totalSalariosPersonal = 0.0;
+    while (rsPersonal.next()) {
+        double salario = rsPersonal.getDouble("salario");
+        double bonus = rsPersonal.getDouble("bonus_por_aluno");
+        totalSalariosPersonal += (salario + bonus);
+    }
+
+    double totalSaidas = totalSalariosAdm + totalSalariosPersonal;
+    double balancoTotal = totalEntradas - totalSaidas;
+
+    // Monta os dados como um array de objetos (linhas, colunas)
+    Object[][] dados = {
+        {"Total de Entradas", totalEntradas},
+        {"Total de Saídas", totalSaidas},
+        {"Salários de Administradores", totalSalariosAdm},
+        {"Salários de Personais (com bônus)", totalSalariosPersonal},
+        {"Balanço Final", balancoTotal}
+    };
+
+    rsFinancas.close();
+    rsAdm.close();
+    rsPersonal.close();
+    conexao.close();
+
+    return dados;
+}
         public Aluno dados_aluno(int idUsuario) throws SQLException {
     Connection conexao = new Conexao().getConexao();
     
@@ -269,5 +268,38 @@ public class Relatorios {
 
     return null;
 }
+        public Adm dados_adm(int idUsuario) throws SQLException {
+    Connection conexao = new Conexao().getConexao();
+
+    String sql = "SELECT * FROM usuario INNER JOIN adm ON usuario.id = adm.fk_usu_adm WHERE usuario.id = ?;";
+    PreparedStatement comando = conexao.prepareStatement(sql);
+    comando.setInt(1, idUsuario);
+
+    ResultSet rs = comando.executeQuery();
+
+    if (rs.next()) {
+        Adm adm = new Adm();
+
+        adm.setId(rs.getInt("id"));
+        adm.setNome(rs.getString("nome"));
+        adm.setEmail(rs.getString("email"));
+        adm.setCpf(rs.getString("cpf"));
+        adm.setDataNasc(rs.getDate("data_nascimento"));
+
+        adm.setSalario(rs.getDouble("salario"));
+        adm.setNumero_comercial(rs.getString("telefone_comercial"));
+        adm.setDesc(rs.getString("descricao"));
+        adm.setSetor(rs.getString("setor"));
+
+        return adm;
+    }
+
+    rs.close();
+    comando.close();
+    conexao.close();
+
+    return null;
+}
+
 
 }

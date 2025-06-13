@@ -4,6 +4,7 @@
  */
 package Telas_view;
 
+import Academia.Adm;
 import Academia.Aluno;
 import Academia.Usuario;
 import Academia.Metodos;
@@ -124,6 +125,15 @@ public class Login_tela extends javax.swing.JFrame {
                 
 
             } else if (ver.equals("adm")) {
+                Relatorios rel2 = new Relatorios();
+                Adm admLogado = rel2.dados_adm(mts.retornoID(this.email_login.getText()));
+                Sessao_usuario.setUsuarioLogado(admLogado);
+                JOptionPane.showMessageDialog(this, "Bem vindo!");
+                Tela_adm tl = new Tela_adm();
+                tl.setVisible(true);
+                this.dispose();
+                
+                
 
             } else {
                 JOptionPane.showMessageDialog(this, "erro verifique se senha ou email estao corretos!");
