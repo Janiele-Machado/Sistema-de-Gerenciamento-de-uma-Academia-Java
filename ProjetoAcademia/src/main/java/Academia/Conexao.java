@@ -13,7 +13,7 @@ public class Conexao {
     
     public static final String SERVIDOR = "jdbc:mysql://localhost:3306/academia_db";
     public static final String USUARIO = "root";
-    public static final String SENHA = "samuel1234";
+    public static final String SENHA = "123456789";
     
     
     public Connection getConexao()throws SQLException {

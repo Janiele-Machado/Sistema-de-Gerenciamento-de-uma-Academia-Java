@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -300,6 +302,40 @@ public class Relatorios {
 
     return null;
 }
+public Object[][] relatorioAluno() throws SQLException {
+    List<Object[]> linhas = new ArrayList<>();
+
+    Connection conexao = new Conexao().getConexao();
+    String sql = "SELECT * FROM usuario INNER JOIN aluno ON usuario.id = fk_usu_aluno";
+    PreparedStatement comando = conexao.prepareStatement(sql);
+    ResultSet rs = comando.executeQuery();
+
+    while (rs.next()) {
+        Object[] linha = {
+            rs.getInt("id"),
+            rs.getString("nome"),
+            rs.getString("email"),
+            rs.getString("cpf"),
+            rs.getDate("data_nascimento"),
+            rs.getString("matricula"),
+            rs.getString("objetivo"),
+            rs.getString("status")
+        };
+        linhas.add(linha);
+    }
+
+    rs.close();
+    conexao.close();
+
+    // Converter List<Object[]> para Object[][]
+    Object[][] dados = new Object[linhas.size()][];
+    for (int i = 0; i < linhas.size(); i++) {
+        dados[i] = linhas.get(i);
+    }
+
+    return dados;
+}
+
 
 
 }
