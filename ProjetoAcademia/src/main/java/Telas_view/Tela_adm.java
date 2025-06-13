@@ -4,6 +4,7 @@
  */
 package Telas_view;
 
+import Academia.Adm;
 import Academia.Metodos;
 import Academia.Relatorios;
 import java.sql.SQLException;
@@ -27,6 +28,11 @@ public class Tela_adm extends javax.swing.JFrame {
             modelo.addRow(linha);
         }
     }
+    public void preencher_nome(){
+        Adm adm = (Adm) Sessao_usuario.getUsuarioLogado();
+        this.email_adm.setText(adm.getEmail());
+        this.Nome_adm1.setText(adm.getNome());
+    }
 
 
     /**
@@ -34,6 +40,7 @@ public class Tela_adm extends javax.swing.JFrame {
      */
     public Tela_adm() {
         initComponents();
+        preencher_nome();
         try {
             preencherTabela();
         } catch (SQLException ex) {
@@ -53,7 +60,7 @@ public class Tela_adm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        Nome_adm = new javax.swing.JTextField();
+        email_adm = new javax.swing.JTextField();
         Nome_adm1 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -76,8 +83,8 @@ public class Tela_adm extends javax.swing.JFrame {
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 170, 80));
 
-        Nome_adm.setEditable(false);
-        getContentPane().add(Nome_adm, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 200, 30));
+        email_adm.setEditable(false);
+        getContentPane().add(email_adm, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 200, 30));
 
         Nome_adm1.setEditable(false);
         getContentPane().add(Nome_adm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 200, 30));
@@ -147,8 +154,8 @@ public class Tela_adm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Nome_adm;
     private javax.swing.JTextField Nome_adm1;
+    private javax.swing.JTextField email_adm;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

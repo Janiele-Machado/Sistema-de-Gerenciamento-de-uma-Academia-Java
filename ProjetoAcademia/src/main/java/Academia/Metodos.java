@@ -149,7 +149,7 @@ public class Metodos {
                 } while (opc1 != 4);
 
             } else if (opc_amd == 2) {
-                rel.gerarBalanco();
+               // rel.gerarBalanco();
 
             } else if (opc_amd == 3) {
                 rel.Relatorio_salarios();

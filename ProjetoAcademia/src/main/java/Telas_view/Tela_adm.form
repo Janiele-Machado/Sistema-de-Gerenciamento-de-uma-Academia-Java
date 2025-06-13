@@ -63,7 +63,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="Nome_adm">
+    <Component class="javax.swing.JTextField" name="email_adm">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
