@@ -46,7 +46,7 @@ public class Alterar {
 
         Connection conexao = new Conexao().getConexao();
 
-        String sqlAlterar = "UPDATE  usuario SET nome=?, email=?, senha=? WHERE  usuario.id=?";
+        String sqlAlterar = "UPDATE  usuario SET nome=?, email=?, senha=?, cpf=?, data_nascimento=? WHERE  usuario.id=?";
         String sqlAlterarPersonal = "UPDATE personal SET especialidade=? WHERE fk_usu_personal=?";
 
         try {
@@ -57,7 +57,9 @@ public class Alterar {
             comandoUsuario.setString(1, personal.getNome());
             comandoUsuario.setString(2, personal.getEmail());
             comandoUsuario.setString(3, personal.getSenha());
-            comandoUsuario.setInt(4, personal.getId());
+            comandoUsuario.setString(4, personal.getCpf());
+            comandoUsuario.setDate(5, personal.getDataNasc());
+            comandoUsuario.setInt(6, personal.getId());
 
             comandoUsuario.executeUpdate();
 
