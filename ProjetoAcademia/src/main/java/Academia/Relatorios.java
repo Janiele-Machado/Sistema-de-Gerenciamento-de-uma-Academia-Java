@@ -146,179 +146,211 @@ public class Relatorios {
         conexao.close();
     }
 
-  public Object[][] gerarBalancoArray() throws SQLException {
-    Connection conexao = new Conexao().getConexao();
+    public Object[][] gerarBalancoArray() throws SQLException {
+        Connection conexao = new Conexao().getConexao();
 
-    double totalEntradas = 0.0;
+        double totalEntradas = 0.0;
 
-    // Somar apenas entradas (Mensalidades)
-    String sql_financas = "SELECT valor, categoria FROM financa";
-    PreparedStatement comandoFinancas = conexao.prepareStatement(sql_financas);
-    ResultSet rsFinancas = comandoFinancas.executeQuery();
+        // Somar apenas entradas (Mensalidades)
+        String sql_financas = "SELECT valor, categoria FROM financa";
+        PreparedStatement comandoFinancas = conexao.prepareStatement(sql_financas);
+        ResultSet rsFinancas = comandoFinancas.executeQuery();
 
-    while (rsFinancas.next()) {
-        double valor = rsFinancas.getDouble("valor");
-        String categoria = rsFinancas.getString("categoria");
+        while (rsFinancas.next()) {
+            double valor = rsFinancas.getDouble("valor");
+            String categoria = rsFinancas.getString("categoria");
 
-        if ("Mensalidade".equalsIgnoreCase(categoria)) {
-            totalEntradas += valor;
+            if ("Mensalidade".equalsIgnoreCase(categoria)) {
+                totalEntradas += valor;
+            }
         }
+
+        // Salários de administradores
+        String sql_salariosAdm = "SELECT salario FROM usuario INNER JOIN adm ON usuario.id = adm.fk_usu_adm";
+        PreparedStatement comandoAdm = conexao.prepareStatement(sql_salariosAdm);
+        ResultSet rsAdm = comandoAdm.executeQuery();
+
+        double totalSalariosAdm = 0.0;
+        while (rsAdm.next()) {
+            totalSalariosAdm += rsAdm.getDouble("salario");
+        }
+
+        // Salários de personal + bônus
+        String sql_salariosPersonal = "SELECT salario, bonus_por_aluno FROM usuario INNER JOIN personal ON usuario.id = personal.fk_usu_personal";
+        PreparedStatement comandoPersonal = conexao.prepareStatement(sql_salariosPersonal);
+        ResultSet rsPersonal = comandoPersonal.executeQuery();
+
+        double totalSalariosPersonal = 0.0;
+        while (rsPersonal.next()) {
+            double salario = rsPersonal.getDouble("salario");
+            double bonus = rsPersonal.getDouble("bonus_por_aluno");
+            totalSalariosPersonal += (salario + bonus);
+        }
+
+        double totalSaidas = totalSalariosAdm + totalSalariosPersonal;
+        double balancoTotal = totalEntradas - totalSaidas;
+
+        // Monta os dados como um array de objetos (linhas, colunas)
+        Object[][] dados = {
+            {"Total de Entradas", totalEntradas},
+            {"Total de Saídas", totalSaidas},
+            {"Salários de Administradores", totalSalariosAdm},
+            {"Salários de Personais (com bônus)", totalSalariosPersonal},
+            {"Balanço Final", balancoTotal}
+        };
+
+        rsFinancas.close();
+        rsAdm.close();
+        rsPersonal.close();
+        conexao.close();
+
+        return dados;
     }
 
-    // Salários de administradores
-    String sql_salariosAdm = "SELECT salario FROM usuario INNER JOIN adm ON usuario.id = adm.fk_usu_adm";
-    PreparedStatement comandoAdm = conexao.prepareStatement(sql_salariosAdm);
-    ResultSet rsAdm = comandoAdm.executeQuery();
+    public Aluno dados_aluno(int idUsuario) throws SQLException {
+        Connection conexao = new Conexao().getConexao();
 
-    double totalSalariosAdm = 0.0;
-    while (rsAdm.next()) {
-        totalSalariosAdm += rsAdm.getDouble("salario");
+        String sql = "SELECT * FROM usuario INNER JOIN aluno ON usuario.id = aluno.fk_usu_aluno WHERE usuario.id = ?;";
+        PreparedStatement comando = conexao.prepareStatement(sql);
+        comando.setInt(1, idUsuario);
+
+        ResultSet rs = comando.executeQuery();
+
+        if (rs.next()) {
+            Aluno alu = new Aluno();
+
+            int id = rs.getInt("id");
+            alu.setNome(rs.getString("nome"));
+            alu.setEmail(rs.getString("email"));
+            alu.setCpf(rs.getString("cpf"));
+            alu.setDataNasc(rs.getDate("data_nascimento"));
+            alu.setMatricula(rs.getString("matricula"));
+            alu.setObjetivo(rs.getString("objetivo"));
+            alu.setStatus(rs.getString("status"));
+            return alu;
+
+        }
+
+        rs.close();
+        comando.close();
+        conexao.close();
+
+        return null;
     }
 
-    // Salários de personal + bônus
-    String sql_salariosPersonal = "SELECT salario, bonus_por_aluno FROM usuario INNER JOIN personal ON usuario.id = personal.fk_usu_personal";
-    PreparedStatement comandoPersonal = conexao.prepareStatement(sql_salariosPersonal);
-    ResultSet rsPersonal = comandoPersonal.executeQuery();
+    public Personal dados_personal(int idUsuario) throws SQLException {
+        Connection conexao = new Conexao().getConexao();
 
-    double totalSalariosPersonal = 0.0;
-    while (rsPersonal.next()) {
-        double salario = rsPersonal.getDouble("salario");
-        double bonus = rsPersonal.getDouble("bonus_por_aluno");
-        totalSalariosPersonal += (salario + bonus);
+        String sql = "SELECT * FROM usuario INNER JOIN personal ON usuario.id = personal.fk_usu_personal WHERE usuario.id = ?;";
+        PreparedStatement comando = conexao.prepareStatement(sql);
+        comando.setInt(1, idUsuario);
+
+        ResultSet rs = comando.executeQuery();
+
+        if (rs.next()) {
+            Personal personal = new Personal();
+
+            personal.setId(rs.getInt("id"));
+            personal.setNome(rs.getString("nome"));
+            personal.setEmail(rs.getString("email"));
+            personal.setCpf(rs.getString("cpf"));
+            personal.setDataNasc(rs.getDate("data_nascimento"));
+            personal.setSalario(rs.getDouble("salario"));
+            personal.setBonus_por_aluno(rs.getDouble("bonus_por_aluno"));
+            personal.setEspecialidade(rs.getString("especialidade"));
+            personal.setQtd_aluno(rs.getInt("quant_alunos"));
+
+            return personal;
+        }
+
+        rs.close();
+        comando.close();
+        conexao.close();
+
+        return null;
     }
 
-    double totalSaidas = totalSalariosAdm + totalSalariosPersonal;
-    double balancoTotal = totalEntradas - totalSaidas;
+    public Adm dados_adm(int idUsuario) throws SQLException {
+        Connection conexao = new Conexao().getConexao();
 
-    // Monta os dados como um array de objetos (linhas, colunas)
-    Object[][] dados = {
-        {"Total de Entradas", totalEntradas},
-        {"Total de Saídas", totalSaidas},
-        {"Salários de Administradores", totalSalariosAdm},
-        {"Salários de Personais (com bônus)", totalSalariosPersonal},
-        {"Balanço Final", balancoTotal}
-    };
+        String sql = "SELECT * FROM usuario INNER JOIN adm ON usuario.id = adm.fk_usu_adm WHERE usuario.id = ?;";
+        PreparedStatement comando = conexao.prepareStatement(sql);
+        comando.setInt(1, idUsuario);
 
-    rsFinancas.close();
-    rsAdm.close();
-    rsPersonal.close();
-    conexao.close();
+        ResultSet rs = comando.executeQuery();
 
-    return dados;
-}
-        public Aluno dados_aluno(int idUsuario) throws SQLException {
-    Connection conexao = new Conexao().getConexao();
-    
-    String sql = "SELECT * FROM usuario INNER JOIN aluno ON usuario.id = aluno.fk_usu_aluno WHERE usuario.id = ?;";
-    PreparedStatement comando = conexao.prepareStatement(sql);
-    comando.setInt(1, idUsuario);
+        if (rs.next()) {
+            Adm adm = new Adm();
 
-    ResultSet rs = comando.executeQuery();
+            adm.setId(rs.getInt("id"));
+            adm.setNome(rs.getString("nome"));
+            adm.setEmail(rs.getString("email"));
+            adm.setCpf(rs.getString("cpf"));
+            adm.setDataNasc(rs.getDate("data_nascimento"));
 
-     
+            adm.setSalario(rs.getDouble("salario"));
+            adm.setNumero_comercial(rs.getString("telefone_comercial"));
+            adm.setDesc(rs.getString("descricao"));
+            adm.setSetor(rs.getString("setor"));
 
-    if (rs.next()) {
-        Aluno alu = new Aluno();
-        
-        int id = rs.getInt("id");
-        alu.setNome(rs.getString("nome"));
-        alu.setEmail(rs.getString("email"));
-        alu.setCpf(rs.getString("cpf"));
-        alu.setDataNasc(rs.getDate("data_nascimento"));
-        alu.setMatricula(rs.getString("matricula"));
-        alu.setObjetivo(rs.getString("objetivo"));
-        alu.setStatus(rs.getString("status"));
-        return alu;
+            return adm;
+        }
 
-        
+        rs.close();
+        comando.close();
+        conexao.close();
+
+        return null;
     }
 
-    rs.close();
-    comando.close();
-    conexao.close();
+    public Object[][] relatorioAluno() throws SQLException {
+        List<Object[]> linhas = new ArrayList<>();
 
-    return null;
-}
-        public Personal dados_personal(int idUsuario) throws SQLException {
-    Connection conexao = new Conexao().getConexao();
+        Connection conexao = new Conexao().getConexao();
+        String sql = "SELECT * FROM usuario INNER JOIN aluno ON usuario.id = fk_usu_aluno";
+        PreparedStatement comando = conexao.prepareStatement(sql);
+        ResultSet rs = comando.executeQuery();
 
-    String sql = "SELECT * FROM usuario INNER JOIN personal ON usuario.id = personal.fk_usu_personal WHERE usuario.id = ?;";
-    PreparedStatement comando = conexao.prepareStatement(sql);
-    comando.setInt(1, idUsuario);
+        while (rs.next()) {
+            Object[] linha = {
+                rs.getString("nome"),
+                rs.getString("email"),
+                rs.getString("cpf"),
+                rs.getDate("data_nascimento"),
+                rs.getString("matricula"),
+                rs.getString("status")
+            };
+            linhas.add(linha);
+        }
 
-    ResultSet rs = comando.executeQuery();
+        rs.close();
+        conexao.close();
 
-    if (rs.next()) {
-        Personal personal = new Personal();
+        // Converter List<Object[]> para Object[][]
+        Object[][] dados = new Object[linhas.size()][];
+        for (int i = 0; i < linhas.size(); i++) {
+            dados[i] = linhas.get(i);
+        }
 
-        personal.setId(rs.getInt("id"));
-        personal.setNome(rs.getString("nome"));
-        personal.setEmail(rs.getString("email"));
-        personal.setCpf(rs.getString("cpf"));
-        personal.setDataNasc(rs.getDate("data_nascimento"));
-        personal.setSalario(rs.getDouble("salario"));
-        personal.setBonus_por_aluno(rs.getDouble("bonus_por_aluno"));
-        personal.setEspecialidade(rs.getString("especialidade"));
-        personal.setQtd_aluno(rs.getInt("quant_alunos"));
-       
-        return personal;
+        return dados;
     }
 
-    rs.close();
-    comando.close();
-    conexao.close();
-
-    return null;
-}
-        public Adm dados_adm(int idUsuario) throws SQLException {
-    Connection conexao = new Conexao().getConexao();
-
-    String sql = "SELECT * FROM usuario INNER JOIN adm ON usuario.id = adm.fk_usu_adm WHERE usuario.id = ?;";
-    PreparedStatement comando = conexao.prepareStatement(sql);
-    comando.setInt(1, idUsuario);
-
-    ResultSet rs = comando.executeQuery();
-
-    if (rs.next()) {
-        Adm adm = new Adm();
-
-        adm.setId(rs.getInt("id"));
-        adm.setNome(rs.getString("nome"));
-        adm.setEmail(rs.getString("email"));
-        adm.setCpf(rs.getString("cpf"));
-        adm.setDataNasc(rs.getDate("data_nascimento"));
-
-        adm.setSalario(rs.getDouble("salario"));
-        adm.setNumero_comercial(rs.getString("telefone_comercial"));
-        adm.setDesc(rs.getString("descricao"));
-        adm.setSetor(rs.getString("setor"));
-
-        return adm;
-    }
-
-    rs.close();
-    comando.close();
-    conexao.close();
-
-    return null;
-}
-public Object[][] relatorioAluno() throws SQLException {
+   public Object[][] relatorioAdm() throws SQLException {
     List<Object[]> linhas = new ArrayList<>();
 
     Connection conexao = new Conexao().getConexao();
-    String sql = "SELECT * FROM usuario INNER JOIN aluno ON usuario.id = fk_usu_aluno";
+    String sql = "SELECT * FROM usuario INNER JOIN adm ON usuario.id = fk_usu_adm";
     PreparedStatement comando = conexao.prepareStatement(sql);
     ResultSet rs = comando.executeQuery();
 
     while (rs.next()) {
         Object[] linha = {
-            
             rs.getString("nome"),
             rs.getString("email"),
             rs.getString("cpf"),
-            rs.getDate("data_nascimento"),
-            rs.getString("matricula"),            
-            rs.getString("status")
+            rs.getDate("data_nascimento"),           
+            rs.getString("telefone_comercial"),        
+            rs.getString("setor")
         };
         linhas.add(linha);
     }
@@ -326,7 +358,6 @@ public Object[][] relatorioAluno() throws SQLException {
     rs.close();
     conexao.close();
 
-    // Converter List<Object[]> para Object[][]
     Object[][] dados = new Object[linhas.size()][];
     for (int i = 0; i < linhas.size(); i++) {
         dados[i] = linhas.get(i);
@@ -334,7 +365,5 @@ public Object[][] relatorioAluno() throws SQLException {
 
     return dados;
 }
-
-
 
 }

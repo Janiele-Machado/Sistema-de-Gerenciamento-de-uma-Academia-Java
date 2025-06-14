@@ -98,7 +98,7 @@ public class Deletar {
          PreparedStatement comando_dellu = conexao.prepareStatement(sql_delU);
          comando_dellu.setString(1, email);
          comando_dellu.executeUpdate();
-         System.out.println("Personal excluído com sucesso");
+         System.out.println("adm excluído com sucesso");
          
          
      } catch(SQLException e){
