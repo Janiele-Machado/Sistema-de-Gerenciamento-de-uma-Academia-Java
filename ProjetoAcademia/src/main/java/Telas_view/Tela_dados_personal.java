@@ -13,6 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.JFormattedTextField; // Novo
+import javax.swing.text.MaskFormatter;  // Novo
+import java.text.ParseException; // Novo
+import java.sql.Date; // Novo
 
 /**
  *
