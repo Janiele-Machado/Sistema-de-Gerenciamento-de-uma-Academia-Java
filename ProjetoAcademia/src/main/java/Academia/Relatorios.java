@@ -335,35 +335,66 @@ public class Relatorios {
         return dados;
     }
 
-   public Object[][] relatorioAdm() throws SQLException {
-    List<Object[]> linhas = new ArrayList<>();
+    public Object[][] relatorioAdm() throws SQLException {
+        List<Object[]> linhas = new ArrayList<>();
 
-    Connection conexao = new Conexao().getConexao();
-    String sql = "SELECT * FROM usuario INNER JOIN adm ON usuario.id = fk_usu_adm";
-    PreparedStatement comando = conexao.prepareStatement(sql);
-    ResultSet rs = comando.executeQuery();
+        Connection conexao = new Conexao().getConexao();
+        String sql = "SELECT * FROM usuario INNER JOIN adm ON usuario.id = fk_usu_adm";
+        PreparedStatement comando = conexao.prepareStatement(sql);
+        ResultSet rs = comando.executeQuery();
 
-    while (rs.next()) {
-        Object[] linha = {
-            rs.getString("nome"),
-            rs.getString("email"),
-            rs.getString("cpf"),
-            rs.getDate("data_nascimento"),           
-            rs.getString("telefone_comercial"),        
-            rs.getString("setor")
-        };
-        linhas.add(linha);
+        while (rs.next()) {
+            Object[] linha = {
+                rs.getString("nome"),
+                rs.getString("email"),
+                rs.getString("cpf"),
+                rs.getDate("data_nascimento"),
+                rs.getString("telefone_comercial"),
+                rs.getString("setor")
+            };
+            linhas.add(linha);
+        }
+
+        rs.close();
+        conexao.close();
+
+        Object[][] dados = new Object[linhas.size()][];
+        for (int i = 0; i < linhas.size(); i++) {
+            dados[i] = linhas.get(i);
+        }
+
+        return dados;
     }
 
-    rs.close();
-    conexao.close();
+    public Object[][] relatorioPersonal() throws SQLException {
+        List<Object[]> linhas = new ArrayList<>();
 
-    Object[][] dados = new Object[linhas.size()][];
-    for (int i = 0; i < linhas.size(); i++) {
-        dados[i] = linhas.get(i);
+        Connection conexao = new Conexao().getConexao();
+        String sql = "SELECT * FROM usuario INNER JOIN personal ON usuario.id = personal.fk_usu_personal";
+        PreparedStatement comando = conexao.prepareStatement(sql);
+        ResultSet rs = comando.executeQuery();
+
+        while (rs.next()) {
+            Object[] linha = {
+                rs.getString("nome"),
+                rs.getString("email"),
+                rs.getString("cpf"),
+                rs.getDate("data_nascimento"),
+                rs.getDouble("salario"),
+                rs.getString("especialidade")
+            };
+            linhas.add(linha);
+        }
+
+        rs.close();
+        conexao.close();
+
+        Object[][] dados = new Object[linhas.size()][];
+        for (int i = 0; i < linhas.size(); i++) {
+            dados[i] = linhas.get(i);
+        }
+
+        return dados;
     }
-
-    return dados;
-}
 
 }
