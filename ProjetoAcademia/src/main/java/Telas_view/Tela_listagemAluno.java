@@ -133,7 +133,7 @@ public class Tela_listagemAluno extends javax.swing.JFrame {
 
                 Deletar del = new Deletar();
                 del.deletarAluno(email);
-                this.nome_delete.setText(nome);
+                this.nome_delete.setText("");
                 carregar_tabela();
                 JOptionPane.showMessageDialog(this, "Deletado!");
 
