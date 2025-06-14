@@ -4,17 +4,56 @@
  */
 package Telas_view;
 
+import Academia.Aluno;
+import Academia.Deletar;
+import Academia.Metodos;
+import Academia.Relatorios;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aluno
  */
 public class Tela_listagemAluno extends javax.swing.JFrame {
 
+    public void carregar_tabela() throws SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) tabela_listarA.getModel();
+        modelo.setRowCount(0); // limpa tabela
+
+        Relatorios rl = new Relatorios();
+        Object[][] dados = rl.relatorioAluno();
+        for (Object[] linha : dados) {
+            modelo.addRow(linha);
+        }
+    }
+
     /**
      * Creates new form Tela_listagemAluno
      */
     public Tela_listagemAluno() {
         initComponents();
+
+        tabela_listarA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int linha = tabela_listarA.getSelectedRow();
+                if (linha != -1) {
+                    String nome = tabela_listarA.getValueAt(linha, 0).toString(); // Nome = coluna 0
+                    nome_delete.setText(nome);
+                }
+            }
+        });
+
+        try {
+            carregar_tabela();
+        } catch (SQLException ex) {
+            Logger.getLogger(Tela_listagemAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -29,40 +68,108 @@ public class Tela_listagemAluno extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        tabela_listarA = new javax.swing.JTable();
+        nome_delete = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1022, 600, 240, 80));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 620, 240, 80));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 10, 140, 50));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 30, 140, 50));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_listarA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "email", "cpf", "Data de nascimento", "Matricula", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela_listarA);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 1200, 410));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 1200, 410));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tela Adm - ListagemAluno.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1336, 698));
+        nome_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nome_deleteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nome_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 650, 430, 50));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tela Adm - ListagemAluno (1).png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1330, 720));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int linha_selecionada = tabela_listarA.getSelectedRow();
+        if (linha_selecionada != -1) { // verifica se alguma linha foi selecionada
+            String nome = tabela_listarA.getValueAt(linha_selecionada, 0).toString(); // coluna 0
+            String email = tabela_listarA.getValueAt(linha_selecionada, 1).toString(); // coluna 1
+
+            try {
+
+                Deletar del = new Deletar();
+                del.deletarAluno(email);
+                this.nome_delete.setText(nome);
+                carregar_tabela();
+                JOptionPane.showMessageDialog(this, "Deletado!");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Tela_escolherPersonal.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "erro!");
+            } catch (Exception ex) {
+                Logger.getLogger(Tela_escolherPersonal.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "erro!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Nenhuma linha selecionada!");
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void nome_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome_deleteActionPerformed
+        // TODO add your handling code here:
+        int linhaSelecionada = tabela_listarA.getSelectedRow(); // pega linha selecionada
+
+        if (linhaSelecionada != -1) { // se alguma linha estiver selecionada
+            String nome = tabela_listarA.getValueAt(linhaSelecionada, 1).toString(); // pega o valor da coluna 1
+            nome_delete.setText(nome); // seta no JTextField
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um usuário na tabela primeiro.");
+        }
+
+    }//GEN-LAST:event_nome_deleteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Tela_adm tl = new Tela_adm();
+        tl.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,8 +209,9 @@ public class Tela_listagemAluno extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField nome_delete;
+    private javax.swing.JTable tabela_listarA;
     // End of variables declaration//GEN-END:variables
 }

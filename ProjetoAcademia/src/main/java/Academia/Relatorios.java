@@ -312,13 +312,12 @@ public Object[][] relatorioAluno() throws SQLException {
 
     while (rs.next()) {
         Object[] linha = {
-            rs.getInt("id"),
+            
             rs.getString("nome"),
             rs.getString("email"),
             rs.getString("cpf"),
             rs.getDate("data_nascimento"),
-            rs.getString("matricula"),
-            rs.getString("objetivo"),
+            rs.getString("matricula"),            
             rs.getString("status")
         };
         linhas.add(linha);
