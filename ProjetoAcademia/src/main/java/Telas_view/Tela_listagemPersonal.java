@@ -122,7 +122,7 @@ public class Tela_listagemPersonal extends javax.swing.JFrame {
             try {
 
                 Deletar del = new Deletar();
-                del.deletarAdm(email);
+                del.deletarPersonal(email);
                 
                 carregar_tabela();
                 this.nome_exclusao.setText("");
