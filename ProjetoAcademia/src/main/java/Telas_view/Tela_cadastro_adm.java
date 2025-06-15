@@ -8,6 +8,7 @@ import Academia.Adm;
 import Academia.Cadastro;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
@@ -38,14 +39,14 @@ public class Tela_cadastro_adm extends javax.swing.JFrame {
         insertad_setor = new javax.swing.JTextField();
         insertad_email = new javax.swing.JTextField();
         insertad_telefone = new javax.swing.JTextField();
-        insertad_cpf = new javax.swing.JTextField();
-        insertad_datanasc = new javax.swing.JTextField();
         insertad_nome = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         insertad_dsc = new javax.swing.JTextArea();
         insertad_senha = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
+        insertad_cpf = new javax.swing.JFormattedTextField();
+        insertad_datanasc = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,42 +57,28 @@ public class Tela_cadastro_adm extends javax.swing.JFrame {
                 insertad_setorActionPerformed(evt);
             }
         });
-        getContentPane().add(insertad_setor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 270, 30));
+        getContentPane().add(insertad_setor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 270, 30));
 
         insertad_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertad_emailActionPerformed(evt);
             }
         });
-        getContentPane().add(insertad_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 270, 30));
+        getContentPane().add(insertad_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 270, 30));
 
         insertad_telefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertad_telefoneActionPerformed(evt);
             }
         });
-        getContentPane().add(insertad_telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 260, 30));
-
-        insertad_cpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertad_cpfActionPerformed(evt);
-            }
-        });
-        getContentPane().add(insertad_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 260, 30));
-
-        insertad_datanasc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertad_datanascActionPerformed(evt);
-            }
-        });
-        getContentPane().add(insertad_datanasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, 240, 30));
+        getContentPane().add(insertad_telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 180, 260, 30));
 
         insertad_nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertad_nomeActionPerformed(evt);
             }
         });
-        getContentPane().add(insertad_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 270, 30));
+        getContentPane().add(insertad_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 270, 30));
 
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -106,17 +93,31 @@ public class Tela_cadastro_adm extends javax.swing.JFrame {
         insertad_dsc.setRows(5);
         jScrollPane1.setViewportView(insertad_dsc);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 260, -1, -1));
 
         insertad_senha.setText("jPasswordField1");
-        getContentPane().add(insertad_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 270, 30));
+        getContentPane().add(insertad_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 270, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         jLabel1.setText(":");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 10, 50));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 10, 60));
+
+        try {
+            insertad_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(insertad_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 270, 30));
+
+        try {
+            insertad_datanasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(insertad_datanasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, 190, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cadastro_adm.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 1053, 691));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 600));
 
         pack();
         setLocationRelativeTo(null);
@@ -126,10 +127,6 @@ public class Tela_cadastro_adm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_insertad_telefoneActionPerformed
 
-    private void insertad_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertad_cpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insertad_cpfActionPerformed
-
     private void insertad_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertad_emailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insertad_emailActionPerformed
@@ -137,10 +134,6 @@ public class Tela_cadastro_adm extends javax.swing.JFrame {
     private void insertad_setorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertad_setorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insertad_setorActionPerformed
-
-    private void insertad_datanascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertad_datanascActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insertad_datanascActionPerformed
 
     private void insertad_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertad_nomeActionPerformed
         // TODO add your handling code here:
@@ -182,19 +175,19 @@ public class Tela_cadastro_adm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public JTextField getInsertad_cpf() {
+    public JFormattedTextField getInsertad_cpf() {
         return insertad_cpf;
     }
 
-    public void setInsertad_cpf(JTextField insertad_cpf) {
+    public void setInsertad_cpf(JFormattedTextField insertad_cpf) {
         this.insertad_cpf = insertad_cpf;
     }
 
-    public JTextField getInsertad_datanasc() {
+    public JFormattedTextField getInsertad_datanasc() {
         return insertad_datanasc;
     }
 
-    public void setInsertad_datanasc(JTextField insertad_datanasc) {
+    public void setInsertad_datanasc(JFormattedTextField insertad_datanasc) {
         this.insertad_datanasc = insertad_datanasc;
     }
 
@@ -282,8 +275,8 @@ public class Tela_cadastro_adm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField insertad_cpf;
-    private javax.swing.JTextField insertad_datanasc;
+    private javax.swing.JFormattedTextField insertad_cpf;
+    private javax.swing.JFormattedTextField insertad_datanasc;
     private javax.swing.JTextArea insertad_dsc;
     private javax.swing.JTextField insertad_email;
     private javax.swing.JTextField insertad_nome;
