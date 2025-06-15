@@ -249,6 +249,7 @@ public class Relatorios {
 
         if (rs.next()) {
             Personal personal = new Personal();
+            Metodos mts = new Metodos();
 
             personal.setId(rs.getInt("id"));
             personal.setNome(rs.getString("nome"));

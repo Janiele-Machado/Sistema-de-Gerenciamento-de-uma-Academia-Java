@@ -11,6 +11,7 @@ import Academia.Personal;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -22,12 +23,13 @@ import javax.swing.JTextField;
 public class Tela_dados_personal extends javax.swing.JFrame {
      private void carregarDadosPersonal() {
         Personal pers = (Personal) Sessao_usuario.getUsuarioLogado();
-
+        Metodos mts = new Metodos();
         if (pers != null) {
             this.personal_nome.setText(pers.getNome());
             this.personal_email.setText(pers.getEmail());
             this.personal_cpf.setText(pers.getCpf());
-            this.personal_data.setText(pers.getDataNasc().toString());
+            String dataFormatada = mts.converterData(pers.getDataNasc().toString());
+            this.personal_data.setText(dataFormatada);
             this.Personal_especialidade.setText(pers.getEspecialidade());
             this.personal_senha.setText(pers.getSenha()); // cuidado com segurança
 
@@ -54,12 +56,12 @@ public class Tela_dados_personal extends javax.swing.JFrame {
 
         personal_senha = new javax.swing.JTextField();
         personal_cpf = new javax.swing.JTextField();
-        personal_data = new javax.swing.JTextField();
         personal_nome = new javax.swing.JTextField();
         personal_email = new javax.swing.JTextField();
         Personal_especialidade = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        personal_data = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,13 +80,6 @@ public class Tela_dados_personal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(personal_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 270, 30));
-
-        personal_data.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                personal_dataActionPerformed(evt);
-            }
-        });
-        getContentPane().add(personal_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 250, 270, 30));
 
         personal_nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +120,13 @@ public class Tela_dados_personal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 110, 40));
 
+        try {
+            personal_data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(personal_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 250, 70, 30));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tela_dados_personal.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1056, 665));
 
@@ -139,10 +141,6 @@ public class Tela_dados_personal extends javax.swing.JFrame {
     private void personal_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personal_cpfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_personal_cpfActionPerformed
-
-    private void personal_dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personal_dataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_personal_dataActionPerformed
 
     private void personal_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personal_nomeActionPerformed
         // TODO add your handling code here:
@@ -228,7 +226,7 @@ public class Tela_dados_personal extends javax.swing.JFrame {
 }
 
     public void setPersonal_data(JTextField personal_data) {
-    this.personal_data = personal_data;
+    this.personal_data = (JFormattedTextField) personal_data;
 }
 
     public JTextField getPersonal_email() {
@@ -296,7 +294,7 @@ public class Tela_dados_personal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField personal_cpf;
-    private javax.swing.JTextField personal_data;
+    private javax.swing.JFormattedTextField personal_data;
     private javax.swing.JTextField personal_email;
     private javax.swing.JTextField personal_nome;
     private javax.swing.JTextField personal_senha;

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -149,7 +150,7 @@ public class Metodos {
                 } while (opc1 != 4);
 
             } else if (opc_amd == 2) {
-               // rel.gerarBalanco();
+                // rel.gerarBalanco();
 
             } else if (opc_amd == 3) {
                 rel.Relatorio_salarios();
@@ -857,5 +858,18 @@ public class Metodos {
         con.close();
 
         return dados;
+    }
+
+    public static String converterData(String dataOriginal) {
+        SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            java.util.Date data = formatoEntrada.parse(dataOriginal);
+            return formatoSaida.format(data);
+        } catch (ParseException e) {
+            // Retorna a data original caso não consiga converter
+            return dataOriginal;
+        }
     }
 }
