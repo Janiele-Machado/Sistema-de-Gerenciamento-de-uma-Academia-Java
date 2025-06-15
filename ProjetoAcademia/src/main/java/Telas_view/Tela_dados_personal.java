@@ -221,7 +221,7 @@ public class Tela_dados_personal extends javax.swing.JFrame {
     return personal_data;
 }
 
-    public void setPersonal_data(JTextField personal_data) {
+    public void setPersonal_data(JFormattedTextField personal_data) {
     this.personal_data = (JFormattedTextField) personal_data;
 }
 

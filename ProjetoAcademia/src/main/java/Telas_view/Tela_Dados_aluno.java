@@ -12,6 +12,7 @@ import Academia.Relatorios;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
@@ -56,9 +57,7 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        select_datanasc = new javax.swing.JTextField();
         select_nome = new javax.swing.JTextField();
-        select_cpf = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         select_objetivo = new javax.swing.JTextArea();
         select_senha = new javax.swing.JPasswordField();
@@ -66,19 +65,19 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         select_email1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        select_cpf = new javax.swing.JFormattedTextField();
+        select_datanasc = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(select_datanasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, 170, 30));
 
         select_nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 select_nomeActionPerformed(evt);
             }
         });
-        getContentPane().add(select_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 270, 30));
-        getContentPane().add(select_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 270, 30));
+        getContentPane().add(select_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 310, 270, 30));
 
         select_objetivo.setColumns(20);
         select_objetivo.setRows(5);
@@ -104,11 +103,31 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 80, 40));
-        getContentPane().add(select_email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 270, 30));
+
+        select_email1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                select_email1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(select_email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 270, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         jLabel2.setText("Nome:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 310, 100, 30));
+
+        try {
+            select_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(select_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 270, 30));
+
+        try {
+            select_datanasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(select_datanasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, 150, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tela_dados_alimo.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
@@ -161,19 +180,23 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public JTextField getSelect_cpf() {
+    private void select_email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_select_email1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_select_email1ActionPerformed
+
+    public JFormattedTextField getSelect_cpf() {
         return select_cpf;
     }
 
-    public void setSelect_cpf(JTextField select_cpf) {
+    public void setSelect_cpf(JFormattedTextField select_cpf) {
         this.select_cpf = select_cpf;
     }
 
-    public JTextField getSelect_datanasc() {
+    public JFormattedTextField getSelect_datanasc() {
         return select_datanasc;
     }
 
-    public void setSelect_datanasc(JTextField select_datanasc) {
+    public void setSelect_datanasc(JFormattedTextField select_datanasc) {
         this.select_datanasc = select_datanasc;
     }
 
@@ -250,8 +273,8 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField select_cpf;
-    private javax.swing.JTextField select_datanasc;
+    private javax.swing.JFormattedTextField select_cpf;
+    private javax.swing.JFormattedTextField select_datanasc;
     private javax.swing.JTextField select_email1;
     private javax.swing.JTextField select_nome;
     private javax.swing.JTextArea select_objetivo;
