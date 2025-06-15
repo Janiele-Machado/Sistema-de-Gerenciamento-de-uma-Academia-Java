@@ -8,6 +8,7 @@ import Academia.Cadastro;
 import Academia.Personal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
@@ -37,14 +38,14 @@ public class Tela_cadastro_personal extends javax.swing.JFrame {
 
         jTextField4 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        insertp_cpf = new javax.swing.JTextField();
         insertp_email = new javax.swing.JTextField();
         insertp_nome = new javax.swing.JTextField();
-        insertp_datanasc = new javax.swing.JTextField();
         insertp_senha = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         insertp_especialidade = new javax.swing.JTextArea();
+        insertp_cpf = new javax.swing.JFormattedTextField();
+        insertp_datanasc = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,20 +53,18 @@ public class Tela_cadastro_personal extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         jLabel2.setText(":");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 30, -1));
-        getContentPane().add(insertp_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 260, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 30, 40));
 
         insertp_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertp_emailActionPerformed(evt);
             }
         });
-        getContentPane().add(insertp_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 260, 30));
-        getContentPane().add(insertp_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 260, 30));
-        getContentPane().add(insertp_datanasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 130, 130, 30));
+        getContentPane().add(insertp_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 260, 30));
+        getContentPane().add(insertp_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 260, 30));
 
         insertp_senha.setText("jPasswordField1");
-        getContentPane().add(insertp_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 260, 30));
+        getContentPane().add(insertp_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 260, 30));
 
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -80,10 +79,24 @@ public class Tela_cadastro_personal extends javax.swing.JFrame {
         insertp_especialidade.setRows(5);
         jScrollPane1.setViewportView(insertp_especialidade);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, -1, -1));
+
+        try {
+            insertp_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(insertp_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 260, 30));
+
+        try {
+            insertp_datanasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(insertp_datanasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 110, 130, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cadastro_personal.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -3, -1, 610));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 570));
 
         pack();
         setLocationRelativeTo(null);
@@ -124,19 +137,19 @@ public class Tela_cadastro_personal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public JTextField getInsertp_cpf() {
+    public JFormattedTextField getInsertp_cpf() {
         return insertp_cpf;
     }
 
-    public void setInsertp_cpf(JTextField insertp_cpf) {
+    public void setInsertp_cpf(JFormattedTextField insertp_cpf) {
         this.insertp_cpf = insertp_cpf;
     }
 
-    public JTextField getInsertp_datanasc() {
+    public JFormattedTextField getInsertp_datanasc() {
         return insertp_datanasc;
     }
 
-    public void setInsertp_datanasc(JTextField insertp_datanasc) {
+    public void setInsertp_datanasc(JFormattedTextField insertp_datanasc) {
         this.insertp_datanasc = insertp_datanasc;
     }
 
@@ -208,8 +221,8 @@ public class Tela_cadastro_personal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField insertp_cpf;
-    private javax.swing.JTextField insertp_datanasc;
+    private javax.swing.JFormattedTextField insertp_cpf;
+    private javax.swing.JFormattedTextField insertp_datanasc;
     private javax.swing.JTextField insertp_email;
     private javax.swing.JTextArea insertp_especialidade;
     private javax.swing.JTextField insertp_nome;
