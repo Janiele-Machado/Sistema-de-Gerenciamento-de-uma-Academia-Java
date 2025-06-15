@@ -9,6 +9,7 @@ import Academia.Cadastro;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
@@ -36,49 +37,35 @@ public class Tela_cadastro_aluno extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        insert_cpf = new javax.swing.JTextField();
         insert_email = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         insert_objetivo = new javax.swing.JTextArea();
-        insert_datansc = new javax.swing.JTextField();
         insert_senha = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         insert_nome = new javax.swing.JTextField();
+        insert_cpf = new javax.swing.JFormattedTextField();
+        insert_datansc = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        insert_cpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insert_cpfActionPerformed(evt);
-            }
-        });
-        getContentPane().add(insert_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 300, 30));
 
         insert_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insert_emailActionPerformed(evt);
             }
         });
-        getContentPane().add(insert_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 300, 30));
+        getContentPane().add(insert_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 300, 30));
 
         insert_objetivo.setColumns(20);
         insert_objetivo.setRows(5);
         jScrollPane1.setViewportView(insert_objetivo);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, -1, -1));
-
-        insert_datansc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insert_datanscActionPerformed(evt);
-            }
-        });
-        getContentPane().add(insert_datansc, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 112, 160, 30));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 180, -1, -1));
 
         insert_senha.setText("jPasswordField1");
-        getContentPane().add(insert_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 290, 30));
+        getContentPane().add(insert_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 290, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         jLabel2.setText("Nome:");
@@ -98,18 +85,28 @@ public class Tela_cadastro_aluno extends javax.swing.JFrame {
                 insert_nomeActionPerformed(evt);
             }
         });
-        getContentPane().add(insert_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 290, 30));
+        getContentPane().add(insert_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 290, 30));
+
+        try {
+            insert_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(insert_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 300, 30));
+
+        try {
+            insert_datansc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(insert_datansc, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 110, 160, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tela_cadastro_aluno.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 0, 1027, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void insert_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_cpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insert_cpfActionPerformed
 
     private void insert_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_emailActionPerformed
         // TODO add your handling code here:
@@ -139,27 +136,23 @@ public class Tela_cadastro_aluno extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void insert_datanscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_datanscActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_insert_datanscActionPerformed
-
     private void insert_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_nomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insert_nomeActionPerformed
 
-    public JTextField getInsert_cpf() {
+    public JFormattedTextField getInsert_cpf() {
         return insert_cpf;
     }
 
-    public void setInsert_cpf(JTextField insert_cpf) {
+    public void setInsert_cpf(JFormattedTextField insert_cpf) {
         this.insert_cpf = insert_cpf;
     }
 
-    public JTextField getInsert_datansc() {
+    public JFormattedTextField getInsert_datansc() {
         return insert_datansc;
     }
 
-    public void setInsert_datansc(JTextField insert_datansc) {
+    public void setInsert_datansc(JFormattedTextField insert_datansc) {
         this.insert_datansc = insert_datansc;
     }
 
@@ -231,8 +224,8 @@ public class Tela_cadastro_aluno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField insert_cpf;
-    private javax.swing.JTextField insert_datansc;
+    private javax.swing.JFormattedTextField insert_cpf;
+    private javax.swing.JFormattedTextField insert_datansc;
     private javax.swing.JTextField insert_email;
     private javax.swing.JTextField insert_nome;
     private javax.swing.JTextArea insert_objetivo;
