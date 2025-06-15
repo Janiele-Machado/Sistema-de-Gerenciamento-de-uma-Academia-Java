@@ -47,25 +47,23 @@ public class Tela_dadosAdm extends javax.swing.JFrame {
 
         adm_telefone = new javax.swing.JTextField();
         adm_desc = new javax.swing.JTextField();
-        adm_data = new javax.swing.JTextField();
-        adm_cpf = new javax.swing.JTextField();
         adm_setor = new javax.swing.JTextField();
         adm_email = new javax.swing.JTextField();
         adm_nome = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         adm_senha = new javax.swing.JPasswordField();
+        adm_data = new javax.swing.JFormattedTextField();
+        adm_cpf = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(adm_telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 570, 310, 30));
-        getContentPane().add(adm_desc, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 250, 30));
-        getContentPane().add(adm_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 240, 300, 30));
-        getContentPane().add(adm_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 350, 310, 30));
-        getContentPane().add(adm_setor, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 470, 310, 30));
-        getContentPane().add(adm_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 250, 30));
-        getContentPane().add(adm_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 250, 30));
+        getContentPane().add(adm_telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, 310, 30));
+        getContentPane().add(adm_desc, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 250, 30));
+        getContentPane().add(adm_setor, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 430, 310, 30));
+        getContentPane().add(adm_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 250, 30));
+        getContentPane().add(adm_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 250, 30));
 
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -86,10 +84,24 @@ public class Tela_dadosAdm extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 100, 40));
 
         adm_senha.setText("jPasswordField1");
-        getContentPane().add(adm_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 472, 260, 30));
+        getContentPane().add(adm_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 260, 30));
+
+        try {
+            adm_data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(adm_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 200, 300, 30));
+
+        try {
+            adm_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(adm_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 320, 310, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tela_dados_adm.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1043, 655));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1043, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -144,8 +156,8 @@ public class Tela_dadosAdm extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField adm_cpf;
-    private javax.swing.JTextField adm_data;
+    private javax.swing.JFormattedTextField adm_cpf;
+    private javax.swing.JFormattedTextField adm_data;
     private javax.swing.JTextField adm_desc;
     private javax.swing.JTextField adm_email;
     private javax.swing.JTextField adm_nome;
