@@ -105,7 +105,7 @@ public class Tela_cadastroPlano extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Tela_escolherPersonal telap = new Tela_escolherPersonal();
+        Tela_escolherPersonal_plus telap = new Tela_escolherPersonal_plus();
         telap.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

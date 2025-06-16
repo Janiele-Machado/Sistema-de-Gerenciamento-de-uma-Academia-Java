@@ -101,7 +101,7 @@ public class Tela_dadosAdm extends javax.swing.JFrame {
         getContentPane().add(adm_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 320, 310, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tela_dados_adm.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1043, 600));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
