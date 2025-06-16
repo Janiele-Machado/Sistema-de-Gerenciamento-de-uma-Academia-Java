@@ -84,7 +84,7 @@ public class Tela_listagemAluno extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabela_listarA);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 1160, 410));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 1220, -1));
 
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -102,11 +102,11 @@ public class Tela_listagemAluno extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 20, 150, 50));
-        getContentPane().add(nome_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 640, 430, 50));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 20, 150, 50));
+        getContentPane().add(nome_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 640, 430, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tela Adm - ListagemAluno (1).png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 1, 1354, 720));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1354, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

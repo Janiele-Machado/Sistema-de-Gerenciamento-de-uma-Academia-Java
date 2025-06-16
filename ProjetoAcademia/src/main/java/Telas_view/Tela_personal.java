@@ -84,16 +84,16 @@ public class Tela_personal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Listar_alunos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 900, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 920, 210));
 
         salario_personal.setEditable(false);
-        getContentPane().add(salario_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 210, 30));
+        getContentPane().add(salario_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 210, 30));
 
         nome_personal.setEditable(false);
-        getContentPane().add(nome_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 210, 30));
+        getContentPane().add(nome_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, 30));
 
         email_personal.setEditable(false);
-        getContentPane().add(email_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 210, 30));
+        getContentPane().add(email_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 210, 30));
 
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -102,7 +102,7 @@ public class Tela_personal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(892, 50, 110, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 30, 110, 50));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -111,10 +111,10 @@ public class Tela_personal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(832, 120, 160, 60));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, 160, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/tela_Personal.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, 621));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 
         pack();
         setLocationRelativeTo(null);

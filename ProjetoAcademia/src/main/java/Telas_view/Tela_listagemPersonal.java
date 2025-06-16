@@ -76,10 +76,10 @@ public class Tela_listagemPersonal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 470, 180, 60));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 480, 180, 60));
 
         nome_exclusao.setEditable(false);
-        getContentPane().add(nome_exclusao, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 330, 40));
+        getContentPane().add(nome_exclusao, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 330, 40));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -88,7 +88,7 @@ public class Tela_listagemPersonal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 20, 120, 40));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 30, 120, 40));
 
         Listar_personal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,10 +103,10 @@ public class Tela_listagemPersonal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Listar_personal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 127, 920, 310));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 930, 330));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tela_ListarPersonal.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1069, 551));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
 
         pack();
         setLocationRelativeTo(null);
