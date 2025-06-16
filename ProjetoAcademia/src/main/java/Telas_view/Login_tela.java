@@ -72,6 +72,7 @@ public class Login_tela extends javax.swing.JFrame {
         });
         getContentPane().add(senha_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 450, 220, 30));
 
+        jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +82,7 @@ public class Login_tela extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, 220, 70));
 
+        jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {

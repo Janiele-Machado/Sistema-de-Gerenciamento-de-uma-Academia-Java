@@ -35,6 +35,7 @@ public class Tela_cadastro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cadastro_aluno.setBorderPainted(false);
         cadastro_aluno.setContentAreaFilled(false);
         cadastro_aluno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cadastro_aluno.addActionListener(new java.awt.event.ActionListener() {
@@ -44,6 +45,7 @@ public class Tela_cadastro extends javax.swing.JFrame {
         });
         getContentPane().add(cadastro_aluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 197, 300, 100));
 
+        cadastro_personal.setBorderPainted(false);
         cadastro_personal.setContentAreaFilled(false);
         cadastro_personal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cadastro_personal.addActionListener(new java.awt.event.ActionListener() {
@@ -53,6 +55,7 @@ public class Tela_cadastro extends javax.swing.JFrame {
         });
         getContentPane().add(cadastro_personal, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 353, 320, 110));
 
+        jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {

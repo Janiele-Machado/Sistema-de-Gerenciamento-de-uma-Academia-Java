@@ -66,6 +66,7 @@ public class Tela_cadastro_personal extends javax.swing.JFrame {
         insertp_senha.setText("jPasswordField1");
         getContentPane().add(insertp_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 260, 30));
 
+        jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +74,7 @@ public class Tela_cadastro_personal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 433, 290, 100));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 290, 100));
 
         insertp_especialidade.setColumns(20);
         insertp_especialidade.setRows(5);

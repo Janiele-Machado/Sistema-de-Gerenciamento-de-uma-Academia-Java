@@ -95,6 +95,7 @@ public class Tela_dados_personal extends javax.swing.JFrame {
         });
         getContentPane().add(Personal_especialidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 540, 280, 30));
 
+        jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +105,7 @@ public class Tela_dados_personal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(842, 90, 160, 60));
 
+        jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {

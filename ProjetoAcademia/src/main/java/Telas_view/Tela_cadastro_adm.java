@@ -80,6 +80,7 @@ public class Tela_cadastro_adm extends javax.swing.JFrame {
         });
         getContentPane().add(insertad_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 270, 30));
 
+        jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {

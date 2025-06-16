@@ -68,6 +68,7 @@ public class Tela_dadosAdm extends javax.swing.JFrame {
         getContentPane().add(adm_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 250, 30));
         getContentPane().add(adm_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 250, 30));
 
+        jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -75,8 +76,9 @@ public class Tela_dadosAdm extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 150, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, 150, 50));
 
+        jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +86,7 @@ public class Tela_dadosAdm extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 100, 40));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 100, 40));
 
         adm_senha.setText("jPasswordField1");
         getContentPane().add(adm_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 260, 30));
@@ -107,6 +109,7 @@ public class Tela_dadosAdm extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 600));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
