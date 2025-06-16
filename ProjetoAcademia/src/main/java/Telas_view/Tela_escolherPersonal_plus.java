@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author samuel
+ * @author samuel e heitor
  */
 public class Tela_escolherPersonal_plus extends javax.swing.JFrame {
     public void preencherTabela() throws SQLException {

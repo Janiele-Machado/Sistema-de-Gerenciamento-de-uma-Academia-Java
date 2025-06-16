@@ -5,11 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author Heitor
- */
-
 public class Alterar {
 
     public void alterarAluno(Aluno aluno) throws SQLException {
