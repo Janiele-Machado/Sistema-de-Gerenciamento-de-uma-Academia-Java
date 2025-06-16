@@ -6,7 +6,7 @@ package Telas_view;
 
 /**
  *
- * @author samue
+ * @author janiele
  */
 public class Tela_aluno extends javax.swing.JFrame {
 

@@ -290,7 +290,7 @@ public class Metodos {
         con.close();
     }
 
-    public Aluno buscarAlunoPorId(int id) {
+    public Aluno buscarAlunoPorId(int id) { //Método que recebe o id de usuário e retorna o id de aluno
         Aluno aluno = new Aluno();
 
         String sqlUsuario = "SELECT * FROM usuarios WHERE id=?";
@@ -469,7 +469,7 @@ public class Metodos {
 
     }
 
-    public void contratarPlano(int idAluno) throws Exception {
+    public void contratarPlano(int idAluno) throws Exception { //método que realiza a contratação do plano comum sem personal e que tem como parametro o id do aluno
         double valor = 120;
         String nome = "Plano Comum";
         int duracao = 1;
@@ -518,6 +518,7 @@ public class Metodos {
         }
     }
 
+    //método que é sobrecarga do metodo contratarPlano, só que esse recebe valores relacionados a personal pois são planos inclusos personal
     public void contratarPlano(int idAluno, int id_personal, double valor, int duracao, String nome, int qtd) throws Exception {
 
         String ativa = "sim";

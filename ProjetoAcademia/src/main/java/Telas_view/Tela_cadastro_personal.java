@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author samue
+ * @author matheus 
  */
 public class Tela_cadastro_personal extends javax.swing.JFrame {
 

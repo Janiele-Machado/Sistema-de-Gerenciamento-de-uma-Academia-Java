@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author aluno
+ * @author janiele
  */
 public class Tela_cadastroPlano extends javax.swing.JFrame {
 

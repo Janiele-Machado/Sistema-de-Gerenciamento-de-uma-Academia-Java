@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author samue
+ * @author janiele
  */
 public class Tela_cadastro_aluno extends javax.swing.JFrame {
 
