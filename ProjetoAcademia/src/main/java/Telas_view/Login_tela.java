@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 
 // Tela de login principal da aplicação (interface Swing)
 // Responsável por autenticar o usuário (aluno, personal ou adm) e redirecioná-lo para a tela correspondente
-    
+
 public class Login_tela extends javax.swing.JFrame {
 
     private int id;
@@ -40,6 +40,8 @@ public class Login_tela extends javax.swing.JFrame {
     /**
      * Creates new form Login_tela
      */
+
+    // Construtor - inicializa os componentes gráficos da interface
     public Login_tela() {
         initComponents();
     }
