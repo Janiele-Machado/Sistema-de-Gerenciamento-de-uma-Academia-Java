@@ -26,12 +26,14 @@ public class Tela_Dados_aluno extends javax.swing.JFrame {
 
     private void carregarDadosAluno() {
         Aluno al = (Aluno) Sessao_usuario.getUsuarioLogado();
+        Metodos mts = new Metodos();
 
         if (al != null) {
             select_nome.setText(al.getNome());
             select_email1.setText(al.getEmail());
             select_cpf.setText(al.getCpf());
-            select_datanasc.setText(al.getDataNasc().toString());
+            String dataFormatada = mts.converterData(al.getDataNasc().toString());
+            select_datanasc.setText(dataFormatada);
             select_objetivo.setText(al.getObjetivo());
             select_senha.setText(al.getSenha()); // cuidado com segurança
 

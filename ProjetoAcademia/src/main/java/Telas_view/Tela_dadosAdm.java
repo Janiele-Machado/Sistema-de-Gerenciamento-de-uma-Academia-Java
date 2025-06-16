@@ -19,10 +19,13 @@ import javax.swing.JOptionPane;
 public class Tela_dadosAdm extends javax.swing.JFrame {
     public void carregar_dados(){
         Adm adm = (Adm) Sessao_usuario.getUsuarioLogado();
+        Metodos mts = new Metodos();
+        
         adm_nome.setText(adm.getNome());
         adm_cpf.setText(adm.getCpf());        
         adm_email.setText(adm.getEmail());
-        adm_data.setText(adm.getDataNasc().toString());
+        String dataFormatada = mts.converterData(adm.getDataNasc().toString());
+        adm_data.setText(dataFormatada);
         adm_setor.setText(adm.getSetor());
         adm_telefone.setText(adm.getNumero_comercial());
         adm_desc.setText(adm.getDesc());
