@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author samue
+ * @author samuel e arthur
  */
 public class Tela_cadastro_adm extends javax.swing.JFrame {
 
@@ -87,7 +87,7 @@ public class Tela_cadastro_adm extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 503, 280, 110));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 460, 280, 110));
 
         insertad_dsc.setColumns(20);
         insertad_dsc.setRows(5);

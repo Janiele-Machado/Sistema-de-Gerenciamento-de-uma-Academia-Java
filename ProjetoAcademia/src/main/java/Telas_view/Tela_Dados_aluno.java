@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author samue
+ * @author samuel
  */
 public class Tela_Dados_aluno extends javax.swing.JFrame {
 

@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author samue
+ * @author samuel
  */
 public class Login_tela extends javax.swing.JFrame {
 
@@ -81,7 +81,7 @@ public class Login_tela extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 693, 140, 40));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 693, 400, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/WhatsApp Image 2025-06-07 at 15.52.34.jpeg"))); // NOI18N
         jLabel1.setText("jLabel1");

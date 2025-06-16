@@ -6,7 +6,7 @@ package Telas_view;
 
 /**
  *
- * @author samue
+ * @author samuel
  */
 public class Tela_cadastro extends javax.swing.JFrame {
 

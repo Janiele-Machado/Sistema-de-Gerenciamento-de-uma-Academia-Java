@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author samue
+ * @author samuel
  */
 public class Tela_escolherPersonal_plus extends javax.swing.JFrame {
     public void preencherTabela() throws SQLException {
@@ -64,7 +64,7 @@ public class Tela_escolherPersonal_plus extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 540, 240, 100));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 540, 300, 100));
 
         Listar_personal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
