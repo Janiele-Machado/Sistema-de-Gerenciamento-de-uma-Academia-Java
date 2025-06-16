@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author samue
+ * @author samuel
  */
 public class Tela_escolherPersonal extends javax.swing.JFrame {
 

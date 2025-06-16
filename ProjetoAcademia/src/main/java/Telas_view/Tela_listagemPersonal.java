@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author samue
+ * @author samuel
  */
 public class Tela_listagemPersonal extends javax.swing.JFrame {
     public void carregar_tabela() throws SQLException {

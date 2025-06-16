@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author samue
+ * @author samuel
  */
 
 public class Tela_dados_personal extends javax.swing.JFrame {

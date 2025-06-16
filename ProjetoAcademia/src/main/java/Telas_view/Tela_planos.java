@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author samue
+ * @author samuel e heitor
  */
 public class Tela_planos extends javax.swing.JFrame {
 

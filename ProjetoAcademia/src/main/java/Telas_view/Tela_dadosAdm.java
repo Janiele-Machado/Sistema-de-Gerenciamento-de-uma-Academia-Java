@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author samue
+ * @author samuel e matheus
  */
 public class Tela_dadosAdm extends javax.swing.JFrame {
     public void carregar_dados(){
