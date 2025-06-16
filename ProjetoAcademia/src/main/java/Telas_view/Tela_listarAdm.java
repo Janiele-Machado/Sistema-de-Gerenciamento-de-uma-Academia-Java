@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author aluno
+ * @author janiele 
  */
 public class Tela_listarAdm extends javax.swing.JFrame {
      public void carregar_tabela() throws SQLException {
@@ -102,7 +102,7 @@ public class Tela_listarAdm extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 20, 150, 40));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 20, 150, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Tela Adm - ListagemAluno.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
