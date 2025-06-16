@@ -11,7 +11,7 @@ public class Alterar {
 
         Connection conexao = new Conexao().getConexao();
 
-        String sqlAlterarUsuario = "UPDATE usuario SET nome=?, email=?, senha=? WHERE id=?";
+        String sqlAlterarUsuario = "UPDATE usuario SET nome=?, email=?, senha=?, cpf=?, data_nascimento=? WHERE id=?";
         String sqlAlterarAluno = "UPDATE aluno SET objetivo=? WHERE fk_usu_aluno=?";
 
         try {
@@ -21,7 +21,9 @@ public class Alterar {
             comandoUsuario.setString(1, aluno.getNome());
             comandoUsuario.setString(2, aluno.getEmail());
             comandoUsuario.setString(3, aluno.getSenha());
-            comandoUsuario.setInt(4, aluno.getId());
+            comandoUsuario.setString(4, aluno.getCpf());
+            comandoUsuario.setDate(5, aluno.getDataNasc());
+            comandoUsuario.setInt(6, aluno.getId());
             comandoUsuario.executeUpdate();
 
             //Atualizando tabela aluno
@@ -86,7 +88,7 @@ public class Alterar {
     public void alterarAdm(Adm adm) throws SQLException {
         Connection conexao = new Conexao().getConexao();
 
-        String sqlAlterar = "UPDATE usuario SET nome=?, email=?, senha=? WHERE usuario.id=?";
+        String sqlAlterar = "UPDATE usuario SET nome=?, email=?, senha=?, cpf=?, data_nascimento=? WHERE usuario.id=?";
         String sqlAlterarAdm = "UPDATE adm SET telefone_comercial=?, setor=?, descricao=? WHERE fk_usu_adm=?";
 
         try {
@@ -97,7 +99,9 @@ public class Alterar {
             comandoUsuario.setString(1, adm.getNome());
             comandoUsuario.setString(2, adm.getEmail());
             comandoUsuario.setString(3, adm.getSenha());
-            comandoUsuario.setInt(4, adm.getId());
+            comandoUsuario.setString(4, adm.getCpf());
+            comandoUsuario.setDate(5, adm.getDataNasc());
+            comandoUsuario.setInt(6, adm.getId());
 
             comandoUsuario.executeUpdate();
 
