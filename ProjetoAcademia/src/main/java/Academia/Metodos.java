@@ -290,7 +290,7 @@ public class Metodos {
         con.close();
     }
 
-    public Aluno buscarAlunoPorId(int id) { //Método que recebe o id de usuário e retorna o id de aluno
+    public Aluno buscarAlunoPorId(int id) { //Método que recebe o id de usuario e faz uma busca pelos dados do aluno
         Aluno aluno = new Aluno();
 
         String sqlUsuario = "SELECT * FROM usuarios WHERE id=?";
@@ -607,7 +607,7 @@ public class Metodos {
         }
     }
 
-    public void listarPersonal() throws SQLException {
+    public void listarPersonal() throws SQLException { //metodo que faz uma listagem de todos os personais e retorna o nome e a especialidade deles.
 
         Connection conexao = new Conexao().getConexao();
         String sqlListar = "SELECT usuario.nome, personal.especialidade FROM personal inner join usuario on usuario.id = personal.fk_usu_personal;";

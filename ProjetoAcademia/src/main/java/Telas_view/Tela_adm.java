@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author samue
+ * @author samuel e matheus
  */
 public class Tela_adm extends javax.swing.JFrame {
     public void preencherTabela() throws SQLException {
@@ -78,7 +78,7 @@ public class Tela_adm extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 200, 80));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 250, 80));
 
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -87,7 +87,7 @@ public class Tela_adm extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 170, 80));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 220, 80));
 
         jButton3.setContentAreaFilled(false);
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -96,7 +96,7 @@ public class Tela_adm extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 170, 80));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 220, 210, 80));
 
         email_adm.setEditable(false);
         getContentPane().add(email_adm, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 200, 30));
