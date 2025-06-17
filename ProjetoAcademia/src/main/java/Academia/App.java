@@ -25,7 +25,8 @@ public class App {
     }
 
     //Método principal que efetua a execução do sistema 
-    public static void main(String[] args) throws SQLException, Exception {
+   /*
+ public static void main(String[] args) throws SQLException, Exception {
         Metodos metodos = new Metodos();
         Scanner scan = new Scanner(System.in);
         int opc_principal = 0;
@@ -363,5 +364,6 @@ public class App {
             }
     }
 
-}
+}*/
+
 }
